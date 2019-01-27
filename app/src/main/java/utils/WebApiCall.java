@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 
 import interfaces.WebApiResponseCallback;
+import models.RegistrationModel;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -305,17 +306,32 @@ public void postFlormData(String url,String key,String userId ,final WebApiRespo
         }
 
     }
-    public void register(String url, String fname, String lname, String email, String password, final WebApiResponseCallback callback) {
+    public void register(String url, RegistrationModel model, final WebApiResponseCallback callback) {
 
         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS).build();
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS).build();
         RequestBody formBody = null;
+
+
+
         formBody = new FormBody.Builder()
-                .add("email", email)
-                .add("password", password)
-                .add("first_name", fname)
-                .add("last_name", lname)
+                .add("email", model.getEmail())
+                .add("password", model.getPassword())
+                .add("first_name", model.getFirst_name())
+                .add("last_name", model.getLast_name())
+                .add("salutation", model.getSalutation())
+                .add("category_id", model.getCategory_id())
+                .add("company_name", model.getCompany_name())
+                .add("street_name", model.getStreet_name())
+                .add("door_no", model.getDoor_no())
+                .add("city", model.getCity())
+
+                .add("zip_code", model.getZip_code())
+                .add("phone_number", model.getPhoneNumber())
+                .add("business_email", model.getBusiness_email())
+                .add("paypal_email", model.getPaypal_email())
+                .add("vat_id", model.getVat_id())
                 .build();
         Request request = new Request.Builder().url(url).post(formBody).build();
         client.newCall(request).enqueue(new Callback() {

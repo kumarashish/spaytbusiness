@@ -22,20 +22,8 @@
 
 
         app:layout_constraintTop_toTopOf="parent">
-        <ProgressBar
-            android:visibility="gone"
-            android:id="@+id/progressbar"
-            android:layout_gravity="center"
-            android:layout_marginTop="6dp"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp" />
-        <LinearLayout
 
-            android:visibility="gone"
-            android:id="@+id/mainView"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -52,13 +40,27 @@ android:layout_marginLeft="10dp"
                 android:layout_centerVertical="true"
                android:layout_marginTop="20dp"
                 android:fontFamily="@font/rgular"
-                android:text="Sign Up"
+                android:text="Company Details"
                 android:textColor="@android:color/white"
                 android:textSize="28dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
         </RelativeLayout>
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/progressbar"
+            android:layout_gravity="center"
+            android:layout_marginTop="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp" />
+        <LinearLayout
 
+            android:visibility="gone"
+
+            android:id="@+id/mainView"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_marginRight="20dp"
@@ -73,6 +75,8 @@ android:layout_marginLeft="10dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <EditText
+                android:inputType="textPersonName"
+                android:id="@+id/companyname"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/lightText"
                 android:hint="Company Name"
@@ -83,11 +87,43 @@ android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
+            <View
+                android:layout_marginTop="5dp"
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:tint="@color/lightText"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/home1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+                <Spinner
+                    android:id="@+id/categories"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/lightText"
+                    android:hint="Category"
+                    android:textSize="18dp"
+                    android:textColor="@android:color/white"
+                    android:layout_marginLeft="-5dp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
         <View
             android:layout_marginTop="5dp"
             android:background="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>
+
         <LinearLayout
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
@@ -103,46 +139,112 @@ android:layout_marginLeft="10dp"
                 android:layout_width="50dp"
                 android:layout_height="30dp" />
             <EditText
+                android:inputType="textPersonName"
+                android:id="@+id/street"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/lightText"
-                android:hint="Company Address"
+                android:hint="StreetName"
                 android:textSize="18dp"
                 android:textColor="@android:color/white"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
-        <View
-            android:layout_marginTop="5dp"
-            android:background="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
-        <LinearLayout
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="40dp">
-            <ImageView
-                android:scaleType="fitXY"
-                android:tint="@color/lightText"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/home1"
-                android:layout_width="40dp"
-                android:layout_height="40dp" />
-            <Spinner
-                android:id="@+id/categories"
-                android:fontFamily="@font/light"
-                android:textColorHint="@color/lightText"
-                android:hint="Category"
-                android:textSize="18dp"
-                android:textColor="@android:color/white"
-                android:layout_marginLeft="-5dp"
-                android:background="@android:color/transparent"
+            <View
+                android:layout_marginTop="5dp"
+                android:background="@android:color/white"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
+                android:layout_height="0.5dp"/>
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <ImageView
+                    android:layout_marginLeft="-10dp"
+                    android:tint="@color/lightText"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/map_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp" />
+                <EditText
+                    android:inputType="textPersonName"
+                    android:id="@+id/doorNumber"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/lightText"
+                    android:hint="Door Number"
+                    android:textSize="18dp"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_marginTop="5dp"
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <ImageView
+                    android:layout_marginLeft="-10dp"
+                    android:tint="@color/lightText"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/map_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp" />
+                <EditText
+                    android:inputType="textPersonName"
+                    android:id="@+id/city"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/lightText"
+                    android:hint="City"
+                    android:textSize="18dp"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_marginTop="5dp"
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <ImageView
+                    android:layout_marginLeft="-10dp"
+                    android:tint="@color/lightText"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/map_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp" />
+                <EditText
+                    android:inputType="number"
+                    android:maxLength="5"
+                    android:id="@+id/zipCode"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/lightText"
+                    android:hint="ZipCode"
+                    android:textSize="18dp"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
         <View
             android:layout_marginTop="5dp"
             android:background="@android:color/white"
@@ -161,9 +263,11 @@ android:layout_marginLeft="10dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <EditText
+                android:inputType="number"
+                android:id="@+id/companyphonenumber"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/lightText"
-                android:hint="Phone Number"
+                android:hint="Company Phone Number"
                 android:textSize="18dp"
                 android:textColor="@android:color/white"
                 android:layout_marginLeft="10dp"
@@ -189,6 +293,8 @@ android:layout_marginLeft="10dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <EditText
+                android:inputType="textPersonName"
+                android:id="@+id/companyEmailId"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/lightText"
                 android:hint="Company Email Id"
@@ -217,6 +323,8 @@ android:layout_marginLeft="10dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <EditText
+                android:inputType="textPersonName"
+                android:id="@+id/companyVatId"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/lightText"
                 android:hint="VAT ID"
@@ -245,6 +353,8 @@ android:layout_marginLeft="10dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <EditText
+                android:inputType="textPersonName"
+                android:id="@+id/paypalId"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/lightText"
                 android:hint="PayPal Email id"
@@ -256,69 +366,26 @@ android:layout_marginLeft="10dp"
                 android:layout_height="match_parent" />
         </LinearLayout>
 
+
+
         <View
             android:layout_marginTop="5dp"
             android:background="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>
-        <LinearLayout
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="40dp">
-            <ImageView
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/pass"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
-            <EditText
-                android:fontFamily="@font/light"
-                android:textColorHint="@color/lightText"
-                android:hint="Password"
-                android:textSize="18dp"
-                android:textColor="@android:color/white"
-                android:layout_marginLeft="10dp"
-                android:background="@android:color/transparent"
+            <View
+
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-        <View
-            android:layout_marginTop="5dp"
-            android:background="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
-        <LinearLayout
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="40dp">
-            <ImageView
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/confirm_pass"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
-            <EditText
-                android:fontFamily="@font/light"
-                android:textColorHint="@color/lightText"
-                android:hint="Confirm Password"
-                android:textSize="18dp"
-                android:textColor="@android:color/white"
-                android:layout_marginLeft="10dp"
-                android:background="@android:color/transparent"
+                android:layout_height="10dp"/>
+            <ProgressBar
+                android:visibility="gone"
+                android:id="@+id/progressbar2"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-        <View
-            android:layout_marginTop="5dp"
-            android:background="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
+                android:layout_height="wrap_content" />
         <Button
-            android:id="@+id/signUp"
+            android:id="@+id/submit"
             android:background="@color/blue"
 
             android:textColor="@android:color/white"

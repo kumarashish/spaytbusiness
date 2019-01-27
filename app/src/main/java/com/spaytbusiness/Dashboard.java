@@ -21,6 +21,7 @@ import android.widget.FrameLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import common.AppController;
 import fragments.BusinessSettings;
 import fragments.Locations;
 import fragments.Notifications;
@@ -28,6 +29,7 @@ import fragments.Offers;
 import fragments.Products;
 import fragments.ProfileSettings;
 import fragments.Transactions;
+import utils.Utils;
 
 public class Dashboard extends AppCompatActivity implements View.OnClickListener {
 
@@ -55,10 +57,13 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     FrameLayout framelayout;
     DrawerLayout drawer;
     Toolbar toolbar;
+    AppController controller;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_dashboard);
+        controller=(AppController)getApplicationContext();
        toolbar = (Toolbar) findViewById(R.id.toolbar);
         ButterKnife.bind(this);
         toolbar.setTitle("Transactions");
@@ -166,6 +171,12 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                         drawer.closeDrawer(GravityCompat.START);
                     }
                     break;
+            case R.id.logout:
+                controller.logout();
+                Utils.logout(Dashboard.this);
+                finish();
+
+                break;
         }
 
     }

@@ -77,14 +77,9 @@ public class Validation {
      */
     public boolean isEmailIdValid(EditText email) {
         if (isNotNull(email)) {
-            pattern = Pattern.compile(EMAIL_REGEX);
-            matcher = pattern.matcher(email.getText().toString());
-            if (matcher.matches()) {
-                return true;
-            } else {
-               Toast.makeText(context,"Please enter valid email id",Toast.LENGTH_SHORT).show();
+           return true;
 
-            }
+
         } else {
             Toast.makeText(context, "Please enter email Id", Toast.LENGTH_SHORT).show();
 

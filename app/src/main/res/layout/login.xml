@@ -42,6 +42,8 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp" />
                 <EditText
+                    android:inputType="textEmailAddress"
+                    android:id="@+id/email_id"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/lightText"
                     android:hint="User Name"
@@ -74,6 +76,8 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp" />
                 <EditText
+                    android:inputType="textPassword"
+                    android:id="@+id/password"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/lightText"
                     android:hint="Password"
@@ -89,6 +93,20 @@
                 android:background="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"/>
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:visibility="gone"
+                android:progressDrawable="@color/white"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+
+
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
             <TextView
                 android:layout_marginRight="10dp"
                 android:gravity="end"
@@ -99,6 +117,7 @@
                 android:text="Forgot Password ?"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
 
 
             <Button
@@ -171,6 +190,7 @@
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
+            </LinearLayout>
             </LinearLayout>
             <View
 

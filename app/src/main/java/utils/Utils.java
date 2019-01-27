@@ -16,6 +16,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 
+import com.spaytbusiness.Login;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -195,5 +197,19 @@ public static JSONArray getJSonArray(String value)
             ex.fillInStackTrace();
         }
         return null;
+    }
+
+    public static void logout(final Activity act) {
+        act.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(act, Login.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                act.startActivity(intent);
+            }
+
+        });
+
     }
 }

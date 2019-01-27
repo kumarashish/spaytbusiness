@@ -20,4 +20,10 @@
         <item>Secondary</item>
 
     </array>
+
+    <array name="salutation">
+        <item>Herr</item>
+        <item>Frau</item>
+
+    </array>
 </resources>

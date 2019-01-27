@@ -29,7 +29,10 @@
             android:name=".Login"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Register"
+            android:name=".Registration"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Register_Step_2"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Add_Products"

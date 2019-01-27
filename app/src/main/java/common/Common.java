@@ -11,5 +11,37 @@ public class Common {
     public static String forgetPassword=baseUrl+"/business/forgotpass";
 
 
+/******user na///////
+ * email
+ */
 
+/******login////
+ * email
+ * password
+ * device_id
+ */
+/******business esists????
+ * company_name
+ */
+
+
+/********register
+ * email
+ * password
+ * salutation
+ * first_name
+ * last_name
+ * category_id
+ * company_name
+ * street_name
+ * door_no
+ * city
+ * zip_code
+ * business_email (optional) - if not specified, email will be used as business_email
+ * paypal_email (optional)
+ * vat_id (optional)
+ */
+/******forgetPassword
+ * email
+ */
 }
