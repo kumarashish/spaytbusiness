@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <RelativeLayout
+                android:background="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp" />
+                <TextView
+                    android:gravity="center"
+
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/rgular"
+                    android:text="Add Products"
+                    android:textColor="@android:color/white"
+                    android:textSize="18dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_margin="10dp"
+                android:text="Choose Category"
+                android:textSize="16dp"
+                android:textColor="@color/darkText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/darkText"
+                android:textSize="18dp"
+                android:textColor="@color/darkText"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+            <View
+                android:background="@color/lightText"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+            <TextView
+                android:layout_margin="10dp"
+                android:text="Choose type"
+                android:textSize="16dp"
+                android:textColor="@color/darkText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:entries="@array/product_type"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/darkText"
+                android:hint="Business name"
+                android:textSize="18dp"
+                android:textColor="@android:color/white"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+            <View
+                android:background="@color/lightText"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+            <TextView
+                android:layout_margin="10dp"
+                android:text="Product Name"
+                android:textSize="16dp"
+                android:textColor="@color/darkText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/darkText"
+                android:hint="name"
+                android:textSize="18dp"
+                android:textColor="@color/darkText"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+            <View
+                android:background="@color/lightText"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+            <TextView
+                android:layout_margin="10dp"
+                android:text="Product Description"
+                android:textSize="16dp"
+                android:textColor="@color/darkText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/darkText"
+                android:hint="description"
+                android:textSize="18dp"
+                android:textColor="@color/darkText"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+            <View
+                android:background="@color/lightText"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+            <TextView
+                android:layout_margin="10dp"
+                android:text="Price (Inc.Tax)"
+                android:textSize="16dp"
+                android:textColor="@color/darkText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/darkText"
+                android:hint="price"
+                android:textSize="18dp"
+                android:textColor="@color/darkText"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+            <View
+                android:background="@color/lightText"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+        </LinearLayout>
+
+        <Button
+            android:layout_alignParentBottom="true"
+
+            android:background="@color/blue"
+            android:id="@+id/submit"
+            android:textColor="@android:color/white"
+            android:text="Submit"
+            android:fontFamily="@font/light"
+            android:textSize="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

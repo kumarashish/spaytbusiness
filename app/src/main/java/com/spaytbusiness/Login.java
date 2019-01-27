@@ -51,8 +51,8 @@ public class Login  extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.submit:
-//                startActivity(new Intent(Login.this,Dashboard.class));
-//                finish();
+                startActivity(new Intent(Login.this,Dashboard.class));
+                finish();
                 break;
             case R.id.signUp:
                 startActivity(new Intent(Login.this,Register.class));

@@ -14,9 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Register"
+            android:name=".Splash"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ForgetPassword"
@@ -25,17 +29,36 @@
             android:name=".Login"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Splash"
+            android:name=".Register"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Add_Products"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Add_Location"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NewTransaction"
+            android:screenOrientation="portrait" />
+        <activity
+        android:name=".AddItem"
+        android:screenOrientation="portrait" />
+        <activity
+            android:name=".MyCart"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChooseCustomer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ScanCustomer"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:screenOrientation="portrait"
             android:name=".Dashboard"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

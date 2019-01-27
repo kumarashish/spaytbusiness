@@ -7,4 +7,17 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <array name="business_options">
+        <item>No Information</item>
+        <item>Open</item>
+        <item>Morning/AfterNoon</item>
+        <item>24Hrs Open</item>
+        <item>Closed</item>
+    </array>
+    <array name="product_type">
+        <item>Primary</item>
+        <item>Secondary</item>
+
+    </array>
 </resources>

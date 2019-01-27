@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <RelativeLayout
+                android:background="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp" />
+                <TextView
+                    android:gravity="center"
+
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/rgular"
+                    android:text="Neue Transaktionen anlegen"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="18dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:background="@drawable/bg"
+            android:layout_width="match_parent"
+            android:layout_height="160dp" />
+        <LinearLayout
+
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/blue_white_circle"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+            <View
+                android:layout_gravity="center_vertical"
+                android:background="@color/white"
+                android:layout_width="60dp"
+                android:layout_height="2dp"/>
+            <ImageView
+                android:src="@drawable/grey_circle"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+            <View
+                android:layout_gravity="center_vertical"
+                android:background="@color/white"
+                android:layout_width="60dp"
+                android:layout_height="2dp"/>
+            <ImageView
+                android:src="@drawable/grey_circle"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:weightSum="3.2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <Button
+                android:id="@+id/existing_customer"
+                android:gravity="center"
+android:background="@color/white"
+
+                android:fontFamily="@font/rgular"
+                android:text="Bestehender Kunde"
+
+                android:textColor="@color/darkText"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+        <View
+            android:background="@color/darkText"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <Button
+                    android:id="@+id/scan_customer"
+                    android:gravity="center"
+                    android:background="@color/white"
+
+
+                    android:fontFamily="@font/rgular"
+                    android:text="Bestehender Skenen"
+
+                    android:textColor="@color/darkText"
+                    android:textSize="18dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+        <View
+            android:background="@color/darkText"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+                    <Button
+                        android:id="@+id/authorise_with_paypal"
+                        android:gravity="center"
+                        android:background="@color/white"
+
+                        android:fontFamily="@font/rgular"
+                        android:text="Authorisieren mil Paypal"
+
+                        android:textColor="@color/darkText"
+                        android:textSize="18dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+        <View
+            android:background="@color/blue"
+            android:layout_weight="0.2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>
