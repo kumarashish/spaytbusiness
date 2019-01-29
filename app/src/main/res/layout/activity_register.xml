@@ -55,7 +55,7 @@ android:layout_marginLeft="10dp"
             android:layout_height="40dp" />
         <LinearLayout
 
-            android:visibility="gone"
+
 
             android:id="@+id/mainView"
             android:orientation="vertical"
