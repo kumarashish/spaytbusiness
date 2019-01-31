@@ -2,7 +2,9 @@ package com.spaytbusiness;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +13,18 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.paypal.android.sdk.payments.PayPalAuthorization;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalOAuthScopes;
+import com.paypal.android.sdk.payments.PayPalProfileSharingActivity;
+import com.paypal.android.sdk.payments.PayPalService;
+
+import org.json.JSONException;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,11 +54,20 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
     LinearLayout view;
     @BindView(R.id.progress_bar)
     ProgressBar progressbar;
+    int REQUEST_CODE_PROFILE_SHARING=1;
     Validation validation;
+    private static PayPalConfiguration config = new PayPalConfiguration()
+            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+            .clientId(Common.paypalClientId)
+            .merchantName("SpaytBusiness")
+            .merchantPrivacyPolicyUri(Uri.parse("https://www.spayt.de"))
+            .merchantUserAgreementUri(Uri.parse("https://www.spayt.de"));;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.login);
+
         ButterKnife.bind(this);
         paypal.setOnClickListener(this);
         submit.setOnClickListener(this);
@@ -52,6 +75,32 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
         controller=(AppController)getApplicationContext();
         validation=new Validation(Login.this);
         forgotPassword.setOnClickListener(this);
+        Intent intent=new Intent(this,PayPalService.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
+        startService(intent);
+
+
+
+    }
+    public void onProfileSharingPressed() {
+        Intent intent = new Intent(Login.this, PayPalProfileSharingActivity.class);
+
+        // send the same configuration for restart resiliency
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+
+        intent.putExtra(PayPalProfileSharingActivity.EXTRA_REQUESTED_SCOPES, getOauthScopes());
+
+        startActivityForResult(intent, REQUEST_CODE_PROFILE_SHARING);
+    }
+
+    private PayPalOAuthScopes getOauthScopes() {
+        /* create the set of required scopes
+         * Note: see https://developer.paypal.com/docs/integration/direct/identity/attributes/ for mapping between the
+         * attributes you select for this app in the PayPal developer portal and the scopes required here.
+         */
+        Set<String> scopes = new HashSet<String>(
+                Arrays.asList(PayPalOAuthScopes.PAYPAL_SCOPE_EMAIL, PayPalOAuthScopes.PAYPAL_SCOPE_ADDRESS) );
+        return new PayPalOAuthScopes(scopes);
     }
 
     @Override
@@ -59,7 +108,7 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
         switch (v.getId())
         {
             case R.id.paypal:
-                Toast.makeText(Login.this, "Under Development", Toast.LENGTH_SHORT).show();
+                onProfileSharingPressed();
                 break;
 
             case R.id.submit:
@@ -122,5 +171,38 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
         });
 
 
+
+    }
+    @Override
+    public void onDestroy() {
+        // Stop service when done
+        stopService(new Intent(this, PayPalService.class));
+        super.onDestroy();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_PROFILE_SHARING) {
+            if (resultCode == Activity.RESULT_OK) {
+                PayPalAuthorization auth =
+                        data.getParcelableExtra(PayPalProfileSharingActivity.EXTRA_RESULT_AUTHORIZATION);
+                if (auth != null) {
+                    try {
+                       Log.i("ProfileSharingExample", auth.toJSONObject().toString(4));
+
+                        String authorization_code = auth.getAuthorizationCode();
+                        Log.i("ProfileSharingExample", authorization_code);
+
+                       // sendAuthorizationToServer(auth);
+                       // displayResultText("Profile Sharing code received from PayPal");
+
+                    } catch (JSONException e) {
+                        Log.e("ProfileSharingExample", "an extremely unlikely failure occurred: ", e);
+                    }
+                }
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                Log.i("ProfileSharingExample", "The user canceled.");
+            }
+        }
     }
 }

@@ -11,6 +11,10 @@ public class Common {
     public static String forgetPassword=baseUrl+"/business/forgotpass";
 
 
+    public static String paypalClientId="Aeotj4cpU2wDvlExN1qZciDC8KP-cG4xR4ZwbJIK7Ec2UGfNzn6_LRIMLz8c0oAY8gTfXaxdUhyJbaup";
+    public static String paypalClientSecret="EJTAzxAEzeoIrTTfgZkDyQHsZseHNVjUx-RlQco_XETkm6KxLvpPkRF-lViyWjhplXNdXp1d0DeCYBfG";
+
+
 /******user na///////
  * email
  */
