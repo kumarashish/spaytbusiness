@@ -57,9 +57,9 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
     int REQUEST_CODE_PROFILE_SHARING=1;
     Validation validation;
     private static PayPalConfiguration config = new PayPalConfiguration()
-            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX     )
             .clientId(Common.paypalClientId)
-            .merchantName("SpaytBusiness")
+            .merchantName("Spayt GmbH")
             .merchantPrivacyPolicyUri(Uri.parse("https://www.spayt.de"))
             .merchantUserAgreementUri(Uri.parse("https://www.spayt.de"));;
     @Override
@@ -99,7 +99,7 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
          * attributes you select for this app in the PayPal developer portal and the scopes required here.
          */
         Set<String> scopes = new HashSet<String>(
-                Arrays.asList(PayPalOAuthScopes.PAYPAL_SCOPE_EMAIL, PayPalOAuthScopes.PAYPAL_SCOPE_ADDRESS) );
+                Arrays.asList(PayPalOAuthScopes.PAYPAL_SCOPE_EMAIL, PayPalOAuthScopes.PAYPAL_SCOPE_ADDRESS,PayPalOAuthScopes.PAYPAL_SCOPE_PROFILE,PayPalOAuthScopes.PAYPAL_SCOPE_PHONE) );
         return new PayPalOAuthScopes(scopes);
     }
 
@@ -186,11 +186,15 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
             if (resultCode == Activity.RESULT_OK) {
                 PayPalAuthorization auth =
                         data.getParcelableExtra(PayPalProfileSharingActivity.EXTRA_RESULT_AUTHORIZATION);
+                     Bundle bundle=  data.getExtras();
                 if (auth != null) {
                     try {
                        Log.i("ProfileSharingExample", auth.toJSONObject().toString(4));
 
+
                         String authorization_code = auth.getAuthorizationCode();
+
+
                         Log.i("ProfileSharingExample", authorization_code);
 
                        // sendAuthorizationToServer(auth);
