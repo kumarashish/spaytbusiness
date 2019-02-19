@@ -56,6 +56,8 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
     ProgressBar progressbar;
     int REQUEST_CODE_PROFILE_SHARING=1;
     Validation validation;
+    public int apicall;
+    int login=1,signUpwithPaypal=2;
     private static PayPalConfiguration config = new PayPalConfiguration()
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX     )
             .clientId(Common.paypalClientId)
@@ -115,7 +117,7 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
                 if((validation.isEmailIdValid(emailId))&&(validation.isNotNull(password)))
                 {
                     if(Utils.isNetworkAvailable(Login.this))
-                    {
+                    {apicall=login;
                         progressbar.setVisibility(View.VISIBLE);
                         view.setVisibility(View.GONE);
                         controller.getWebApiCall().login(Common.login,emailId.getText().toString().trim(),password.getText().toString().trim(),"",this);
@@ -142,6 +144,7 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
             public void run() {
                 if(Utils.getStatus(value))
                 {
+
                     controller.setProfile(new UserProfile(value));
                     controller.setBusinessProfile(new BusinessProfile(value));
                     controller.getManager().setUserLoggedIn(true);
@@ -194,9 +197,12 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
 
                         String authorization_code = auth.getAuthorizationCode();
 
+                        progressbar.setVisibility(View.VISIBLE);
 
+                        view.setVisibility(View.GONE);
+                        apicall=signUpwithPaypal;
+                        controller.getWebApiCall().getData(Common.login_withPaypal,authorization_code,this);
                         Log.i("ProfileSharingExample", authorization_code);
-
                        // sendAuthorizationToServer(auth);
                        // displayResultText("Profile Sharing code received from PayPal");
 

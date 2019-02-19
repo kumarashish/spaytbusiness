@@ -13,6 +13,7 @@ import models.RegistrationModel;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -49,6 +50,42 @@ public class WebApiCall {
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS).build();
         final Request request = new Request.Builder().url(url).build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callback.onError(e.fillInStackTrace().toString());
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.code() == 200) {
+                    if (response != null) {
+                        callback.onSucess(response.body().string());
+                    } else {
+                        if (response.message() != null) {
+                            callback.onError(response.message());
+                        } else {
+                            callback.onError("No data found!");
+                        }
+
+                    }
+                }else{
+                    callback.onError(response.body().string());
+                }
+            }
+        });
+    }
+    public void getData(String url,String token, final WebApiResponseCallback callback) {
+
+        HttpUrl httpUrl = HttpUrl.parse(url).newBuilder()
+                .addEncodedQueryParameter("code",token)
+                // Each addPathSegment separated add a / symbol to the final url
+                // finally my Full URL is:
+                // https://subdomain.apiweb.com/api/v1/students/8873?auth_token=71x23768234hgjwqguygqew
+                .build();
+        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS).build();
+        final Request request = new Request.Builder().url(httpUrl).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

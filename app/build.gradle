@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.spaytbusiness"
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 24
         versionCode 2
         versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

@@ -7,7 +7,7 @@ public class Common {
     public static String getCategories=baseUrl+"/business/categories";
     public static String registerUser=baseUrl+"/business/register";
     public static String login=baseUrl+"/business/login";
-    public static String login_withPaypal=baseUrl+"/business/complete_signup_with_paypal?code=";
+    public static String login_withPaypal=baseUrl+"/business_users/complete_signup_with_paypal?";
     public static String forgetPassword=baseUrl+"/business/forgotpass";
     public static String businessLocationUrl=baseUrl+"/business_locations";
 
@@ -77,6 +77,27 @@ public class Common {
 /******forgetPassword
  * email
  */
+/*
+
+
+"/business_products/categories
+        /business_products
+/business_products/add
+/business_products/update
+/business_products/delete
+/business_products/details
+/business_products/search"
+            "/business_products_offers
+            /business_products_offers/add
+/business_products_offers/update
+/business_products_offers/delete
+/business_products_offers/details
+/business_products_offers/search"
+            "/business
+            /business/update"
+
+
+            */
 
 
 }

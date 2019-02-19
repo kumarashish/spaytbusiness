@@ -29,6 +29,7 @@ import fragments.Offers;
 import fragments.Products;
 import fragments.ProfileSettings;
 import fragments.Transactions;
+import fragments.Users;
 import utils.Utils;
 
 public class Dashboard extends AppCompatActivity implements View.OnClickListener {
@@ -49,6 +50,8 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     View profileSettings;
     @BindView(R.id.logout)
     View logout;
+    @BindView(R.id.manage_users)
+    View manageUsers;
     @BindView(R.id.app_bar_dashboard)
     View appBardDashboard;
     @BindView(R.id.close)
@@ -87,6 +90,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         profileSettings.setOnClickListener(this);
         logout.setOnClickListener(this);
         close.setOnClickListener(this);
+        manageUsers.setOnClickListener(this);
         showFragment(new Transactions());
 
 
@@ -141,6 +145,13 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                     drawer.closeDrawer(GravityCompat.START);
                 }
                 getSupportActionBar().setTitle("Products");
+                break;
+            case R.id.manage_users:
+                showFragment(new Users());
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+                getSupportActionBar().setTitle("Manage Users");
                 break;
             case R.id.locations:
                 showFragment(new Locations());

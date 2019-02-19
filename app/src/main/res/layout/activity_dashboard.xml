@@ -250,7 +250,36 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"/>
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
 
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/rgular"
+                        android:textSize="18dp"
+                        android:text="Manage Users"
+                        android:textColor="@color/darkText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <View
+                        android:layout_marginTop="15dp"
+                        android:background="@color/lightText"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+                </LinearLayout>
+                <View
+                    android:id="@+id/manage_users"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"/>
+            </RelativeLayout>
            <View
                android:layout_width="match_parent"
                android:layout_height="30dp"/>
