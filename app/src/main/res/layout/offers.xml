@@ -28,6 +28,7 @@
                     android:layout_height="160dp">
                     <TextView
                         android:gravity="center"
+                        android:id="@+id/name"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="50dp"
@@ -38,7 +39,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                     <TextView
-
+                        android:id="@+id/count"
                         android:gravity="center"
                         android:layout_marginLeft="10dp"
                         android:fontFamily="@font/rgular"
@@ -50,6 +51,7 @@
                 </LinearLayout>
             </RelativeLayout>
             <ImageView
+                android:id="@+id/add"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="-30dp"
                 android:layout_gravity="end"
@@ -62,10 +64,26 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:visibility="gone"
+                    android:progressDrawable="@color/blue"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
                 <ListView
-
+                   android:divider="@null"
+                    android:id="@+id/listView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
+                <TextView
+                    android:id="@+id/nodata"
+                    android:visibility="gone"
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    android:text="No data"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
             </RelativeLayout>
 
         </LinearLayout>

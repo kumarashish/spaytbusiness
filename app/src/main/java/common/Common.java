@@ -10,9 +10,20 @@ public class Common {
     public static String login_withPaypal=baseUrl+"/business_users/complete_signup_with_paypal?";
     public static String forgetPassword=baseUrl+"/business/forgotpass";
     public static String businessLocationUrl=baseUrl+"/business_locations";
+    public static String businessUserUrl=baseUrl+"/business_users";
+    public static String offersUrl=baseUrl+"/business_products_offers";
+    public static String businessProducts=baseUrl+"/business_products";
+    public static String businessProfile=baseUrl+"/business";
+    public static String updateBusinessProfile=baseUrl+"/business/update";
 
 
-
+    public static String[] updateBusinessKeys = {"business_email","category_id", "company_name", "street_name", "door_no", "city", "zip_code", "phone_number", "paypal_email", "vat_id"};
+//"
+//        /business_products_offers/add
+///business_products_offers/update
+///business_products_offers/delete
+///business_products_offers/details
+///business_products_offers/search"
 
    //   public static String paypalClientId="Aeotj4cpU2wDvlExN1qZciDC8KP-cG4xR4ZwbJIK7Ec2UGfNzn6_LRIMLz8c0oAY8gTfXaxdUhyJbaup";
 //    public static String paypalClientSecret="EJTAzxAEzeoIrTTfgZkDyQHsZseHNVjUx-RlQco_XETkm6KxLvpPkRF-lViyWjhplXNdXp1d0DeCYBfG";
@@ -42,62 +53,7 @@ public class Common {
 
 
 
-//https://github.com/paypal/PayPal-Android-SDK/blob/master/SampleApp/src/main/java/com/paypal/example/paypalandroidsdkexample/SampleActivity.java
 
-/******user na///////
- * email
- */
-
-/******login////
- * email
- * password
- * device_id
- */
-/******business esists????
- * company_name
- */
-
-
-/********register
- * email
- * password
- * salutation
- * first_name
- * last_name
- * category_id
- * company_name
- * street_name
- * door_no
- * city
- * zip_code
- * business_email (optional) - if not specified, email will be used as business_email
- * paypal_email (optional)
- * vat_id (optional)
- */
-/******forgetPassword
- * email
- */
-/*
-
-
-"/business_products/categories
-        /business_products
-/business_products/add
-/business_products/update
-/business_products/delete
-/business_products/details
-/business_products/search"
-            "/business_products_offers
-            /business_products_offers/add
-/business_products_offers/update
-/business_products_offers/delete
-/business_products_offers/details
-/business_products_offers/search"
-            "/business
-            /business/update"
-
-
-            */
 
 
 }

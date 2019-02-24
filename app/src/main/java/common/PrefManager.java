@@ -45,7 +45,7 @@ public class PrefManager {
     public void setUserToken(String value) {
         try {
             JSONObject jsonObject = new JSONObject(value);
-            editor.putString(UserToken, jsonObject .getString("auth_token"));
+            editor.putString(UserToken, jsonObject .getString("X-Businesstoken"));
             editor.commit();
         } catch (Exception ex) {
             ex.fillInStackTrace();

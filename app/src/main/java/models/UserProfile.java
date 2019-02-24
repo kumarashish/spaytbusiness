@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 public class UserProfile {
     String user_id;
+    String businessId;
     String salutation;
     String email;
     String first_name;
@@ -16,7 +17,7 @@ public class UserProfile {
             JSONObject jsonObj=new JSONObject(value);
             JSONObject jsonObject=jsonObj.getJSONObject("user_details");
             user_id = jsonObject.isNull("user_id") ? "" : jsonObject.getString("user_id");
-            salutation = jsonObject.isNull("salutation") ? "" : jsonObject.getString("salutationd");
+            salutation = jsonObject.isNull("salutation") ? "" : jsonObject.getString("salutation");
             email = jsonObject.isNull("email") ? "" : jsonObject.getString("email");
             first_name = jsonObject.isNull("first_name") ? "" : jsonObject.getString("first_name");
             last_name = jsonObject.isNull("last_name") ? "" : jsonObject.getString("last_name");
@@ -26,6 +27,28 @@ public class UserProfile {
         {
             ex.fillInStackTrace();
         }
+    }
+
+    public UserProfile(JSONObject jsonObject){
+        try {
+
+
+            user_id = jsonObject.isNull("id") ? "" : jsonObject.getString("id");
+            businessId = jsonObject.isNull("business_id") ? "" : jsonObject.getString("business_id");
+            salutation = jsonObject.isNull("salutation") ? "" : jsonObject.getString("salutation");
+            email = jsonObject.isNull("email") ? "" : jsonObject.getString("email");
+            first_name = jsonObject.isNull("first_name") ? "" : jsonObject.getString("first_name");
+            last_name = jsonObject.isNull("last_name") ? "" : jsonObject.getString("last_name");
+            role = jsonObject.isNull("user_type_name") ? "" : jsonObject.getString("user_type_name");
+            role_id = jsonObject.isNull("user_type") ? "" : jsonObject.getString("user_type");
+        } catch (Exception ex)
+        {
+            ex.fillInStackTrace();
+        }
+    }
+
+    public String getBusinessId() {
+        return businessId;
     }
 
     public String getEmail() {

@@ -11,9 +11,17 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:visibility="gone"
+            android:progressDrawable="@color/blue"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     <LinearLayout
 
-     
+        android:visibility="gone"
         android:id="@+id/mainView"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -71,11 +79,12 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <EditText
+                android:id="@+id/companyName"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/darkText"
                 android:hint="Company Name"
                 android:textSize="18dp"
-                android:textColor="@android:color/white"
+                android:textColor="@color/grey"
                 android:layout_marginLeft="10dp"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
@@ -83,7 +92,7 @@
         </LinearLayout>
         <View
             android:layout_marginTop="5dp"
-            android:background="@android:color/white"
+            android:background="@color/grey"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>
         <LinearLayout
@@ -102,18 +111,112 @@
                 android:layout_width="50dp"
                 android:layout_height="30dp" />
             <EditText
+                android:id="@+id/street"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/darkText"
-                android:hint="Company Address"
+                android:hint="Street"
                 android:textSize="18dp"
-                android:textColor="@android:color/white"
+                android:textColor="@color/grey"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
         <View
             android:layout_marginTop="5dp"
-            android:background="@android:color/white"
+            android:background="@color/grey"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:layout_marginLeft="-10dp"
+                android:tint="@color/darkText"
+
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/map_icon"
+                android:layout_width="50dp"
+                android:layout_height="30dp" />
+            <EditText
+                android:id="@+id/doorNumber"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/darkText"
+                android:hint="Door Number"
+                android:textSize="18dp"
+                android:textColor="@color/grey"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@color/grey"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:layout_marginLeft="-10dp"
+                android:tint="@color/darkText"
+
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/map_icon"
+                android:layout_width="50dp"
+                android:layout_height="30dp" />
+            <EditText
+                android:id="@+id/city"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/darkText"
+                android:hint="City"
+                android:textSize="18dp"
+                android:textColor="@color/grey"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@color/grey"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:layout_marginLeft="-10dp"
+                android:tint="@color/darkText"
+
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/map_icon"
+                android:layout_width="50dp"
+                android:layout_height="30dp" />
+            <EditText
+                android:id="@+id/pincode"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/darkText"
+                android:hint="Pincode"
+                android:textSize="18dp"
+                android:textColor="@color/grey"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@color/grey"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>
         <LinearLayout
@@ -130,14 +233,14 @@
                 android:src="@drawable/home1"
                 android:layout_width="40dp"
                 android:layout_height="40dp" />
-            <TextView
+            <Spinner
                 android:id="@+id/categories"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/darkText"
                 android:hint="Category"
                 android:textSize="18dp"
                 android:gravity="center_vertical"
-                android:textColor="@android:color/white"
+                android:textColor="@color/grey"
                 android:layout_marginLeft="5dp"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
@@ -145,7 +248,7 @@
         </LinearLayout>
         <View
             android:layout_marginTop="5dp"
-            android:background="@android:color/white"
+            android:background="@color/grey"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>
         <LinearLayout
@@ -162,11 +265,15 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <EditText
+                android:id="@+id/phone"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/darkText"
                 android:hint="Phone Number"
+                android:maxLength="12"
+                android:inputType="number"
+                android:imeOptions="actionNext"
                 android:textSize="18dp"
-                android:textColor="@android:color/white"
+                android:textColor="@color/grey"
                 android:layout_marginLeft="10dp"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
@@ -174,7 +281,7 @@
         </LinearLayout>
         <View
             android:layout_marginTop="5dp"
-            android:background="@android:color/white"
+            android:background="@color/grey"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>
         <LinearLayout
@@ -191,12 +298,13 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <EditText
-
+                android:imeOptions="actionNext"
+android:id="@+id/companyEmailId"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/darkText"
                 android:hint="Company Email Id"
                 android:textSize="18dp"
-                android:textColor="@android:color/white"
+                android:textColor="@color/grey"
                 android:layout_marginLeft="10dp"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
@@ -204,7 +312,7 @@
         </LinearLayout>
         <View
             android:layout_marginTop="5dp"
-            android:background="@android:color/white"
+            android:background="@color/grey"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>
         <LinearLayout
@@ -221,11 +329,13 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <EditText
+                android:imeOptions="actionNext"
+                android:id="@+id/vatId"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/darkText"
                 android:hint="VAT ID"
                 android:textSize="18dp"
-                android:textColor="@android:color/white"
+                android:textColor="@color/grey"
                 android:layout_marginLeft="10dp"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
@@ -233,7 +343,7 @@
         </LinearLayout>
         <View
             android:layout_marginTop="5dp"
-            android:background="@android:color/white"
+            android:background="@color/grey"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>
         <LinearLayout
@@ -250,11 +360,13 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <EditText
+                android:imeOptions="actionDone"
+                android:id="@+id/paypalId"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/darkText"
                 android:hint="PayPal Email id"
                 android:textSize="18dp"
-                android:textColor="@android:color/white"
+                android:textColor="@color/grey"
                 android:layout_marginLeft="10dp"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
@@ -263,45 +375,10 @@
 
         <View
             android:layout_marginTop="5dp"
-            android:background="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
-        <LinearLayout
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="40dp">
-            <ImageView
-                android:tint="@color/darkText"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/pass"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
-            <EditText
-                android:fontFamily="@font/light"
-                android:textColorHint="@color/darkText"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:textSize="18dp"
-                android:textColor="@android:color/white"
-                android:layout_marginLeft="10dp"
-                android:background="@android:color/transparent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-        <View
-            android:layout_marginTop="5dp"
-            android:background="@android:color/white"
+            android:background="@color/grey"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>
 
-        <View
-            android:layout_marginTop="5dp"
-            android:background="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
         <Button
             android:id="@+id/submit"
             android:background="@color/blue"
@@ -312,6 +389,23 @@
             android:textSize="20dp"
             android:layout_width="match_parent"
             android:layout_height="50dp" />
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/progress_bar2"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ProgressBar
+
+
+            android:progressDrawable="@color/blue"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+        </LinearLayout>
 
 
 

@@ -1,0 +1,83 @@
+package adapter;
+
+import android.app.Activity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.spaytbusiness.R;
+
+import java.util.ArrayList;
+
+import models.BusinessProductModel;
+import models.UserProfile;
+
+public class BusinessProductAdapter extends BaseAdapter {
+    ArrayList<BusinessProductModel> list;
+    Activity act;
+    LayoutInflater inflater;
+
+    public BusinessProductAdapter(ArrayList<BusinessProductModel> list, Activity act) {
+        this.list = list;
+        this.act = act;
+        inflater = LayoutInflater.from(act);
+    }
+
+    @Override
+    public int getCount() {
+        return list.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return list.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+        BusinessProductModel model = list.get(position);
+        if (convertView == null) {
+            holder = new ViewHolder();
+
+            convertView = inflater.inflate(R.layout.business_user_row, parent, false);
+            holder.description = (TextView) convertView.findViewById(R.id.email);
+            holder.productname = (TextView) convertView.findViewById(R.id.name);
+            holder.price = (TextView) convertView.findViewById(R.id.role);
+            holder.next = (View) convertView.findViewById(R.id.next);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.productname.setText(model.getName());
+        holder.description.setText(model.getDescription());
+        if (model.getPrice_per_liter().length() > 0) {
+            holder.price.setText(model.getPrice_per_liter() + " € / liter");
+        } else if(model.getParking_fee_per_hour().length()>0) {
+            holder.price.setText(model.getParking_fee_per_hour() + " € / hour");
+        }else{
+            holder.price.setText(model.getTotal_price() + " € ");
+        }
+
+        holder.next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        convertView.setTag(holder);
+
+        return convertView;
+    }
+
+    public class ViewHolder {
+        TextView productname, description, price;
+        View next;
+    }
+}

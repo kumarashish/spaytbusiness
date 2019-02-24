@@ -4,6 +4,8 @@ import org.json.JSONObject;
 
 public class BusinessProfile {
     String id;
+    String category_id;
+    String business_email;
     String category_name;
     String company_name;
     String street_name;
@@ -14,6 +16,7 @@ public class BusinessProfile {
     String longitude;
     String paypal_email;
     String vat_id;
+    String phone_number;
     public BusinessProfile(){}
     public BusinessProfile(String value)
     {
@@ -35,6 +38,41 @@ public class BusinessProfile {
         {
             ex.fillInStackTrace();
         }
+    }
+    public BusinessProfile(JSONObject jsonObject)
+    {
+
+            try{
+                id=jsonObject.isNull("business_id")?"":jsonObject.getString("business_id");
+                category_id=jsonObject.isNull("category_id")?"":jsonObject.getString("category_id");;
+                category_name=jsonObject.isNull("category_name")?"":jsonObject.getString("category_name");;
+                company_name=jsonObject.isNull("company_name")?"":jsonObject.getString("company_name");;
+                business_email=jsonObject.isNull("business_email")?"":jsonObject.getString("business_email");;
+                street_name=jsonObject.isNull("street_name")?"":jsonObject.getString("street_name");;
+                door_no=jsonObject.isNull("door_no")?"":jsonObject.getString("door_no");;
+                city=jsonObject.isNull("city")?"":jsonObject.getString("city");;
+                zip_code=jsonObject.isNull("zip_code")?"":jsonObject.getString("zip_code");;
+                latitude=jsonObject.isNull("latitude")?"":jsonObject.getString("latitude");;
+                longitude=jsonObject.isNull("longitude")?"":jsonObject.getString("longitude");;
+                paypal_email=jsonObject.isNull("paypal_email")?"":jsonObject.getString("paypal_email");
+                vat_id=jsonObject.isNull("vat_id")?"":jsonObject.getString("vat_id");
+                phone_number=jsonObject.isNull("phone_number")?"":jsonObject.getString("phone_number");
+            }catch (Exception ex)
+            {
+                ex.fillInStackTrace();
+            }
+        }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public String getCategory_id() {
+        return category_id;
+    }
+
+    public String getBusiness_email() {
+        return business_email;
     }
 
     public String getCategory_name() {
