@@ -168,7 +168,7 @@ switch (v.getId())
         if (model == null) {
             return new String[]{fname.getText().toString(), lname.getText().toString(), salutation.getSelectedItem().toString(), email.getText().toString(), checked, roleType};
         } else {
-            return new String[]{controller.getProfile().getUser_id(), fname.getText().toString(), lname.getText().toString(), salutation.getSelectedItem().toString(), email.getText().toString(), checked, roleType};
+            return new String[]{model.getUser_id(), fname.getText().toString(), lname.getText().toString(), salutation.getSelectedItem().toString(), email.getText().toString(), checked, roleType};
         }
     }
     public boolean isAllFildsValidated()
