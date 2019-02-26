@@ -58,6 +58,12 @@
         <activity
             android:name=".Business_Location_Detais"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".BusinessProductDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BusinessUserDetails"
+            android:screenOrientation="portrait" />
 
         <activity
             android:screenOrientation="portrait"

@@ -144,7 +144,6 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
             public void run() {
                 if(Utils.getStatus(value))
                 {
-
                     controller.setProfile(new UserProfile(value));
                     controller.setBusinessProfile(new BusinessProfile(value));
                     controller.getManager().setUserLoggedIn(true);
@@ -152,7 +151,6 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
                     utils.Utils.showToast(Login.this, "Logged in sucessfully.");
                     startActivity(new Intent(Login.this, Dashboard.class));
                     finish();
-
                 }else{
                     Toast.makeText(Login.this,Utils.getMessage(value),Toast.LENGTH_SHORT).show();
                     progressbar.setVisibility(View.GONE);
@@ -172,9 +170,6 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
                 view.setVisibility(View.VISIBLE);
             }
         });
-
-
-
     }
     @Override
     public void onDestroy() {

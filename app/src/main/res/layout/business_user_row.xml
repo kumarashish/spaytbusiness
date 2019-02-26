@@ -47,8 +47,19 @@
             android:layout_height="0.5dp"/>
 
     </LinearLayout>
+        <ImageView
+            android:id="@+id/delete"
+            android:tint="@color/grey"
+            android:src="@drawable/delete"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
         <View
+
             android:id="@+id/next"
+            android:layout_marginRight="70dp"
             android:layout_width="match_parent"
             android:layout_height="90dp"/>
     </RelativeLayout>

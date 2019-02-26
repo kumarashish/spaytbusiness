@@ -17,7 +17,6 @@ public class    AppController extends Application {
     BusinessProfile businessProfile;
     @Override
     public void onCreate() {
-
         controller=this;
         webApiCall=new WebApiCall(getApplicationContext());
         manager=new PrefManager(getApplicationContext());

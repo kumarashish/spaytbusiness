@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.spaytbusiness.R;
@@ -55,12 +56,20 @@ public class BusinessLocationAdapter extends BaseAdapter {
             holder.locationname = (TextView) convertView.findViewById(R.id.name);
             holder.description = (TextView) convertView.findViewById(R.id.role);
             holder.next = (View) convertView.findViewById(R.id.next);
+            holder.delete=(ImageView) convertView.findViewById(R.id.delete);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.locationname.setText(model.getLocation_name());
         holder.address.setText(model.getStreet_name() + "," + model.getCity() + "," + model.getDoor_no());
         holder.description.setText(model.getDescription());
+        holder.delete.setVisibility(View.VISIBLE);
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.onDeleteCLicked(model);
+            }
+        });
         holder.next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +83,7 @@ public class BusinessLocationAdapter extends BaseAdapter {
 
     public class ViewHolder {
         TextView locationname, address, description;
+        ImageView delete;
         View next;
     }
 }

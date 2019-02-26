@@ -15,10 +15,25 @@ public class Common {
     public static String businessProducts=baseUrl+"/business_products";
     public static String businessProfile=baseUrl+"/business";
     public static String updateBusinessProfile=baseUrl+"/business/update";
+    public static String addBusinessUser="business_users/add";
+    public static String updateBusinessUser="business_users/update";
+
 
 
     public static String[] updateBusinessKeys = {"business_email","category_id", "company_name", "street_name", "door_no", "city", "zip_code", "phone_number", "paypal_email", "vat_id"};
-//"
+    public static String []updateUserKeys={"id","first_name","last_name","salutation","email","is_active","user_type"};
+    public static String []addUserKeys={"first_name","last_name","salutation","email","is_active","user_type"};
+
+
+
+
+
+
+
+
+
+
+    //"
 //        /business_products_offers/add
 ///business_products_offers/update
 ///business_products_offers/delete

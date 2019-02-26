@@ -14,8 +14,11 @@ import android.widget.FrameLayout;
 import com.spaytbusiness.NewTransaction;
 import com.spaytbusiness.R;
 
+import common.AppController;
+
 public class Transactions extends Fragment {
     Button new_transaction;
+    AppController controller;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +27,7 @@ public class Transactions extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        controller=(AppController)getActivity().getApplicationContext();
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.transactions, container, false);
         new_transaction=(Button)v.findViewById(R.id.new_transaction);
@@ -33,6 +37,8 @@ public class Transactions extends Fragment {
                 startActivity(new Intent(getActivity(),NewTransaction.class));
             }
         });
+
+
         return v;
     }
 }

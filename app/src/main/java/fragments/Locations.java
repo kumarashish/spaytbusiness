@@ -1,5 +1,7 @@
 package fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -71,6 +73,13 @@ OnListItemSelected callback;
             progress_bar.setVisibility(View.VISIBLE);
             controller.getWebApiCall().getDataCommon(Common.businessLocationUrl,controller.getManager().getUserToken(),this);
         }
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Business_Location_Detais.model=null;
+                startActivity(new Intent(getActivity(),Business_Location_Detais.class));
+            }
+        });
         return v;
     }
 
@@ -139,12 +148,50 @@ OnListItemSelected callback;
     }
 
     @Override
-    public void onBusinessLocationSlected(Business_locations model) {
+    public void onBusinessLocationSlected(final Business_locations model) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                Business_Location_Detais.model=model;
                 startActivity(new Intent(getActivity(),Business_Location_Detais.class));
             }
         });
+    }
+
+    @Override
+    public void onDeleteCLicked(Business_locations model) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showAlert();
+            }
+        });
+    }
+
+
+    public void showAlert()
+    {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+        builder1.setMessage("Do yo really want to delete this location ?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 }

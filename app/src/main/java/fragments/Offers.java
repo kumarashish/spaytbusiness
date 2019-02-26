@@ -94,7 +94,7 @@ public class Offers   extends Fragment implements WebApiResponseCallback,View.On
 
 
                         count.setText(Integer.toString(businessUserList.size()));
-                        listView.setAdapter(new BusinessUserAdapter(businessUserList,getActivity()));
+                      //  listView.setAdapter(new BusinessUserAdapter(businessUserList,getActivity(),ca));
                         listView.setVisibility(View.VISIBLE);
                         nodata.setVisibility(View.GONE);
                     }

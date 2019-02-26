@@ -2,7 +2,9 @@ package utils;
 
 import android.app.Activity;
 
+import android.os.Build;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -63,12 +65,17 @@ public class Validation {
     }
 
     private static boolean isValidEmail(String email) {
-        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
+            return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        }
+        return false;
     }
 
     public void requestFocus(View view) {
         if (view.requestFocus()) {
-            context.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
+                context.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+            }
         }
     }
 
@@ -76,12 +83,11 @@ public class Validation {
      * validate email string with given email regular expression
      */
     public boolean isEmailIdValid(EditText email) {
-        if (isNotNull(email)) {
+        if ((isNotNull(email))&&(isValidEmail(email.getText().toString()))) {
            return true;
 
-
         } else {
-            Toast.makeText(context, "Please enter email Id", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Please enter valid email Id", Toast.LENGTH_SHORT).show();
 
         }
         return false;

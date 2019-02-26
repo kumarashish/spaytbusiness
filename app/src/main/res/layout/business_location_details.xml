@@ -18,6 +18,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <TextView
+                android:id="@+id/heading"
                 android:textSize="18dp"
                 android:fontFamily="@font/bold"
                 android:gravity="center"
@@ -49,7 +50,7 @@
                 android:layout_height="30dp" />
             <EditText
                 android:inputType="textPersonName"
-                android:id="@+id/companyname"
+                android:id="@+id/location_name"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/grey"
                 android:hint="Location Name"
@@ -468,7 +469,7 @@
 
                     android:textSize="18dp"
                     android:hint="From(HH:MM)"
-                    android:id="@+id/m_mFrom"
+                    android:id="@+id/t_mFrom"
 
                     android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
@@ -484,7 +485,7 @@
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
-                    android:id="@+id/m_mTo"
+                    android:id="@+id/t_mTo"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:textColor="@color/blue"
@@ -521,7 +522,7 @@
 
                     android:textSize="18dp"
                     android:hint="From(HH:MM)"
-                    android:id="@+id/m_aFrom"
+                    android:id="@+id/t_aFrom"
 
                     android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
@@ -537,7 +538,7 @@
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
-                    android:id="@+id/m_aTo"
+                    android:id="@+id/t_aTo"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:textColor="@color/blue"
@@ -610,7 +611,7 @@
 
                     android:textSize="18dp"
                     android:hint="From(HH:MM)"
-                    android:id="@+id/m_mFrom"
+                    android:id="@+id/w_mFrom"
 
                     android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
@@ -626,7 +627,7 @@
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
-                    android:id="@+id/m_mTo"
+                    android:id="@+id/w_mTo"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:textColor="@color/blue"
@@ -663,7 +664,7 @@
 
                     android:textSize="18dp"
                     android:hint="From(HH:MM)"
-                    android:id="@+id/m_aFrom"
+                    android:id="@+id/w_aFrom"
 
                     android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
@@ -679,7 +680,7 @@
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
-                    android:id="@+id/m_aTo"
+                    android:id="@+id/w_aTo"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:textColor="@color/blue"
@@ -752,7 +753,7 @@
 
                     android:textSize="18dp"
                     android:hint="From(HH:MM)"
-                    android:id="@+id/m_mFrom"
+                    android:id="@+id/th_mFrom"
 
                     android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
@@ -768,7 +769,7 @@
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
-                    android:id="@+id/m_mTo"
+                    android:id="@+id/th_mTo"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:textColor="@color/blue"
@@ -805,7 +806,7 @@
 
                     android:textSize="18dp"
                     android:hint="From(HH:MM)"
-                    android:id="@+id/m_aFrom"
+                    android:id="@+id/th_aFrom"
 
                     android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
@@ -821,7 +822,7 @@
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
-                    android:id="@+id/m_aTo"
+                    android:id="@+id/th_aTo"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:textColor="@color/blue"
@@ -894,7 +895,7 @@
 
                     android:textSize="18dp"
                     android:hint="From(HH:MM)"
-                    android:id="@+id/m_mFrom"
+                    android:id="@+id/f_mFrom"
 
                     android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
@@ -910,7 +911,7 @@
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
-                    android:id="@+id/m_mTo"
+                    android:id="@+id/f_mTo"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:textColor="@color/blue"
@@ -947,7 +948,7 @@
 
                     android:textSize="18dp"
                     android:hint="From(HH:MM)"
-                    android:id="@+id/m_aFrom"
+                    android:id="@+id/f_aFrom"
 
                     android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
@@ -963,7 +964,7 @@
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
-                    android:id="@+id/m_aTo"
+                    android:id="@+id/f_aTo"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:textColor="@color/blue"
@@ -1260,6 +1261,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"/>
             <Button
+
+                android:id="@+id/submit"
                 android:layout_marginTop="30dp"
                 android:background="@color/blue"
                 android:textColor="@color/white"

@@ -5,23 +5,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.spaytbusiness.R;
 
 import java.util.ArrayList;
 
+import interfaces.BusinessUserClicked;
 import models.UserProfile;
 
 public class BusinessUserAdapter extends BaseAdapter {
     ArrayList<UserProfile>list;
     Activity act;
     LayoutInflater inflater;
-    public BusinessUserAdapter(ArrayList<UserProfile>list, Activity act)
+    BusinessUserClicked callback;
+    public BusinessUserAdapter(ArrayList<UserProfile>list, Activity act,BusinessUserClicked callback)
     {
         this.list=list;
         this.act=act;
       inflater = LayoutInflater.from(act);
+      this.callback=callback;
     }
     @Override
     public int getCount() {
@@ -41,7 +45,7 @@ public class BusinessUserAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        UserProfile model=list.get(position);
+        final UserProfile model=list.get(position);
         if(convertView==null)
         {
             holder=new ViewHolder();
@@ -51,15 +55,17 @@ public class BusinessUserAdapter extends BaseAdapter {
             holder.name=(TextView)convertView.findViewById(R.id.name);
             holder.role=(TextView)convertView.findViewById(R.id.role);
             holder.next=(View) convertView.findViewById(R.id.next);
+            holder.delete=(ImageView) convertView.findViewById(R.id.delete);
         }else{holder=(ViewHolder) convertView.getTag();
         }
         holder.name.setText(model.getFirst_name()+" "+model.getLast_name());
         holder.email.setText(model.getEmail());
         holder.role.setText(model.getRole());
+        holder.delete.setVisibility(View.GONE);
         holder.next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+         callback.onUserSelected(model);
             }
         });
         convertView.setTag(holder);
@@ -69,6 +75,7 @@ public class BusinessUserAdapter extends BaseAdapter {
 
     public class ViewHolder{
         TextView name,email,role;
+        ImageView delete;
         View next;
     }
 }

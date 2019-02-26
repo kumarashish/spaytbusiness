@@ -11,6 +11,7 @@ public class UserProfile {
     String last_name;
     String role;
     String role_id;
+   String  is_active;
     public UserProfile(){}
     public UserProfile(String value) {
         try {
@@ -23,6 +24,7 @@ public class UserProfile {
             last_name = jsonObject.isNull("last_name") ? "" : jsonObject.getString("last_name");
             role = jsonObject.isNull("role") ? "" : jsonObject.getString("role");
             role_id = jsonObject.isNull("role_id") ? "" : jsonObject.getString("role_id");
+            is_active= jsonObject.isNull("is_active") ? "" : jsonObject.getString("is_active");
         } catch (Exception ex)
         {
             ex.fillInStackTrace();
@@ -41,10 +43,15 @@ public class UserProfile {
             last_name = jsonObject.isNull("last_name") ? "" : jsonObject.getString("last_name");
             role = jsonObject.isNull("user_type_name") ? "" : jsonObject.getString("user_type_name");
             role_id = jsonObject.isNull("user_type") ? "" : jsonObject.getString("user_type");
+            is_active= jsonObject.isNull("is_active") ? "" : jsonObject.getString("is_active");
         } catch (Exception ex)
         {
             ex.fillInStackTrace();
         }
+    }
+
+    public String getIs_active() {
+        return is_active;
     }
 
     public String getBusinessId() {

@@ -1,5 +1,6 @@
 package fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.spaytbusiness.BusinessProductDetails;
+import com.spaytbusiness.BusinessUserDetails;
+import com.spaytbusiness.Business_Location_Detais;
 import com.spaytbusiness.R;
 
 import org.json.JSONArray;
@@ -23,7 +27,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import common.AppController;
 import common.Common;
+import interfaces.BusinessUserClicked;
 import interfaces.WebApiResponseCallback;
+import models.BusinessProfile;
 import models.UserProfile;
 import utils.Utils;
 
@@ -31,7 +37,7 @@ import utils.Utils;
  * Created by ashish.kumar on 19-02-2019.
  */
 
-public class Users extends Fragment implements WebApiResponseCallback,View.OnClickListener {
+public class Users extends Fragment implements WebApiResponseCallback,View.OnClickListener, BusinessUserClicked {
     AppController controller;
 
    TextView heading;
@@ -41,7 +47,7 @@ public class Users extends Fragment implements WebApiResponseCallback,View.OnCli
     ListView listView;
     TextView nodata;
     ArrayList<UserProfile> businessUserList=new ArrayList<>();
-
+    BusinessUserClicked callback;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +58,7 @@ public class Users extends Fragment implements WebApiResponseCallback,View.OnCli
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        callback=this;
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.offers, container, false);
        heading=(TextView)v.findViewById(R.id.name);
@@ -69,6 +75,13 @@ public class Users extends Fragment implements WebApiResponseCallback,View.OnCli
             progress_bar.setVisibility(View.VISIBLE);
             controller.getWebApiCall().getDataCommon(Common.businessUserUrl,controller.getManager().getUserToken(),this);
         }
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BusinessUserDetails.model=null;
+                startActivity(new Intent(getActivity(),BusinessUserDetails.class));
+            }
+        });
         return v;
     }
 
@@ -99,7 +112,7 @@ public class Users extends Fragment implements WebApiResponseCallback,View.OnCli
 
                                 heading.setText("Business Users");
                                 count.setText(Integer.toString(businessUserList.size()));
-                                listView.setAdapter(new BusinessUserAdapter(businessUserList, getActivity()));
+                                listView.setAdapter(new BusinessUserAdapter(businessUserList, getActivity(),callback));
                                 listView.setVisibility(View.VISIBLE);
                                 nodata.setVisibility(View.GONE);
                             } else {
@@ -137,6 +150,18 @@ public class Users extends Fragment implements WebApiResponseCallback,View.OnCli
 
     @Override
     public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onUserSelected(UserProfile model) {
+        BusinessUserDetails.model=model;
+        startActivity(new Intent(getActivity(),BusinessUserDetails.class));
+
+    }
+
+    @Override
+    public void onDeleteCLicked(UserProfile model) {
 
     }
 }

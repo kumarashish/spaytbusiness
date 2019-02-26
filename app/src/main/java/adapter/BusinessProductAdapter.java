@@ -5,12 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.spaytbusiness.R;
 
 import java.util.ArrayList;
 
+import interfaces.BusinessProductClicked;
 import models.BusinessProductModel;
 import models.UserProfile;
 
@@ -18,11 +20,13 @@ public class BusinessProductAdapter extends BaseAdapter {
     ArrayList<BusinessProductModel> list;
     Activity act;
     LayoutInflater inflater;
+    BusinessProductClicked callback;
 
-    public BusinessProductAdapter(ArrayList<BusinessProductModel> list, Activity act) {
+    public BusinessProductAdapter(ArrayList<BusinessProductModel> list, Activity act,BusinessProductClicked callback) {
         this.list = list;
         this.act = act;
         inflater = LayoutInflater.from(act);
+        this.callback=callback;
     }
 
     @Override
@@ -43,7 +47,7 @@ public class BusinessProductAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        BusinessProductModel model = list.get(position);
+        final BusinessProductModel model = list.get(position);
         if (convertView == null) {
             holder = new ViewHolder();
 
@@ -52,9 +56,11 @@ public class BusinessProductAdapter extends BaseAdapter {
             holder.productname = (TextView) convertView.findViewById(R.id.name);
             holder.price = (TextView) convertView.findViewById(R.id.role);
             holder.next = (View) convertView.findViewById(R.id.next);
+            holder.delete=(ImageView) convertView.findViewById(R.id.delete);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        holder.delete.setVisibility(View.VISIBLE);
         holder.productname.setText(model.getName());
         holder.description.setText(model.getDescription());
         if (model.getPrice_per_liter().length() > 0) {
@@ -65,10 +71,16 @@ public class BusinessProductAdapter extends BaseAdapter {
             holder.price.setText(model.getTotal_price() + " € ");
         }
 
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.onDeleteCLicked(model);
+            }
+        });
         holder.next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                callback.onProductSelected(model);
             }
         });
         convertView.setTag(holder);
@@ -78,6 +90,7 @@ public class BusinessProductAdapter extends BaseAdapter {
 
     public class ViewHolder {
         TextView productname, description, price;
+        ImageView delete;
         View next;
     }
 }

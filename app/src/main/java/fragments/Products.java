@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import com.spaytbusiness.Add_Location;
 import com.spaytbusiness.Add_Products;
+import com.spaytbusiness.BusinessProductDetails;
+import com.spaytbusiness.BusinessUserDetails;
+import com.spaytbusiness.Business_Location_Detais;
 import com.spaytbusiness.R;
 
 import org.json.JSONArray;
@@ -25,12 +28,13 @@ import adapter.BusinessUserAdapter;
 import butterknife.ButterKnife;
 import common.AppController;
 import common.Common;
+import interfaces.BusinessProductClicked;
 import interfaces.WebApiResponseCallback;
 import models.BusinessProductModel;
 import models.UserProfile;
 import utils.Utils;
 
-public class Products extends Fragment implements WebApiResponseCallback,View.OnClickListener {
+public class Products extends Fragment implements WebApiResponseCallback,View.OnClickListener, BusinessProductClicked {
     AppController controller;
 
     TextView heading;
@@ -40,7 +44,7 @@ public class Products extends Fragment implements WebApiResponseCallback,View.On
     ListView listView;
     TextView nodata;
     ArrayList<BusinessProductModel> businessProductsList=new ArrayList<>();
-
+BusinessProductClicked callback;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +57,7 @@ public class Products extends Fragment implements WebApiResponseCallback,View.On
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-
+callback=this;
         View v= inflater.inflate(R.layout.offers, container, false);
         heading=(TextView)v.findViewById(R.id.name);
         count=(TextView)v.findViewById(R.id.count);
@@ -69,6 +73,13 @@ public class Products extends Fragment implements WebApiResponseCallback,View.On
             progress_bar.setVisibility(View.VISIBLE);
             controller.getWebApiCall().getDataCommon(Common.businessProducts,controller.getManager().getUserToken(),this);
         }
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Business_Location_Detais.model=null;
+                startActivity(new Intent(getActivity(),BusinessProductDetails.class));
+            }
+        });
         return v;
     }
 
@@ -98,7 +109,7 @@ public class Products extends Fragment implements WebApiResponseCallback,View.On
                         }
 
                         count.setText(Integer.toString(businessProductsList.size()));
-                        listView.setAdapter(new BusinessProductAdapter(businessProductsList,getActivity()));
+                        listView.setAdapter(new BusinessProductAdapter(businessProductsList,getActivity(),callback));
                         listView.setVisibility(View.VISIBLE);
                         nodata.setVisibility(View.GONE);
                     }
@@ -134,5 +145,15 @@ public class Products extends Fragment implements WebApiResponseCallback,View.On
 
     @Override
     public void onClick(View v) {
+    }
+
+    @Override
+    public void onProductSelected(BusinessProductModel model) {
+        startActivity(new Intent(getActivity(),BusinessProductDetails.class));
+    }
+
+    @Override
+    public void onDeleteCLicked(BusinessProductModel model) {
+
     }
 }

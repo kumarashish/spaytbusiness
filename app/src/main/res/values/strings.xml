@@ -32,4 +32,14 @@
         <item>Frau</item>
 
     </array>
+    <array name="roles">
+        <item>Admin</item>
+        <item>Manager</item>
+
+    </array>
+    <array name="role">
+        <item>Herr</item>
+        <item>Frau</item>
+
+    </array>
 </resources>
