@@ -83,11 +83,7 @@ public class WebApiCall {
 
 
     public void getDataCommon(String url,String token, final WebApiResponseCallback callback) {
-
-
-        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS).build();
+        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS).writeTimeout(60, TimeUnit.SECONDS).readTimeout(60, TimeUnit.SECONDS).build();
         final Request request = new Request.Builder().header("X-Businesstoken",token).url(url).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -105,7 +101,6 @@ public class WebApiCall {
                         } else {
                             callback.onError("No data found!");
                         }
-
                     }
                 }else{
                     callback.onError(response.body().string());

@@ -119,7 +119,7 @@ OnListItemSelected callback;
                     else{
 
                         nodata.setVisibility(View.VISIBLE);
-                        nodata.setText("No Locations added");
+                        nodata.setText("No  Locations added");
                         count.setText("0");
                         listView.setVisibility(View.GONE);
 

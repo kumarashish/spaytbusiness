@@ -57,7 +57,7 @@ BusinessProductClicked callback;
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-callback=this;
+         callback=this;
         View v= inflater.inflate(R.layout.offers, container, false);
         heading=(TextView)v.findViewById(R.id.name);
         count=(TextView)v.findViewById(R.id.count);
@@ -149,6 +149,7 @@ callback=this;
 
     @Override
     public void onProductSelected(BusinessProductModel model) {
+        BusinessProductDetails.model=model;
         startActivity(new Intent(getActivity(),BusinessProductDetails.class));
     }
 

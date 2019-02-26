@@ -12,9 +12,10 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import interfaces.WebApiResponseCallback;
 import models.Business_locations;
 
-public class Business_Location_Detais extends Activity implements View.OnClickListener {
+public class Business_Location_Detais extends Activity implements View.OnClickListener, WebApiResponseCallback {
     @BindView(R.id.back)
     Button back;
     @BindView(R.id.heading)
@@ -261,6 +262,9 @@ public class Business_Location_Detais extends Activity implements View.OnClickLi
             case R.id.back:
                 onBackPressed();
                 break;
+            case R.id.submit:
+
+                break;
         }
 
     }
@@ -282,6 +286,16 @@ public class Business_Location_Detais extends Activity implements View.OnClickLi
             break;
     }
             return index;
+
+    }
+
+    @Override
+    public void onSucess(String value) {
+
+    }
+
+    @Override
+    public void onError(String value) {
 
     }
 }

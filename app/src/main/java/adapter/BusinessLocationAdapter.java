@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.spaytbusiness.BusinessProductDetails;
 import com.spaytbusiness.R;
 
 import java.util.ArrayList;
@@ -64,6 +65,13 @@ public class BusinessLocationAdapter extends BaseAdapter {
         holder.address.setText(model.getStreet_name() + "," + model.getCity() + "," + model.getDoor_no());
         holder.description.setText(model.getDescription());
         holder.delete.setVisibility(View.VISIBLE);
+        try{
+            BusinessProductDetails activity=(BusinessProductDetails)act;
+            holder.delete.setVisibility(View.GONE);
+        }catch (Exception ex)
+        {
+            ex.fillInStackTrace();
+        }
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

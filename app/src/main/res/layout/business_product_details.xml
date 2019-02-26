@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
         android:orientation="vertical"
@@ -18,6 +20,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <TextView
+                android:id="@+id/heading"
                 android:textSize="18dp"
                 android:fontFamily="@font/bold"
                 android:gravity="center"
@@ -27,6 +30,414 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/progress_bar2"
+
+            android:progressDrawable="@color/blue"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:id="@+id/mainLayout"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:tint="@color/blue"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/user"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <Spinner
+
+                android:inputType="textPersonName"
+                android:id="@+id/category"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:hint="Product Name"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:tint="@color/blue"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/user"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <EditText
+                android:inputType="textPersonName"
+                android:id="@+id/productname"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:hint="Product Name"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:tint="@color/blue"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/user"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <EditText
+                android:inputType="textPersonName"
+                android:id="@+id/description"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:hint="Description"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:id="@+id/total_price_view"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:tint="@color/blue"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/user"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <EditText
+                android:inputType="textPersonName"
+                android:id="@+id/total_price"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:hint="Total Price"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="200dp"
+                android:layout_height="match_parent" />
+            <EditText
+                android:focusable="false"
+                android:enabled="false"
+                android:inputType="textPersonName"
+
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:text=" € "
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:id="@+id/view1"
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:id="@+id/per_liter_price_view"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:tint="@color/blue"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/user"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <EditText
+                android:inputType="textPersonName"
+                android:id="@+id/per_liter_price"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:hint="Per Litre Price"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="200dp"
+                android:layout_height="match_parent" />
+            <EditText
+         android:focusable="false"
+                android:enabled="false"
+                android:inputType="textPersonName"
+
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:text=" € / liter"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:id="@+id/view2"
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:id="@+id/per_hour_price_view"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:tint="@color/blue"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/user"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <EditText
+                android:inputType="textPersonName"
+                android:id="@+id/parking_fee_per_hou"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:hint="Per Hour Price"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="200dp"
+                android:layout_height="match_parent" />
+            <EditText
+                android:focusable="false"
+                android:enabled="false"
+                android:inputType="textPersonName"
+
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:text=" € / hour"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:id="@+id/view3"
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+
+        <LinearLayout
+            android:id="@+id/minimum_parking_hours_view"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:tint="@color/blue"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/user"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <EditText
+                android:inputType="textPersonName"
+                android:id="@+id/minimum_parking_hours"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:hint="Minimum Parking Hours"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="200dp"
+                android:layout_height="match_parent" />
+            <EditText
+                android:focusable="false"
+                android:enabled="false"
+                android:inputType="textPersonName"
+
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:text=" hours"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:id="@+id/view4"
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:id="@+id/maximum_parking_fee_perday_view"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:tint="@color/blue"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/user"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <EditText
+                android:inputType="textPersonName"
+                android:id="@+id/maximum_parking_fee_perday"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:hint="Maximum Parking Fees Per Day"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="200dp"
+                android:layout_height="match_parent" />
+            <EditText
+                android:focusable="false"
+                android:enabled="false"
+                android:inputType="textPersonName"
+
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:text=" € "
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:id="@+id/view5"
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <RelativeLayout
+            android:background="@color/blue"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+        <TextView
+            android:paddingLeft="10dp"
+            android:textSize="18dp"
+            android:fontFamily="@font/bold"
+            android:gravity="left"
+            android:text="Locations"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/add_location"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/blue_circe"
+                android:backgroundTint="@color/blue"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/add"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/locationList"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></LinearLayout>
+        <ProgressBar
+android:visibility="gone"
+            android:id="@+id/progress_bar"
+
+            android:progressDrawable="@color/blue"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:layout_alignParentBottom="true"
+            android:id="@+id/submit"
+            android:layout_marginTop="30dp"
+            android:background="@color/blue"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:fontFamily="@font/light"
+            android:text="Submit"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+
+
+
+    </LinearLayout>
+
+    </ScrollView>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
