@@ -1,0 +1,1276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <Button
+                android:id="@+id/back"
+                android:background="@drawable/back"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:textSize="18dp"
+                android:fontFamily="@font/bold"
+                android:gravity="center"
+                android:text="Location Details"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:tint="@color/blue"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/user"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <EditText
+                android:inputType="textPersonName"
+                android:id="@+id/companyname"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:hint="Location Name"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:tint="@color/blue"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/map_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <EditText
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:id="@+id/doorNumber"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:hint="Door Number"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:tint="@color/blue"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/map_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <EditText
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:id="@+id/street"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:hint="Street Name"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:tint="@color/blue"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/map_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <EditText
+                android:inputType="textPersonName"
+                android:imeOptions="actionNext"
+
+
+                android:id="@+id/city"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:hint="City"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:textSize="18dp"
+
+                android:tint="@color/blue"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/map_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <EditText
+
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:id="@+id/zipcode"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:hint="ZipCode"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:tint="@color/blue"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/smartphone"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <EditText
+
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:id="@+id/phone"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:hint="Phone Number"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:tint="@color/blue"
+                android:layout_gravity="center_vertical"
+                android:src="@android:drawable/ic_dialog_info"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <EditText
+
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:id="@+id/description"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:hint="Description"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <TextView
+                android:fontFamily="@font/light"
+                android:textColor="@color/blue"
+                android:textSize="18dp"
+                android:text="Moday Mode : "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Spinner
+
+
+                android:inputType="number"
+                android:entries="@array/business_opnening_options"
+                android:id="@+id/mondayMode"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/grey"
+                android:hint="Description"
+                android:textSize="18dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/light"
+                android:textColor="@color/grey"
+                android:textSize="16dp"
+                android:text="Morning From - To  "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:textSize="18dp"
+                    android:hint="From(HH:MM)"
+                    android:id="@+id/m_mFrom"
+
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:textSize="18dp"
+                    android:hint="To(HH:MM)"
+                    android:id="@+id/m_mTo"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/light"
+                android:textColor="@color/grey"
+                android:textSize="16dp"
+                android:text="Afternoon From - To  "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:textSize="18dp"
+                    android:hint="From(HH:MM)"
+                    android:id="@+id/m_aFrom"
+
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:textSize="18dp"
+                    android:hint="To(HH:MM)"
+                    android:id="@+id/m_aTo"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:fontFamily="@font/light"
+                    android:textColor="@color/blue"
+                    android:textSize="18dp"
+                    android:text="Tuesday Mode : "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Spinner
+
+
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:id="@+id/tuesdayMode"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:hint="Description"
+                    android:textSize="18dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/light"
+                android:textColor="@color/grey"
+                android:textSize="16dp"
+                android:text="Morning From - To  "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:textSize="18dp"
+                    android:hint="From(HH:MM)"
+                    android:id="@+id/m_mFrom"
+
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:textSize="18dp"
+                    android:hint="To(HH:MM)"
+                    android:id="@+id/m_mTo"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/light"
+                android:textColor="@color/grey"
+                android:textSize="16dp"
+                android:text="Afternoon From - To  "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:textSize="18dp"
+                    android:hint="From(HH:MM)"
+                    android:id="@+id/m_aFrom"
+
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:textSize="18dp"
+                    android:hint="To(HH:MM)"
+                    android:id="@+id/m_aTo"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_marginTop="5dp"
+                android:background="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:fontFamily="@font/light"
+                    android:textColor="@color/blue"
+                    android:textSize="18dp"
+                    android:text="Wednesday Mode : "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Spinner
+
+
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:id="@+id/wednesdayMode"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:hint="Description"
+                    android:textSize="18dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/light"
+                android:textColor="@color/grey"
+                android:textSize="16dp"
+                android:text="Morning From - To  "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:textSize="18dp"
+                    android:hint="From(HH:MM)"
+                    android:id="@+id/m_mFrom"
+
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:textSize="18dp"
+                    android:hint="To(HH:MM)"
+                    android:id="@+id/m_mTo"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/light"
+                android:textColor="@color/grey"
+                android:textSize="16dp"
+                android:text="Afternoon From - To  "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:textSize="18dp"
+                    android:hint="From(HH:MM)"
+                    android:id="@+id/m_aFrom"
+
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:textSize="18dp"
+                    android:hint="To(HH:MM)"
+                    android:id="@+id/m_aTo"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_marginTop="5dp"
+                android:background="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:fontFamily="@font/light"
+                    android:textColor="@color/blue"
+                    android:textSize="18dp"
+                    android:text="Thursday Mode : "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Spinner
+
+
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:id="@+id/thursdayMode"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:hint="Description"
+                    android:textSize="18dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/light"
+                android:textColor="@color/grey"
+                android:textSize="16dp"
+                android:text="Morning From - To  "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:textSize="18dp"
+                    android:hint="From(HH:MM)"
+                    android:id="@+id/m_mFrom"
+
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:textSize="18dp"
+                    android:hint="To(HH:MM)"
+                    android:id="@+id/m_mTo"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/light"
+                android:textColor="@color/grey"
+                android:textSize="16dp"
+                android:text="Afternoon From - To  "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:textSize="18dp"
+                    android:hint="From(HH:MM)"
+                    android:id="@+id/m_aFrom"
+
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:textSize="18dp"
+                    android:hint="To(HH:MM)"
+                    android:id="@+id/m_aTo"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_marginTop="5dp"
+                android:background="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:fontFamily="@font/light"
+                    android:textColor="@color/blue"
+                    android:textSize="18dp"
+                    android:text="Friday Mode : "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Spinner
+
+
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:id="@+id/fridayMode"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:hint="Description"
+                    android:textSize="18dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/light"
+                android:textColor="@color/grey"
+                android:textSize="16dp"
+                android:text="Morning From - To  "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:textSize="18dp"
+                    android:hint="From(HH:MM)"
+                    android:id="@+id/m_mFrom"
+
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:textSize="18dp"
+                    android:hint="To(HH:MM)"
+                    android:id="@+id/m_mTo"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/light"
+                android:textColor="@color/grey"
+                android:textSize="16dp"
+                android:text="Afternoon From - To  "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:textSize="18dp"
+                    android:hint="From(HH:MM)"
+                    android:id="@+id/m_aFrom"
+
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:textSize="18dp"
+                    android:hint="To(HH:MM)"
+                    android:id="@+id/m_aTo"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_marginTop="5dp"
+                android:background="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:fontFamily="@font/light"
+                    android:textColor="@color/blue"
+                    android:textSize="18dp"
+                    android:text="Saturday Mode : "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Spinner
+                    android:entries="@array/business_opnening_options"
+                    android:id="@+id/saturdaymode"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+
+                    android:textSize="18dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/light"
+                android:textColor="@color/grey"
+                android:textSize="16dp"
+                android:text="Morning From - To  "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:textSize="18dp"
+                    android:hint="From(HH:MM)"
+                    android:id="@+id/sat_mFrom"
+
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:textSize="18dp"
+                    android:hint="To(HH:MM)"
+                    android:id="@+id/sat_mTo"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/light"
+                android:textColor="@color/grey"
+                android:textSize="16dp"
+                android:text="Afternoon From - To  "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:textSize="18dp"
+                    android:hint="From(HH:MM)"
+                    android:id="@+id/sat_aFrom"
+
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:textSize="18dp"
+                    android:hint="To(HH:MM)"
+                    android:id="@+id/sat_aTo"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_marginTop="5dp"
+                android:background="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:fontFamily="@font/light"
+                    android:textColor="@color/blue"
+                    android:textSize="18dp"
+                    android:text="Sunday Mode : "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <Spinner
+
+
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:id="@+id/sundayMode"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:hint="Description"
+                    android:textSize="18dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/light"
+                android:textColor="@color/grey"
+                android:textSize="16dp"
+                android:text="Morning From - To  "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:textSize="18dp"
+                    android:hint="From(HH:MM)"
+                    android:id="@+id/sun_mFrom"
+
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:textSize="18dp"
+                    android:hint="To(HH:MM)"
+                    android:id="@+id/sun_mTo"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/light"
+                android:textColor="@color/grey"
+                android:textSize="16dp"
+                android:text="Afternoon From - To  "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:textSize="18dp"
+                    android:hint="From(HH:MM)"
+                    android:id="@+id/sun_aFrom"
+
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <EditText
+                    android:background="@drawable/rectangle"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:entries="@array/business_opnening_options"
+                    android:textSize="18dp"
+                    android:hint="To(HH:MM)"
+                    android:id="@+id/sun_aTo"
+                    android:fontFamily="@font/light"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/blue"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_marginTop="5dp"
+                android:background="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <Button
+                android:layout_marginTop="30dp"
+                android:background="@color/blue"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:fontFamily="@font/light"
+                android:text="Submit"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+        </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.spaytbusiness.Add_Location;
+import com.spaytbusiness.Business_Location_Detais;
 import com.spaytbusiness.R;
 
 import org.json.JSONArray;
@@ -19,15 +20,18 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import adapter.BusinessLocationAdapter;
 import adapter.BusinessUserAdapter;
 import butterknife.ButterKnife;
 import common.AppController;
 import common.Common;
+import interfaces.OnListItemSelected;
 import interfaces.WebApiResponseCallback;
+import models.Business_locations;
 import models.UserProfile;
 import utils.Utils;
 
-public class Locations extends Fragment implements WebApiResponseCallback,View.OnClickListener {
+public class Locations extends Fragment implements WebApiResponseCallback,View.OnClickListener, OnListItemSelected {
     AppController controller;
 
     TextView heading;
@@ -36,8 +40,8 @@ public class Locations extends Fragment implements WebApiResponseCallback,View.O
     ProgressBar progress_bar;
     ListView listView;
     TextView nodata;
-    ArrayList<UserProfile> businessUserList=new ArrayList<>();
-
+    ArrayList<Business_locations> businessLocationList=new ArrayList<>();
+OnListItemSelected callback;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +64,7 @@ public class Locations extends Fragment implements WebApiResponseCallback,View.O
         nodata=(TextView)v.findViewById(R.id.nodata);
         heading.setText("Business Locations");
         count.setText("");
+        callback=this;
         ButterKnife.bind(getActivity());
         if(Utils.isNetworkAvailable(getActivity()))
         {
@@ -85,18 +90,19 @@ public class Locations extends Fragment implements WebApiResponseCallback,View.O
             public void run() {
                 try{
                     JSONObject jsonObject=new JSONObject(value);
-                    JSONArray userList=jsonObject.getJSONArray("businesslocations_details");
-                    if((userList!=null)&&(userList.length()>0))
+                    JSONArray businesslocations_details=jsonObject.getJSONArray("businesslocations_details");
+                    if((businesslocations_details!=null)&&(businesslocations_details.length()>0))
                     {
-                        for(int i=0;i<userList.length();i++)
+                        for(int i=0;i<businesslocations_details.length();i++)
                         {
+                            businessLocationList.add(new Business_locations(businesslocations_details.getJSONObject(i)));
 
                         }
 
 
 
-                        count.setText(Integer.toString(businessUserList.size()));
-                        listView.setAdapter(new BusinessUserAdapter(businessUserList,getActivity()));
+                        count.setText(Integer.toString(businessLocationList.size()));
+                        listView.setAdapter(new BusinessLocationAdapter(businessLocationList,getActivity(),callback));
                         listView.setVisibility(View.VISIBLE);
                         nodata.setVisibility(View.GONE);
                     }
@@ -130,5 +136,15 @@ public class Locations extends Fragment implements WebApiResponseCallback,View.O
 
     @Override
     public void onClick(View v) {
+    }
+
+    @Override
+    public void onBusinessLocationSlected(Business_locations model) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(getActivity(),Business_Location_Detais.class));
+            }
+        });
     }
 }

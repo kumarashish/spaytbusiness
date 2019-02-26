@@ -15,6 +15,12 @@
         <item>24Hrs Open</item>
         <item>Closed</item>
     </array>
+    <array name="business_opnening_options">
+        <item>All</item>
+        <item>Open</item>
+        <item>Split</item>
+        <item>Closed</item>
+    </array>
     <array name="product_type">
         <item>Primary</item>
         <item>Secondary</item>
