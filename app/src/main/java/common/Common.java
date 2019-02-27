@@ -25,18 +25,18 @@ public class Common {
     public static String deleteBusinessLocation=baseUrl+"/business_locations/delete";
     public static String addBusinessOffers=baseUrl+"/business_products_offers/add";
     public static String updateBusinessOffers=baseUrl+"/business_products_offers/update";
-
+    public static String deleteBusinessOffers=baseUrl+"/business_products_offers/delete";
 
    public static String[] id={"id"};
     public static String[] updateBusinessKeys = {"business_email","category_id", "company_name", "street_name", "door_no", "city", "zip_code", "phone_number", "paypal_email", "vat_id"};
     public static String []updateUserKeys={"id","first_name","last_name","salutation","email","is_active","user_type"};
-    public static String []addUserKeys={"first_name","last_name","salutation","email","is_active","user_type"};
+    public static String []addUserKeys={"first_name","last_name","salutation","email","is_active","user_type","password"};
     public static String[] addBusinessOffersKeys = {"product_id",
             "business_location_ids",
             "offer_name",
             "offer_description",
-            "from_date in the format",
-            "to_date in the format",
+            "from_date",
+            "to_date",
             "opening_hour_mode",
             "morning_from",
             "morning_to",
@@ -52,8 +52,8 @@ public class Common {
             "business_location_ids",
             "offer_name",
             "offer_description",
-            "from_date in the format",
-            "to_date in the format",
+            "from_date",
+            "to_date",
             "opening_hour_mode",
             "morning_from",
             "morning_to",

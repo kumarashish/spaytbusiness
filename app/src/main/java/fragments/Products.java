@@ -48,16 +48,15 @@ public class Products extends Fragment implements WebApiResponseCallback,View.On
     ListView listView;
     TextView nodata;
     ArrayList<BusinessProductModel> businessProductsList=new ArrayList<>();
-BusinessProductClicked callback;
-int apiCall;
-int getApiCall=1,deleteApiCAll=2;
-ProgressDialog progressDialog;
+    BusinessProductClicked callback;
+    int apiCall;
+    int getApiCall=1,deleteApiCAll=2;
+    ProgressDialog progressDialog;
     WebApiResponseCallback webApiResponseCallback;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         controller=(AppController)getActivity().getApplicationContext();
-
     }
 
     @Override
@@ -174,7 +173,7 @@ ProgressDialog progressDialog;
     @Override
     public void onProductSelected(BusinessProductModel model) {
         BusinessProductDetails.model=model;
-        startActivity(new Intent(getActivity(),BusinessProductDetails.class));
+        getActivity().startActivityForResult(new Intent(getActivity(),BusinessProductDetails.class),2);
     }
     public void showAlert(final BusinessProductModel model)
     {

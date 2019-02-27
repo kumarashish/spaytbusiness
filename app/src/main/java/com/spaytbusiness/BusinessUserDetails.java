@@ -167,7 +167,7 @@ switch (v.getId())
             roleType = "2";
         }
         if (model == null) {
-            return new String[]{fname.getText().toString(), lname.getText().toString(), salutation.getSelectedItem().toString(), email.getText().toString(), checked, roleType};
+            return new String[]{fname.getText().toString(), lname.getText().toString(), salutation.getSelectedItem().toString(), email.getText().toString(), checked, roleType,"12345"};
         } else {
             return new String[]{model.getUser_id(), fname.getText().toString(), lname.getText().toString(), salutation.getSelectedItem().toString(), email.getText().toString(), checked, roleType};
         }

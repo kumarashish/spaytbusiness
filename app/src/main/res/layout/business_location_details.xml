@@ -250,7 +250,7 @@
             <EditText
 
                 android:imeOptions="actionNext"
-                android:inputType="number"
+                android:inputType="textPersonName"
                 android:id="@+id/description"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/grey"

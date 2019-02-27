@@ -128,6 +128,25 @@ public class WebApiCall {
         }
 
     }
+    public String getData(String url,String token) {
+        OkHttpClient client = new OkHttpClient();
+        client.newBuilder().connectTimeout(60000, TimeUnit.MILLISECONDS).readTimeout(60000, TimeUnit.MILLISECONDS).build();
+        final Request request = new Request.Builder().header("X-Businesstoken",token).url(url).build();
+        try {
+            Response response = client.newCall(request).execute();
+            if (response.code() == 200) {
+                return response.body().string();
+
+            } else {
+                return getErrorData();
+            }
+
+        } catch (Exception ex) {
+            ex.fillInStackTrace();
+            return getErrorData();
+        }
+
+    }
 
     public String getErrorData() {
         JSONObject object = new JSONObject();

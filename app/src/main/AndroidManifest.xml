@@ -64,7 +64,9 @@
         <activity
             android:name=".BusinessUserDetails"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".BusinessOffersDetails"
+            android:screenOrientation="portrait" />
         <activity
             android:screenOrientation="portrait"
             android:name=".Dashboard"

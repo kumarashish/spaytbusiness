@@ -79,7 +79,7 @@ public class Users extends Fragment implements WebApiResponseCallback,View.OnCli
             @Override
             public void onClick(View v) {
                 BusinessUserDetails.model=null;
-                startActivityForResult(new Intent(getActivity(),BusinessUserDetails.class),2);
+                getActivity().startActivityForResult(new Intent(getActivity(),BusinessUserDetails.class),2);
             }
         });
         return v;
@@ -96,12 +96,14 @@ public class Users extends Fragment implements WebApiResponseCallback,View.OnCli
 
     @Override
     public void onSucess(final String value) {
+        businessUserList.clear();
 
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     try {
                         if (Utils.getStatus(value)) {
+
                             JSONObject jsonObject = new JSONObject(value);
                             JSONArray userList = jsonObject.getJSONArray("businessusers_details");
                             if ((userList != null) && (userList.length() > 0)) {
@@ -156,7 +158,7 @@ public class Users extends Fragment implements WebApiResponseCallback,View.OnCli
     @Override
     public void onUserSelected(UserProfile model) {
         BusinessUserDetails.model=model;
-        startActivityForResult(new Intent(getActivity(),BusinessUserDetails.class),2);
+        getActivity().startActivityForResult(new Intent(getActivity(),BusinessUserDetails.class),2);
 
     }
 
@@ -169,7 +171,6 @@ public class Users extends Fragment implements WebApiResponseCallback,View.OnCli
         super.onActivityResult(requestCode, resultCode, data);
         if((requestCode==2)&&(resultCode==-1))
         {
-
             progress_bar.setVisibility(View.VISIBLE);
             listView.setVisibility(View.GONE);
             controller.getWebApiCall().getDataCommon(Common.businessUserUrl,controller.getManager().getUserToken(),this);
