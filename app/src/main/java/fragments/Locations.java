@@ -1,6 +1,7 @@
 package fragments;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,6 +45,10 @@ public class Locations extends Fragment implements WebApiResponseCallback,View.O
     TextView nodata;
     ArrayList<Business_locations> businessLocationList=new ArrayList<>();
 OnListItemSelected callback;
+ProgressDialog progressDialog;
+int apiCall;
+int getApiCall=1,deleteApiCAll=2;
+WebApiResponseCallback webApiResponseCallback;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +63,10 @@ OnListItemSelected callback;
         // Inflate the layout for this fragment
 
         View v= inflater.inflate(R.layout.offers, container, false);
+        progressDialog=new ProgressDialog(getActivity());
+        progressDialog.setMessage("Please wait....");
+        progressDialog.setCancelable(false);
+        webApiResponseCallback=this;
         heading=(TextView)v.findViewById(R.id.name);
         count=(TextView)v.findViewById(R.id.count);
         add=(ImageView) v.findViewById(R.id.add);
@@ -69,7 +78,7 @@ OnListItemSelected callback;
         callback=this;
         ButterKnife.bind(getActivity());
         if(Utils.isNetworkAvailable(getActivity()))
-        {
+        {apiCall=getApiCall;
             progress_bar.setVisibility(View.VISIBLE);
             controller.getWebApiCall().getDataCommon(Common.businessLocationUrl,controller.getManager().getUserToken(),this);
         }
@@ -77,7 +86,7 @@ OnListItemSelected callback;
             @Override
             public void onClick(View v) {
                 Business_Location_Detais.model=null;
-                startActivity(new Intent(getActivity(),Business_Location_Detais.class));
+                getActivity().startActivityForResult(new Intent(getActivity(),Business_Location_Detais.class),2);
             }
         });
         return v;
@@ -94,41 +103,55 @@ OnListItemSelected callback;
 
     @Override
     public void onSucess(final String value) {
+        businessLocationList.clear();
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                try{
-                    JSONObject jsonObject=new JSONObject(value);
-                    JSONArray businesslocations_details=jsonObject.getJSONArray("businesslocations_details");
-                    if((businesslocations_details!=null)&&(businesslocations_details.length()>0))
-                    {
-                        for(int i=0;i<businesslocations_details.length();i++)
-                        {
-                            businessLocationList.add(new Business_locations(businesslocations_details.getJSONObject(i)));
+                switch (apiCall) {
+                    case 1:
+                    try {
+                        JSONObject jsonObject = new JSONObject(value);
+                        JSONArray businesslocations_details = jsonObject.getJSONArray("businesslocations_details");
+                        if ((businesslocations_details != null) && (businesslocations_details.length() > 0)) {
+                            for (int i = 0; i < businesslocations_details.length(); i++) {
+                                businessLocationList.add(new Business_locations(businesslocations_details.getJSONObject(i)));
+
+                            }
+
+
+                            count.setText(Integer.toString(businessLocationList.size()));
+                            listView.setAdapter(new BusinessLocationAdapter(businessLocationList, getActivity(), callback));
+                            listView.setVisibility(View.VISIBLE);
+                            nodata.setVisibility(View.GONE);
+                        } else {
+
+                            nodata.setVisibility(View.VISIBLE);
+                            nodata.setText("No  Locations added");
+                            count.setText("0");
+                            listView.setVisibility(View.GONE);
 
                         }
-
-
-
-                        count.setText(Integer.toString(businessLocationList.size()));
-                        listView.setAdapter(new BusinessLocationAdapter(businessLocationList,getActivity(),callback));
-                        listView.setVisibility(View.VISIBLE);
-                        nodata.setVisibility(View.GONE);
+                    } catch (Exception ex) {
+                        ex.fillInStackTrace();
                     }
+                    progress_bar.setVisibility(View.GONE);
+                    break;
+                    case 2:
+                        if(Utils.getStatus(value)==true)
+                        {
 
-                    else{
+                            apiCall=getApiCall;
 
-                        nodata.setVisibility(View.VISIBLE);
-                        nodata.setText("No  Locations added");
-                        count.setText("0");
-                        listView.setVisibility(View.GONE);
+                            progress_bar.setVisibility(View.VISIBLE);
+                            listView.setVisibility(View.GONE);
+                            controller.getWebApiCall().getDataCommon(Common.businessLocationUrl,controller.getManager().getUserToken(),webApiResponseCallback);
 
-                    }
-                }catch (Exception ex)
-                {
-                    ex.fillInStackTrace();
+
+                        }
+                        Utils.showToast(getActivity(),Utils.getMessage(value));
+                        progressDialog.cancel();
+                        break;
                 }
-                progress_bar.setVisibility(View.GONE);
             }
         });
 
@@ -153,23 +176,23 @@ OnListItemSelected callback;
             @Override
             public void run() {
                 Business_Location_Detais.model=model;
-                startActivity(new Intent(getActivity(),Business_Location_Detais.class));
+                getActivity().startActivityForResult(new Intent(getActivity(),Business_Location_Detais.class),2);
             }
         });
     }
 
     @Override
-    public void onDeleteCLicked(Business_locations model) {
+    public void onDeleteCLicked(final Business_locations model) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                showAlert();
+                showAlert(model);
             }
         });
     }
 
 
-    public void showAlert()
+    public void showAlert(final Business_locations model)
     {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
         builder1.setMessage("Do yo really want to delete this location ?");
@@ -180,6 +203,11 @@ OnListItemSelected callback;
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
+
+                                apiCall=deleteApiCAll;
+                                progressDialog.show();
+                                controller.getWebApiCall().postData(Common.deleteBusinessLocation,controller.getManager().getUserToken(),Common.id,new String[]{model.getId()},webApiResponseCallback);
+
                     }
                 });
 
@@ -193,5 +221,17 @@ OnListItemSelected callback;
 
         AlertDialog alert11 = builder1.create();
         alert11.show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if((requestCode==2)&&(resultCode==-1))
+        {
+            progress_bar.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.GONE);
+            controller.getWebApiCall().getDataCommon(Common.businessLocationUrl,controller.getManager().getUserToken(),webApiResponseCallback);
+
+        }
     }
 }

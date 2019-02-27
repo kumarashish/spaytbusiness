@@ -1,6 +1,7 @@
 package com.spaytbusiness;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -245,9 +246,15 @@ public boolean getCheck(String value)
                     {
                         case 1:
                             Utils.showToast(BusinessUserDetails.this,"User Added  Sucessfully.");
+                            Intent data = new Intent();
+                            setResult(RESULT_OK, data);
+                            finish();
                             break;
                         case 2:
                             Utils.showToast(BusinessUserDetails.this,"UserDetails updated Sucessfully.");
+                            data = new Intent();
+                            setResult(RESULT_OK, data);
+                            finish();
                             break;
                     }
 

@@ -1,5 +1,8 @@
 package fragments;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -31,6 +34,7 @@ import common.Common;
 import interfaces.BusinessProductClicked;
 import interfaces.WebApiResponseCallback;
 import models.BusinessProductModel;
+import models.Business_locations;
 import models.UserProfile;
 import utils.Utils;
 
@@ -45,6 +49,10 @@ public class Products extends Fragment implements WebApiResponseCallback,View.On
     TextView nodata;
     ArrayList<BusinessProductModel> businessProductsList=new ArrayList<>();
 BusinessProductClicked callback;
+int apiCall;
+int getApiCall=1,deleteApiCAll=2;
+ProgressDialog progressDialog;
+    WebApiResponseCallback webApiResponseCallback;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +66,10 @@ BusinessProductClicked callback;
 
         // Inflate the layout for this fragment
          callback=this;
+        webApiResponseCallback=this;
+        progressDialog=new ProgressDialog(getActivity());
+        progressDialog.setMessage("Please wait....");
+        progressDialog.setCancelable(false);
         View v= inflater.inflate(R.layout.offers, container, false);
         heading=(TextView)v.findViewById(R.id.name);
         count=(TextView)v.findViewById(R.id.count);
@@ -71,13 +83,14 @@ BusinessProductClicked callback;
         if(Utils.isNetworkAvailable(getActivity()))
         {
             progress_bar.setVisibility(View.VISIBLE);
+            apiCall=getApiCall;
             controller.getWebApiCall().getDataCommon(Common.businessProducts,controller.getManager().getUserToken(),this);
         }
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Business_Location_Detais.model=null;
-                startActivity(new Intent(getActivity(),BusinessProductDetails.class));
+                getActivity().startActivityForResult(new Intent(getActivity(),BusinessProductDetails.class),2);
             }
         });
         return v;
@@ -94,41 +107,52 @@ BusinessProductClicked callback;
 
     @Override
     public void onSucess(final String value) {
+        businessProductsList.clear();
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                try{
-                    JSONObject jsonObject=new JSONObject(value);
-                    JSONArray productList=jsonObject.getJSONArray("businessproducts_details");
-                    if((productList!=null)&&(productList.length()>0))
-                    {
-                        for(int i=0;i<productList.length();i++)
-                        {
-                            businessProductsList.add(new BusinessProductModel(productList.getJSONObject(i)));
+                switch (apiCall) {
+                    case 1:
+                    try {
+                        JSONObject jsonObject = new JSONObject(value);
+                        JSONArray productList = jsonObject.getJSONArray("businessproducts_details");
+                        if ((productList != null) && (productList.length() > 0)) {
+                            for (int i = 0; i < productList.length(); i++) {
+                                businessProductsList.add(new BusinessProductModel(productList.getJSONObject(i)));
+
+                            }
+
+                            count.setText(Integer.toString(businessProductsList.size()));
+                            listView.setAdapter(new BusinessProductAdapter(businessProductsList, getActivity(), callback));
+                            listView.setVisibility(View.VISIBLE);
+                            nodata.setVisibility(View.GONE);
+                        } else {
+
+                            nodata.setVisibility(View.VISIBLE);
+                            nodata.setText("No Products Added");
+                            count.setText("0");
+                            listView.setVisibility(View.GONE);
 
                         }
-
-                        count.setText(Integer.toString(businessProductsList.size()));
-                        listView.setAdapter(new BusinessProductAdapter(businessProductsList,getActivity(),callback));
-                        listView.setVisibility(View.VISIBLE);
-                        nodata.setVisibility(View.GONE);
+                    } catch (Exception ex) {
+                        ex.fillInStackTrace();
                     }
+                    progress_bar.setVisibility(View.GONE);
+                    break;
+                    case 2:
+                        if(Utils.getStatus(value)==true)
+                        {
 
+                            apiCall=getApiCall;
 
-
-                    else{
-
-                        nodata.setVisibility(View.VISIBLE);
-                        nodata.setText("No Products Added");
-                        count.setText("0");
-                        listView.setVisibility(View.GONE);
-
-                    }
-                }catch (Exception ex)
-                {
-                    ex.fillInStackTrace();
+                            progress_bar.setVisibility(View.VISIBLE);
+                            listView.setVisibility(View.GONE);
+                            controller.getWebApiCall().getDataCommon(Common.businessProducts,controller.getManager().getUserToken(),webApiResponseCallback);
+                        }
+                        Utils.showToast(getActivity(),Utils.getMessage(value));
+                        progressDialog.cancel();
+                        break;
                 }
-                progress_bar.setVisibility(View.GONE);
             }
         });
 
@@ -152,9 +176,56 @@ BusinessProductClicked callback;
         BusinessProductDetails.model=model;
         startActivity(new Intent(getActivity(),BusinessProductDetails.class));
     }
+    public void showAlert(final BusinessProductModel model)
+    {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+        builder1.setMessage("Are you sure you want to delete this product ?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+
+                        apiCall=deleteApiCAll;
+                        progressDialog.show();
+                        controller.getWebApiCall().postData(Common.deleteBusinessProduct,controller.getManager().getUserToken(),Common.id,new String[]{model.getId()},webApiResponseCallback);
+
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+    @Override
+    public void onDeleteCLicked(final BusinessProductModel model) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showAlert(model);
+                  }
+        });
+    }
 
     @Override
-    public void onDeleteCLicked(BusinessProductModel model) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if((requestCode==2)&&(resultCode==-1))
+        {
+            apiCall=getApiCall;
+            progress_bar.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.GONE);
+            controller.getWebApiCall().getDataCommon(Common.businessProducts,controller.getManager().getUserToken(),webApiResponseCallback);
 
+        }
     }
 }

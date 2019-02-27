@@ -79,7 +79,7 @@ public class Users extends Fragment implements WebApiResponseCallback,View.OnCli
             @Override
             public void onClick(View v) {
                 BusinessUserDetails.model=null;
-                startActivity(new Intent(getActivity(),BusinessUserDetails.class));
+                startActivityForResult(new Intent(getActivity(),BusinessUserDetails.class),2);
             }
         });
         return v;
@@ -156,12 +156,24 @@ public class Users extends Fragment implements WebApiResponseCallback,View.OnCli
     @Override
     public void onUserSelected(UserProfile model) {
         BusinessUserDetails.model=model;
-        startActivity(new Intent(getActivity(),BusinessUserDetails.class));
+        startActivityForResult(new Intent(getActivity(),BusinessUserDetails.class),2);
 
     }
 
     @Override
     public void onDeleteCLicked(UserProfile model) {
 
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if((requestCode==2)&&(resultCode==-1))
+        {
+
+            progress_bar.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.GONE);
+            controller.getWebApiCall().getDataCommon(Common.businessUserUrl,controller.getManager().getUserToken(),this);
+
+        }
     }
 }

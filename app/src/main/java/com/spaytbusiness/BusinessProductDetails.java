@@ -2,7 +2,9 @@ package com.spaytbusiness;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -105,20 +108,25 @@ public class BusinessProductDetails extends Activity implements View.OnClickList
     ArrayList<String>categorylistName=new ArrayList<>();
     ArrayList<Business_locations>addedView=new ArrayList<>();
     ArrayList<Business_locations> businessLocationList=new ArrayList<>();
-  OnListItemSelected callback;
-   Dialog dialog;
+     OnListItemSelected callback;
+      Dialog dialog;
+      int apiCall;
+      int getBusinessList=1,updateProduct=3,addPRoduct=2;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.business_product_details);
         ButterKnife.bind(this);
         back.setOnClickListener(this);
+        submit.setOnClickListener(this);
         addLocation.setOnClickListener(this);
         controller=(AppController)getApplicationContext();
+
         callback=this;
         setData();
 
     }
+
 public void addView()
 {
     locationList.removeAllViews();
@@ -193,7 +201,7 @@ if(modell!=null) {
 
         if(Utils.isNetworkAvailable(BusinessProductDetails.this))
         {
-
+              apiCall=getBusinessList;
             controller.getWebApiCall().getDataCommon(Common.businessLocationUrl,controller.getManager().getUserToken(),this);
         }
         Thread t=new Thread(new Runnable() {
@@ -276,6 +284,24 @@ public int getCategoryIndex()
             case R.id.add_location:
                 showAlert();
                 break;
+            case R.id.submit:
+                if(isFieldsValidated())
+                {
+                    if (Utils.isNetworkAvailable(BusinessProductDetails.this)){
+
+                        submit.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.VISIBLE);
+                        if(model==null) {
+                            apiCall=addPRoduct;
+                            controller.getWebApiCall().postData(Common.addBusinessProducts,controller.getManager().getUserToken(),Common.addBusinessProduct,getRequestArray(),this);
+                        }else {
+                            apiCall=updateProduct;
+                            controller.getWebApiCall().postData(Common.updateBusinessProducts,controller.getManager().getUserToken(),Common.updateBusinessProduct,getRequestArray(),this);
+
+                        }
+                    }
+                }
+                break;
         }
     }
 
@@ -285,22 +311,46 @@ public int getCategoryIndex()
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                try{
-                    JSONObject jsonObject=new JSONObject(value);
-                    JSONArray businesslocations_details=jsonObject.getJSONArray("businesslocations_details");
-                    if((businesslocations_details!=null)&&(businesslocations_details.length()>0)) {
-                        for (int i = 0; i < businesslocations_details.length(); i++) {
-                            businessLocationList.add(new Business_locations(businesslocations_details.getJSONObject(i)));
+                switch (apiCall) {
+                    case 1:
+                    try {
+
+                        JSONObject jsonObject = new JSONObject(value);
+                        JSONArray businesslocations_details = jsonObject.getJSONArray("businesslocations_details");
+                        if ((businesslocations_details != null) && (businesslocations_details.length() > 0)) {
+                            for (int i = 0; i < businesslocations_details.length(); i++) {
+                                businessLocationList.add(new Business_locations(businesslocations_details.getJSONObject(i)));
+
+                            }
+
 
                         }
+                    } catch (Exception ex) {
+                        ex.fillInStackTrace();
                     }
-
-                }catch (Exception ex)
-                {
-                    ex.fillInStackTrace();
+                    progressBar2.setVisibility(View.GONE);
+                    mainView.setVisibility(View.VISIBLE);
+                    break;
+                    case 2:
+                        if(Utils.getStatus(value))
+                        {
+                            Intent data = new Intent();
+                            setResult(RESULT_OK, data);
+                            finish();
+                            Toast.makeText(BusinessProductDetails.this,"Product added sucessfully",Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    case 3:
+                        if(Utils.getStatus(value))
+                        {
+                            Toast.makeText(BusinessProductDetails.this,"Product updated sucessfully",Toast.LENGTH_SHORT).show();
+                            Intent data = new Intent();
+                            setResult(RESULT_OK, data);
+                            finish();
+                        }
+                        break;
                 }
-                progressBar2.setVisibility(View.GONE);
-                mainView.setVisibility(View.VISIBLE);
+
             }
         });
 
@@ -311,8 +361,17 @@ public int getCategoryIndex()
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                progressBar2.setVisibility(View.GONE);
-                mainView.setVisibility(View.VISIBLE);
+                switch (apiCall) {
+                    case 1:
+                    progressBar2.setVisibility(View.GONE);
+                    mainView.setVisibility(View.VISIBLE);
+                    break;
+                    case 2:
+                    case 3:
+                        progressBar.setVisibility(View.GONE);
+                        submit.setVisibility(View.VISIBLE);
+                        break;
+                }
                 Utils.showToast(BusinessProductDetails.this,Utils.getMessage(value));
             }
         });
@@ -376,7 +435,11 @@ public boolean isItemPresent(Business_locations modell) {
 
     @Override
     public void onDeleteCLicked(final Business_locations model) {
-
+          runOnUiThread(new Runnable() {
+              @Override
+              public void run() {
+                         }
+          });
     }
 
     @Override
@@ -385,4 +448,86 @@ public boolean isItemPresent(Business_locations modell) {
         super.onDestroy();
 
     }
+
+    public boolean isFieldsValidated()
+    {
+        if((productName.getText().length()>0)&&(description.getText().length()>0)&&(addedView.size()>0))
+        {
+
+            return true;
+        }else{
+            if(productName.getText().length()==0)
+            {
+                Utils.showToast(BusinessProductDetails.this,"Please enter product name");
+            }else if(description.getText().length()==0)
+            { Utils.showToast(BusinessProductDetails.this,"Please enter product description");
+
+            }else if(addedView.size()==0)
+            { Utils.showToast(BusinessProductDetails.this,"Please add business location");
+
+            }
+            return false;
+        }
+    }
+
+    public String[] getRequestArray() {
+        String product_category_id = getCategoryId(category.getSelectedItem().toString());
+        String business_location_ids = getBusinessId();
+        String name = productName.getText().toString();
+        String descriptionValue = description.getText().toString();
+        String total_priceValue = "";
+
+
+        if (total_price.getText().length() > 0) {
+            total_priceValue = total_price.getText().toString();
+        }
+        String price_per_liter = "";
+        if (per_liter_price.getText().length() > 0) {
+            price_per_liter = per_liter_price.getText().toString();
+        }
+        String parking_fee_per_hour = "";
+        if (parking_fee_per_hou.getText().length() > 0) {
+            parking_fee_per_hour = parking_fee_per_hou.getText().toString();
+        }
+        String minimum_parking_hoursValue = "";
+        if (minimum_parking_hours.getText().length() > 0) {
+            minimum_parking_hoursValue = minimum_parking_hours.getText().toString();
+        }
+        String maximum_parking_fee_perdayValue = "";
+        if (maximum_parking_fee_perday.getText().length() > 0) {
+            maximum_parking_fee_perdayValue = maximum_parking_fee_perday.getText().toString();
+        }
+        if (model == null) {
+            return new String[]{product_category_id, business_location_ids, name, descriptionValue, total_priceValue, price_per_liter, parking_fee_per_hour, minimum_parking_hoursValue, maximum_parking_fee_perdayValue};
+        } else {
+            return new String[]{model.getId(), product_category_id, business_location_ids, name, descriptionValue, total_priceValue, price_per_liter, parking_fee_per_hour, minimum_parking_hoursValue, maximum_parking_fee_perdayValue};
+
+        }
+    }
+
+
+     public String getBusinessId()
+     {
+         String id="";
+         for(int i=0;i<addedView.size();i++)
+         {
+             if(i==0)
+             {
+                 id=addedView.get(i).getId();
+             }else{
+                 id+=","+addedView.get(i).getId();
+             }
+         }
+         return id;
+     }
+    public String getCategoryId(String categoryName) {
+        for (int i = 0; i < categorylist.size(); i++) {
+            if (categoryName.equalsIgnoreCase(categorylist.get(i).getCategoryName())) {
+                return categorylist.get(i).getCategoryId();
+
+            }
+        }
+        return "";
+    }
+
 }

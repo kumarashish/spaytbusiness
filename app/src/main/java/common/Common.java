@@ -19,15 +19,155 @@ public class Common {
     public static String updateBusinessUser=baseUrl+"/business_users/update";
     public static String updateBusinessProducts=baseUrl+"/business_products/update";
     public static String addBusinessProducts=baseUrl+"/business_products/add";
+    public static String deleteBusinessProduct=baseUrl+"/business_products/delete";
+    public static String addBusinessLocation=baseUrl+"/business_locations/add";
+    public static String updateBusinessLocation=baseUrl+"/business_locations/update";
+    public static String deleteBusinessLocation=baseUrl+"/business_locations/delete";
+    public static String addBusinessOffers=baseUrl+"/business_products_offers/add";
+    public static String updateBusinessOffers=baseUrl+"/business_products_offers/update";
 
 
+   public static String[] id={"id"};
     public static String[] updateBusinessKeys = {"business_email","category_id", "company_name", "street_name", "door_no", "city", "zip_code", "phone_number", "paypal_email", "vat_id"};
     public static String []updateUserKeys={"id","first_name","last_name","salutation","email","is_active","user_type"};
     public static String []addUserKeys={"first_name","last_name","salutation","email","is_active","user_type"};
-    public static String[]addBusinessLocation={};
-    public static String []updateBusinessLocations={};
-    public static String[]addBusinessProduct={};
-    public static String []updateBusinessProduct={};
+    public static String[] addBusinessOffersKeys = {"product_id",
+            "business_location_ids",
+            "offer_name",
+            "offer_description",
+            "from_date in the format",
+            "to_date in the format",
+            "opening_hour_mode",
+            "morning_from",
+            "morning_to",
+            "afternoon_from",
+            "afternoon_to",
+            "total_price",
+            "price_per_liter",
+            "parking_fee_per_hour",
+            "minimum_parking_hours",
+            "maximum_parking_fee_perday"
+    };
+    public static String[] updateBusinessOffersKeys = {"id ","product_id",
+            "business_location_ids",
+            "offer_name",
+            "offer_description",
+            "from_date in the format",
+            "to_date in the format",
+            "opening_hour_mode",
+            "morning_from",
+            "morning_to",
+            "afternoon_from",
+            "afternoon_to",
+            "total_price",
+            "price_per_liter",
+            "parking_fee_per_hour",
+            "minimum_parking_hours",
+            "maximum_parking_fee_perday"
+    };
+
+    public static String[] addBusinessProduct = {"product_category_id",
+            "business_location_ids",
+            "name",
+            "description",
+            "total_price",
+            "price_per_liter",
+            "parking_fee_per_hour",
+            "minimum_parking_hours",
+            "maximum_parking_fee_perday"
+    };
+    public static String[] updateBusinessProduct = {"id", "product_category_id",
+            "business_location_ids",
+            "name",
+            "description",
+            "total_price",
+            "price_per_liter",
+            "parking_fee_per_hour",
+            "minimum_parking_hours",
+            "maximum_parking_fee_perday"
+    };
+    public static String[] updateBusinessLocationKeys = {"id", "location_name", "street_name",
+            "door_no",
+            "city",
+            "zip_code",
+            "phone_number",
+            "monday_mode",
+            "tuesday_mode",
+            "wednesday_mode",
+            "thursday_mode",
+            "friday_mode",
+            "saturday_mode",
+            "sunday_mode",
+            "monday_morning_from",
+            "monday_morning_to",
+            "monday_afternoon_from",
+            "monday_afternoon_to",
+            "tuesday_morning_from",
+            "tuesday_morning_to",
+            "tuesday_afternoon_from",
+            "tuesday_afternoon_to",
+            "wednesday_morning_from",
+            "wednesday_morning_to",
+            "wednesday_afternoon_from",
+            "wednesday_afternoon_to",
+            "thursday_morning_from",
+            "thursday_morning_to",
+            "thursday_afternoon_from",
+            "thursday_afternoon_to",
+            "friday_morning_from",
+            "friday_morning_to",
+            "friday_afternoon_from",
+            "friday_afternoon_to",
+            "saturday_morning_from",
+            "saturday_morning_to",
+            "saturday_afternoon_from",
+            "saturday_afternoon_to",
+            "sunday_morning_from",
+            "sunday_morning_to",
+            "sunday_afternoon_from",
+            "sunday_afternoon_to"};
+public static String[]addBusinessLocationKeys={"location_name","street_name",
+        "door_no",
+        "city",
+        "zip_code",
+        "phone_number",
+        "monday_mode",
+        "tuesday_mode",
+        "wednesday_mode",
+        "thursday_mode",
+        "friday_mode",
+        "saturday_mode",
+        "sunday_mode",
+        "monday_morning_from",
+        "monday_morning_to",
+        "monday_afternoon_from",
+        "monday_afternoon_to",
+        "tuesday_morning_from",
+        "tuesday_morning_to",
+        "tuesday_afternoon_from",
+        "tuesday_afternoon_to",
+        "wednesday_morning_from",
+        "wednesday_morning_to",
+        "wednesday_afternoon_from",
+        "wednesday_afternoon_to",
+        "thursday_morning_from",
+        "thursday_morning_to",
+        "thursday_afternoon_from",
+        "thursday_afternoon_to",
+        "friday_morning_from",
+        "friday_morning_to",
+        "friday_afternoon_from",
+        "friday_afternoon_to",
+        "saturday_morning_from",
+        "saturday_morning_to",
+        "saturday_afternoon_from",
+        "saturday_afternoon_to",
+        "sunday_morning_from",
+        "sunday_morning_to",
+        "sunday_afternoon_from",
+        "sunday_afternoon_to"};
+
+
 
 
 
