@@ -48,7 +48,7 @@ public class Common {
             "minimum_parking_hours",
             "maximum_parking_fee_perday"
     };
-    public static String[] updateBusinessOffersKeys = {"id ","product_id",
+    public static String[] updateBusinessOffersKeys = {"id","product_id",
             "business_location_ids",
             "offer_name",
             "offer_description",
