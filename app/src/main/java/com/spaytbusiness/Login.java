@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.paypal.android.sdk.payments.PayPalAuthorization;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalOAuthScopes;
@@ -58,6 +59,7 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
     Validation validation;
     public int apicall;
     int login=1,signUpwithPaypal=2;
+    String token="";
     private static PayPalConfiguration config = new PayPalConfiguration()
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX     )
             .clientId(Common.paypalClientId)
@@ -80,6 +82,10 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
         Intent intent=new Intent(this,PayPalService.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
         startService(intent);
+
+
+        token=  FirebaseInstanceId.getInstance().getToken();
+        Log.d("TAG", token);
 
 
 
@@ -120,7 +126,7 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
                     {apicall=login;
                         progressbar.setVisibility(View.VISIBLE);
                         view.setVisibility(View.GONE);
-                        controller.getWebApiCall().login(Common.login,emailId.getText().toString().trim(),password.getText().toString().trim(),"",this);
+                        controller.getWebApiCall().login(Common.login,emailId.getText().toString().trim(),password.getText().toString().trim(),token,this);
                     }
                 }
 
