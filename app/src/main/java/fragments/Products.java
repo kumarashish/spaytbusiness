@@ -160,10 +160,12 @@ public class Products extends Fragment implements WebApiResponseCallback,View.On
 
     @Override
     public void onError(String value) {
-        if(value.length()>0)
-        {
-
-        }
+       getActivity().runOnUiThread(new Runnable() {
+           @Override
+           public void run() {
+               progress_bar.setVisibility(View.GONE);
+           }
+       });
     }
 
     @Override

@@ -26,6 +26,7 @@ public class Common {
     public static String addBusinessOffers=baseUrl+"/business_products_offers/add";
     public static String updateBusinessOffers=baseUrl+"/business_products_offers/update";
     public static String deleteBusinessOffers=baseUrl+"/business_products_offers/delete";
+    public static String getBusinessTransactions=baseUrl+"/order/get_my_business_orders";
 
    public static String[] id={"id"};
     public static String[] updateBusinessKeys = {"business_email","category_id", "company_name", "street_name", "door_no", "city", "zip_code", "phone_number", "paypal_email", "vat_id"};
