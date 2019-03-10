@@ -77,17 +77,32 @@
         </RelativeLayout>
 
         <RelativeLayout
+
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/scan_view"
-                android:layout_margin="30dp"
-                android:background="@drawable/rectangle"
+            <fragment
+                android:layout_marginBottom="60dp"
+                android:id="@+id/barcode_scanner"
+                android:name="info.androidhive.barcode.BarcodeReader"
                 android:layout_width="match_parent"
-                android:layout_height="150dp" />
+                android:layout_height="match_parent"
+                app:auto_focus="true"
+                app:use_flash="false" />
+            <info.androidhive.barcode.ScannerOverlay
+                android:id="@+id/scan_view"
+
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#44000000"
+                app:line_color="@color/blue"
+                app:line_speed="6"
+                app:line_width="4"
+                app:square_height="250"
+                app:square_width="250" />
+
 
             <TextView
+                android:id="@+id/customer_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/scan_view"
@@ -104,7 +119,7 @@
                 android:layout_alignParentBottom="true"
                 android:background="@color/blue"
                 android:layout_width="match_parent"
-                android:layout_height="59dp" />
+                android:layout_height="60dp" />
 
         </RelativeLayout>
 

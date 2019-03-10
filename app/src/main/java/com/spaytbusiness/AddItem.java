@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -14,6 +15,9 @@ public class AddItem extends Activity implements View.OnClickListener {
     ImageView back;
     @BindView(R.id.mycart)
     View myCart;
+    @BindView(R.id.customer_name)
+    TextView customer_name;
+    String customerCode="";
 
 
     @Override
@@ -24,6 +28,8 @@ public class AddItem extends Activity implements View.OnClickListener {
         ButterKnife.bind(this);
         back.setOnClickListener(this);
         myCart.setOnClickListener(this);
+        customerCode=getIntent().getStringExtra("code");
+        customer_name.setText(customerCode);
 
 
     }

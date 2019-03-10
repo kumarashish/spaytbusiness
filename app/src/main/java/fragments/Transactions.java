@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.spaytbusiness.NewTransaction;
 import com.spaytbusiness.R;
@@ -28,6 +30,8 @@ public class Transactions extends Fragment  implements WebApiResponseCallback{
     ProgressBar progress_bar,progress_bar2;
     int apiCall;
     int getApiCall=1;
+    ListView transactions;
+    TextView noTransactions;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +43,10 @@ public class Transactions extends Fragment  implements WebApiResponseCallback{
         controller=(AppController)getActivity().getApplicationContext();
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.transactions, container, false);
-        progress_bar=(ProgressBar)v.findViewById(R.id.progress_bar);
-
+        progress_bar=(ProgressBar)v.findViewById(R.id.progressbar);
         new_transaction=(Button)v.findViewById(R.id.new_transaction);
+        transactions=(ListView)v.findViewById(R.id.listView);
+        noTransactions=(TextView)v.findViewById(R.id.no_transactionView);
         new_transaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
