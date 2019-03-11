@@ -7,53 +7,53 @@ import android.util.SparseArray;
 import android.widget.Toast;
 
 import com.google.android.gms.vision.barcode.Barcode;
+import com.google.zxing.Result;
 
 import java.util.List;
 
 import info.androidhive.barcode.BarcodeReader;
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-public class ScanActivity extends AppCompatActivity implements BarcodeReader.BarcodeReaderListener {
+public class ScanActivity  extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
-    BarcodeReader barcodeReader;
+    private ZXingScannerView mScannerView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.scanner);
-
-        // get the barcode reader instance
-        barcodeReader = (BarcodeReader) getSupportFragmentManager().findFragmentById(R.id.barcode_scanner);
+    public void onCreate(Bundle state) {
+        super.onCreate(state);
+        mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
+        setContentView(mScannerView);                // Set the scanner view as the content view
     }
 
     @Override
-    public void onScanned(Barcode barcode) {
+    public void onResume() {
+        super.onResume();
+        mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
+        mScannerView.startCamera();          // Start camera on resume
+    }
 
-        // playing barcode reader beep sound
-        barcodeReader.playBeep();
+    @Override
+    public void onPause() {
+        super.onPause();
+        mScannerView.stopCamera();           // Stop camera on pause
+    }
 
-        // ticket details activity by passing barcode
+    @Override
+    public void handleResult(Result rawResult) {
+        // Do something with the result here
+        // Log.v("tag", rawResult.getText()); // Prints scan results
+        // Log.v("tag", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
+
         Intent intent = new Intent(ScanActivity.this, AddItem.class);
-        intent.putExtra("code", barcode.displayValue);
+        intent.putExtra("code", rawResult.getText());
         startActivity(intent);
+
+
+
+
+        // If you would like to resume scanning, call this method below:
+        //mScannerView.resumeCameraPreview(this);
     }
 
-    @Override
-    public void onScannedMultiple(List<Barcode> list) {
 
-    }
-
-    @Override
-    public void onBitmapScanned(SparseArray<Barcode> sparseArray) {
-
-    }
-
-    @Override
-    public void onCameraPermissionDenied() {
-        finish();
-    }
-
-    @Override
-    public void onScanError(String s) {
-        Toast.makeText(getApplicationContext(), "Error occurred while scanning " + s, Toast.LENGTH_SHORT).show();
-    }
 }
