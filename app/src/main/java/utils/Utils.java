@@ -97,27 +97,7 @@ public class Utils {
 
 
 
-    public static String getCompleteAddressString(final Activity act, final double LATITUDE, final double LONGITUDE) {
-        List<Address> list;
-        String strAdd=null;
-        Geocoder geocoder = new Geocoder(act, Locale.getDefault());
-        try {
-            list = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
-            for (int n = 0; n <= list.get(0).getMaxAddressLineIndex()-2; n++) {
-                strAdd +=   list.get(0).getAddressLine(n) + ", ";
-            }
 
-            strAdd = list.get(0).getLocality();
-            if(strAdd.length()>22)
-            {
-                strAdd= strAdd.substring(0,22);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return strAdd;
-
-    }
 public static JSONArray getJSonArray(String value)
 {
     try{
@@ -130,74 +110,6 @@ public static JSONArray getJSonArray(String value)
     return null;
 }
 
-    public static JSONObject getTimers(String value) {
-        try {
-            JSONObject jsonObject = new JSONObject(value);
-            return jsonObject.getJSONObject("users_timer");
-        } catch (Exception ex) {
-            ex.fillInStackTrace();
-        }
-        return null;
-    }
-
-    public static JSONObject getLocationDetails(String value) {
-        try {
-            JSONObject jsonObject = new JSONObject(value);
-            JSONArray jsonArray = jsonObject.getJSONArray("Location Details");
-
-            return jsonArray.getJSONObject(0);
-        } catch (Exception ex) {
-            ex.fillInStackTrace();
-        }
-        return null;
-    }
-    public static JSONArray getLocationsArray(String value)
-    {
-        try{
-            JSONObject jsonObject=new JSONObject(value);
-            JSONArray jsonArray=jsonObject.getJSONArray("locations");
-            return jsonArray;
-        }catch (Exception ex)
-        {
-            ex.fillInStackTrace();
-        }
-        return null;
-    }
-
-    public static boolean[] isTimerStarted(String value)
-    {
-        try{JSONObject jsonObj=new JSONObject(value);
-            JSONObject jsonObject=jsonObj.getJSONObject("users_timer");
-
-            return new boolean[]{jsonObject.getBoolean("IsTimerStarted"),jsonObject.getBoolean("IsTimerStoped"),jsonObject.getBoolean("IsPaymentDone")};
-        }catch (Exception ex)
-        {
-            ex.fillInStackTrace();
-        }
-        return new boolean[]{};
-    }
-
-    public static String getcarPlateNumber(String value) {
-        try{
-            JSONObject jsonObject=new JSONObject(value);
-           return jsonObject.getString("parking_carplate_no");
-        }catch (Exception ex)
-        {
-            ex.fillInStackTrace();
-        }
-        return "";
-    }
-
-    public static String getTotalParkingAmount(String value) {
-        try{
-            JSONObject jsonObject=new JSONObject(value);
-            return jsonObject.getString("total_parking_fees");
-        }catch (Exception ex)
-        {
-            ex.fillInStackTrace();
-        }
-        return null;
-    }
 
     public static void logout(final Activity act) {
         act.runOnUiThread(new Runnable() {

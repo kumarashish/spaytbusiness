@@ -27,8 +27,10 @@ public class Common {
     public static String updateBusinessOffers=baseUrl+"/business_products_offers/update";
     public static String deleteBusinessOffers=baseUrl+"/business_products_offers/delete";
     public static String getBusinessTransactions=baseUrl+"/order/get_my_business_orders";
+    public static String getBusinessProductsOffers=baseUrl+"/order/get_products_with_offers";
 
    public static String[] id={"id"};
+    public static String[] locationIdKey={"location_id"};
     public static String[] updateBusinessKeys = {"business_email","category_id", "company_name", "street_name", "door_no", "city", "zip_code", "phone_number", "paypal_email", "vat_id"};
     public static String []updateUserKeys={"id","first_name","last_name","salutation","email","is_active","user_type"};
     public static String []addUserKeys={"first_name","last_name","salutation","email","is_active","user_type","password"};

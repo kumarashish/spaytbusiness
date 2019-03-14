@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class BusinessProductModel {
     ArrayList<Business_locations>list=new ArrayList<>();
     String id;
+    String type="product";
     String business_id;
     String product_category_id;
     String name;
@@ -17,7 +18,10 @@ public class BusinessProductModel {
     String parking_fee_per_hour;
     String minimum_parking_hours;
     String maximum_parking_fee_perday;
+    String price;
+    public int quantity=0;
     public BusinessProductModel(JSONObject jsonObject)
+
     {try {
         id = jsonObject.isNull("id") ? "" : jsonObject.getString("id");
         business_id= jsonObject.isNull("business_id") ? "" : jsonObject.getString("business_id");
@@ -39,6 +43,38 @@ public class BusinessProductModel {
     {
         ex.fillInStackTrace();
     }
+    }
+
+    public BusinessProductModel(String type,String id,String name,String description,String quantiy,String price){
+
+        this.type=type;
+        this.id=id;
+        this.name=name;
+        this.description=description;
+        this.quantity=Integer.parseInt(quantiy);
+        this.price=price;
+
+
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public void setQuantity(int getQuantity) {
+        this.quantity = getQuantity;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getId() {

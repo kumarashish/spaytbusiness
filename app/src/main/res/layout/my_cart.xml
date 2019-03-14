@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -191,135 +192,14 @@
                         android:background="@color/darkText"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"/>
-                    <LinearLayout
-
-                        android:layout_marginTop="10dp"
-                        android:weightSum="5"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp">
-
-                        <TextView
-                            android:textSize="12dp"
-                            android:fontFamily="@font/rgular"
-                            android:paddingLeft="10dp"
-                            android:textColor="@color/grey"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:text="Autowashe"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent" />
-                        <TextView
-                            android:textSize="12dp"
-                            android:fontFamily="@font/rgular"
-                            android:paddingLeft="10dp"
-                            android:textColor="@color/grey"
-                            android:layout_weight="1"
-
-                            android:gravity="center"
-                            android:text="1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent" />
-                        <TextView
-                            android:textSize="12dp"
-                            android:fontFamily="@font/rgular"
-                            android:paddingLeft="10dp"
-                            android:textColor="@color/grey"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="12-09-2018"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent" />
-                        <TextView
-                            android:textSize="12dp"
-                            android:fontFamily="@font/rgular"
-                            android:paddingLeft="10dp"
-                            android:textColor="@color/grey"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="19,00 $"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent" />
-                        <TextView
-                            android:textSize="12dp"
-                            android:fontFamily="@font/rgular"
-                            android:paddingLeft="10dp"
-                            android:textColor="@color/grey"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="119 $"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent" />
 
 
-                    </LinearLayout>
-                    <View
-                        android:layout_marginTop="5dp"
-                        android:background="@color/darkText"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"/>
-                    <LinearLayout
+                   <LinearLayout
+                       android:id="@+id/content"
+                       android:orientation="vertical"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"></LinearLayout>
 
-                        android:layout_marginTop="10dp"
-                        android:weightSum="5"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp">
-
-                        <TextView
-                            android:textSize="12dp"
-                            android:fontFamily="@font/rgular"
-                            android:paddingLeft="10dp"
-                            android:textColor="@color/grey"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:text="Autowashe"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent" />
-                        <TextView
-                            android:textSize="12dp"
-                            android:fontFamily="@font/rgular"
-                            android:paddingLeft="10dp"
-                            android:textColor="@color/grey"
-                            android:layout_weight="1"
-
-                            android:gravity="center"
-                            android:text="1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent" />
-                        <TextView
-                            android:textSize="12dp"
-                            android:fontFamily="@font/rgular"
-                            android:paddingLeft="10dp"
-                            android:textColor="@color/grey"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="12-09-2018"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent" />
-                        <TextView
-                            android:textSize="12dp"
-                            android:fontFamily="@font/rgular"
-                            android:paddingLeft="10dp"
-                            android:textColor="@color/grey"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="19,00 $"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent" />
-                        <TextView
-                            android:textSize="12dp"
-                            android:fontFamily="@font/rgular"
-                            android:paddingLeft="10dp"
-                            android:textColor="@color/grey"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="119 $"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent" />
-
-
-                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_marginTop="10dp"
@@ -338,14 +218,15 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent" />
                         <TextView
-                            android:text="19,99 $"
+                            android:text=""
                             android:textColor="@color/blue"
                             android:layout_weight="1"
                             android:gravity="center"
                             android:layout_width="0dp"
                             android:layout_height="match_parent" />
                         <TextView
-                            android:text="138,00 $"
+                            android:id="@+id/grand_total"
+                            android:text=""
                             android:textColor="@color/blue"
                             android:layout_weight="1"
                             android:gravity="center"
