@@ -89,13 +89,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/customer_name"
                     android:gravity="center"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
 
                     android:fontFamily="@font/bold"
                     android:textSize="18dp"
-                    android:text="Customer name"
+                    android:text=""
                     android:textColor="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -105,7 +106,7 @@
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/rgular"
                     android:textSize="16dp"
-                    android:text="Address "
+                    android:text=" "
                     android:textColor="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

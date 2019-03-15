@@ -120,7 +120,7 @@
 
                     android:fontFamily="@font/bold"
                     android:textSize="18dp"
-                    android:text="Customer name"
+                    android:text=""
                     android:textColor="@color/darkText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -130,7 +130,7 @@
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/rgular"
                     android:textSize="16dp"
-                    android:text="Address"
+                    android:text=""
                     android:textColor="@color/darkText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -263,7 +263,8 @@
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/darkText"
                     android:id="@+id/price"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
+
                     android:textSize="18dp"
                     android:paddingLeft="5dp"
                     android:textColor="@color/darkText"

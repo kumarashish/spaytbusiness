@@ -1,8 +1,10 @@
 package utils;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -16,7 +18,9 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 
+import com.spaytbusiness.Dashboard;
 import com.spaytbusiness.Login;
+import com.spaytbusiness.MyCart;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -111,6 +115,19 @@ public static JSONArray getJSonArray(String value)
 }
 
 
+    public static JSONObject getJSONObject(String value,String key)
+    {
+        try{
+            JSONObject jsonObject=new JSONObject(value);
+
+            return jsonObject.getJSONObject(key);
+        }catch (Exception ex)
+        {
+            ex.fillInStackTrace();
+        }
+        return null;
+    }
+
     public static void logout(final Activity act) {
         act.runOnUiThread(new Runnable() {
             @Override
@@ -123,5 +140,25 @@ public static JSONArray getJSonArray(String value)
 
         });
 
+    }
+
+    public static void sucessAlert(final Activity act,final String orderId){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(act);
+        alertDialogBuilder.setMessage("Your Order has been submited Sucessfully. Order Id : "+orderId);
+                alertDialogBuilder.setNeutralButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                Intent intent = new Intent(act, Dashboard.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                act.startActivity(intent);
+                            }
+                        });
+
+
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }

@@ -1,6 +1,7 @@
 package com.spaytbusiness;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,27 +23,46 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import common.AppController;
+import common.Common;
+import interfaces.WebApiResponseCallback;
 import models.BusinessProductModel;
 import utils.Utils;
 
-public class MyCart extends Activity implements View.OnClickListener {
+public class MyCart extends Activity implements View.OnClickListener , WebApiResponseCallback {
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.content)
     LinearLayout content;
-AppController controller;
-@BindView(R.id.grand_total)
-TextView grandTotal;
-
-
-
+    AppController controller;
+    @BindView(R.id.grand_total)
+    TextView grandTotal;
+    @BindView(R.id.submit)
+    Button submit;
+    @BindView(R.id.customer_name)
+    TextView customer_name;
+    ProgressDialog pd;
+    String locationId="";
+    int apiCall;
+    int createOrder=1,submitOrder=2;
+    String orderId="";
+String customerName="";
+String customerId="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_cart);
         controller=(AppController)getApplicationContext();
         ButterKnife.bind(this);
+        locationId=getIntent().getStringExtra("locationId");
+        customerName=getIntent().getStringExtra("customerName");
+        customerId=getIntent().getStringExtra("customerId");
+        customer_name.setText(customerName);
         back.setOnClickListener(this);
+        submit.setOnClickListener(this);
+        pd=new ProgressDialog(MyCart.this);
+        pd.setMessage("Please Wait....");
+        pd.setCancelable(false);
+
         for (int i=0;i<controller.getGetMyCart().size();i++)
         {
             final BusinessProductModel model=controller.getGetMyCart().get(i);
@@ -96,7 +119,7 @@ TextView grandTotal;
                 @Override
                 public void afterTextChanged(Editable s) {
                     if((price.getText().length()>0)&&(s.length()>0))
-                    {  double val=Double.parseDouble(price.getText().toString())*Integer.parseInt(quantity.getText().toString());
+                    {   double val=Double.parseDouble(price.getText().toString().trim())*Integer.parseInt(quantity.getText().toString().trim());
                         total_price.setText(Double.toString(val)+" £");
                         int index=controller.getIndexOfModel(model);
                         model.setQuantity(Integer.parseInt(quantity.getText().toString()));
@@ -105,15 +128,10 @@ TextView grandTotal;
                     }
                 }
             });
-
-
             content.addView(row);
 
         }
         grandTotal.setText(Double.toString(controller.getTotalPrice())+" £");
-
-
-
     }
 
     public String getDate()
@@ -130,9 +148,112 @@ TextView grandTotal;
             case R.id.back:
                 finish();
                 break;
+            case R.id.submit:
+                if(controller.getTotalPrice()>0.0)
+                if (Utils.isNetworkAvailable(MyCart.this)) {
+                    if (orderId.length() > 0) {
+                        submitOrder(orderId);
+                    } else {
+                        apiCall = createOrder;
+                        pd.show();
+                        controller.getWebApiCall().postData(Common.getCreateOrderUrl, controller.getManager().getUserToken(), getCreateOrderJson("10", locationId).toString(), MyCart.this);
+                    }
+                }
+                break;
 
 
         }
     }
 
+    public void submitOrder(String orderId) {
+        pd.show();
+        apiCall = submitOrder;
+        controller.getWebApiCall().postData(Common.getSubmitOrderUrl, controller.getManager().getUserToken(), Common.id, new String[]{orderId}, MyCart.this);
+
     }
+
+    public JSONObject getCreateOrderJson(String consumerId, String locationId) {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray productsArray = new JSONArray();
+        try {
+            jsonObject.put("consumer_id", consumerId);
+            jsonObject.put("location_id", locationId);
+            for (int i = 0; i < controller.getGetMyCart().size(); i++) {
+                BusinessProductModel model = controller.getGetMyCart().get(i);
+                JSONObject products = new JSONObject();
+                products.put("type", model.getType());
+                products.put("id", model.getId());
+                products.put("name", model.getName());
+                products.put("description", model.getType());
+                products.put("quantity", model.getQuantity());
+                products.put("price", model.getPrice());
+                productsArray.put(i, products);
+            }
+            jsonObject.put("order_items", productsArray);
+
+
+        } catch (Exception ex) {
+            ex.fillInStackTrace();
+        }
+        return jsonObject;
+    }
+
+    @Override
+    public void onSucess(final String value) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                if(pd!=null)
+                {
+                    pd.cancel();
+                }
+                if(Utils.getStatus(value)==true)
+                {
+                    switch (apiCall)
+                    {
+                        case 1:
+                            orderId=getOrderId(value);
+                            submitOrder(orderId);
+                            break;
+                        case 2:
+                         Utils.sucessAlert(MyCart.this,orderId);
+                         controller.getGetMyCart().clear();
+                            break;
+                    }
+
+                }else{
+                    Utils.showToast(MyCart.this,Utils.getMessage(value));
+                }
+            }
+        });
+
+
+    }
+public String getOrderId(String value)
+{
+    try{
+        JSONObject jsonObject=new JSONObject(value);
+        JSONArray orderData=jsonObject.getJSONArray("order_data");
+        return  orderData.getJSONObject(0).getString("id");
+    }catch (Exception ex)
+    {
+        ex.fillInStackTrace();
+    }
+    return "";
+}
+    @Override
+    public void onError(final String value) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Utils.showToast(MyCart.this,Utils.getMessage(value));
+                if(pd!=null)
+                {
+                    pd.cancel();
+                }
+            }
+        });
+    }
+}
+

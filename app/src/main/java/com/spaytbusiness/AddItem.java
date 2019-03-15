@@ -60,6 +60,8 @@ public class AddItem extends Activity implements View.OnClickListener , WebApiRe
     EditText price;
     @BindView(R.id.quantity)
     EditText quantity;
+String customerId="";
+String customerName="";
 
 @BindView(R.id.submit)
 Button submit;
@@ -73,10 +75,7 @@ Button submit;
 @BindView(R.id.myCartCount)
         TextView myCartItemCount;
     int apiCall;
-    int getLocation=1,getProducts=2;
-
-
-
+    int getLocation=1,getProducts=2,getCustomerFromCode=3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,13 +87,14 @@ Button submit;
         submit.setOnClickListener(this);
 
         customerCode=getIntent().getStringExtra("code");
-        customer_name.setText(customerCode);
         controller=(AppController)getApplicationContext();
-        if(Utils.isNetworkAvailable(AddItem.this))
-        {apiCall=getLocation;
-            progress.setVisibility(View.VISIBLE);
-            controller.getWebApiCall().getDataCommon(Common.businessLocationUrl,controller.getManager().getUserToken(),this);
-        }
+
+            if(Utils.isNetworkAvailable(AddItem.this))
+            {apiCall=getCustomerFromCode;
+                progress.setVisibility(View.VISIBLE);
+                controller.getWebApiCall().postData(Common.getCustomerFromQRCodeUrl,controller.getManager().getUserToken(),Common.qrCodeKey,new String[]{customerCode},this);
+            }
+
         locations.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -162,7 +162,14 @@ if((price.getText().length()>0)&&(s.length()>0))
             }
         });
     }
-
+public void getLocation()
+{
+    if(Utils.isNetworkAvailable(AddItem.this))
+    {apiCall=getLocation;
+        progress.setVisibility(View.VISIBLE);
+        controller.getWebApiCall().getDataCommon(Common.businessLocationUrl,controller.getManager().getUserToken(),this);
+    }
+}
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -196,7 +203,13 @@ if((price.getText().length()>0)&&(s.length()>0))
                 break;
             case R.id.mycartView:
                 if(controller.getGetMyCart().size()>0) {
-                    startActivity(new Intent(this, MyCart.class));
+                    int pos=locations.getSelectedItemPosition()-1;
+                    Intent in=new Intent(this, MyCart.class);
+                    in.putExtra("locationId",businessLocationList.get(pos).getId());
+                    in.putExtra("customerName",customerName);
+                    in.putExtra("customerId",customerId);
+
+                    startActivity(in);
                 }else{
                     Utils.showToast(AddItem.this,"You cart is empty!Please add product in cart");
                 }
@@ -278,8 +291,28 @@ if((price.getText().length()>0)&&(s.length()>0))
                         }}else {
                             Utils.showToast(AddItem.this,Utils.getMessage(value));
                         }
-progress2.setVisibility(View.GONE);
+                          progress2.setVisibility(View.GONE);
                             break;
+                    case 3:
+                        if(Utils.getStatus(value))
+                        {
+                            JSONObject jsonObject=Utils.getJSONObject(value,"consumer_details");
+                            try {
+                                customerName = jsonObject.getString("first_name") + " " + jsonObject.getString("last_name");
+                                customerId=jsonObject.getString("consumer_id");
+                                customer_name.setText(customerName);
+                                progress2.setVisibility(View.GONE);
+                                getLocation();
+
+                            }catch (Exception ex)
+                            {
+                                ex.fillInStackTrace();
+                            }
+                        }else{
+                            Utils.showToast(AddItem.this,Utils.getMessage(value));
+                            progress2.setVisibility(View.GONE);
+                        }
+                        break;
 
 
     }}});

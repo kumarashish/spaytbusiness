@@ -238,6 +238,35 @@ public class WebApiCall {
     }
 
 
+    public void postData(String url, String token, String requestJson, final WebApiResponseCallback callback) {
+        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS).build();
+        RequestBody body = RequestBody.create(JSON, requestJson);
+        Request request = new Request.Builder().header("X-Businesstoken", token).url(url).post(body).build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+                callback.onError(e.fillInStackTrace().toString());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.code() == 200 || response.code() == 201) {
+                    if (response != null) {
+                        callback.onSucess(response.body().string());
+                    } else {
+                        callback.onError(response.message());
+                    }
+                } else {
+                    callback.onError(response.message());
+                }
+            }
+        });
+    }
+
+
     public void loginWithFb(String url, String fb_Id, String email, String userName, String deviceId, String accessToken, final WebApiResponseCallback callback) {
         OkHttpClient client = new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)

@@ -42,7 +42,8 @@ public class NewTransaction extends Activity implements View.OnClickListener {
                 finish();
                 break;
             case R.id.scan_customer:
-                startActivity(new Intent(NewTransaction.this,AddItem.class));
+                startActivity(new Intent(NewTransaction.this,ScanActivity.class));
+
                 break;
             case R.id.existing_customer:
               startActivity(new Intent(NewTransaction.this,ChooseCustomer.class));
