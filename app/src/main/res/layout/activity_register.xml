@@ -63,13 +63,14 @@ android:layout_marginLeft="10dp"
             android:layout_height="wrap_content">
             <android.support.design.widget.TextInputLayout
                 android:layout_marginTop="10dp"
-                android:id="@+id/input_layout_password"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/input_company_name"
                 android:textColorHint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
         <LinearLayout
             android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
+
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -125,15 +126,62 @@ android:layout_marginLeft="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
+
         <View
             android:layout_marginTop="5dp"
             android:background="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>
+            <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/input_doornumber"
+                android:textColorHint="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_marginRight="20dp"
+
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <ImageView
+                        android:layout_marginLeft="-10dp"
+                        android:tint="@color/lightText"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/map_icon"
+                        android:layout_width="50dp"
+                        android:layout_height="30dp" />
+                    <EditText
+                        android:inputType="textPersonName"
+                        android:id="@+id/doorNumber"
+                        android:fontFamily="@font/light"
+                        android:textColorHint="@color/lightText"
+                        android:hint="Door Number"
+                        android:textSize="18dp"
+                        android:textColor="@android:color/white"
+                        android:background="@android:color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </android.support.design.widget.TextInputLayout>
+            <View
+                android:layout_marginTop="5dp"
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/input_sreet"
+                android:textColorHint="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
+
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -157,45 +205,22 @@ android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
+            </android.support.design.widget.TextInputLayout>
             <View
                 android:layout_marginTop="5dp"
                 android:background="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"/>
+            <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/input_city"
+                android:textColorHint="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="40dp">
-                <ImageView
-                    android:layout_marginLeft="-10dp"
-                    android:tint="@color/lightText"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/map_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp" />
-                <EditText
-                    android:inputType="textPersonName"
-                    android:id="@+id/doorNumber"
-                    android:fontFamily="@font/light"
-                    android:textColorHint="@color/lightText"
-                    android:hint="Door Number"
-                    android:textSize="18dp"
-                    android:textColor="@android:color/white"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
-            <View
-                android:layout_marginTop="5dp"
-                android:background="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"/>
-            <LinearLayout
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
+
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -219,11 +244,19 @@ android:layout_marginLeft="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
+            </android.support.design.widget.TextInputLayout>
             <View
                 android:layout_marginTop="5dp"
                 android:background="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"/>
+            <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/input_pincode"
+                android:textColorHint="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
@@ -251,12 +284,20 @@ android:layout_marginLeft="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
+            </android.support.design.widget.TextInputLayout>
 
         <View
             android:layout_marginTop="5dp"
             android:background="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>
+            <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/input_c_phone"
+                android:textColorHint="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
         <LinearLayout
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
@@ -282,11 +323,19 @@ android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
+            </android.support.design.widget.TextInputLayout>
         <View
             android:layout_marginTop="5dp"
             android:background="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>
+            <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/input_c_email"
+                android:textColorHint="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
         <LinearLayout
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
@@ -312,14 +361,16 @@ android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
+            </android.support.design.widget.TextInputLayout>
         <View
             android:layout_marginTop="5dp"
             android:background="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>
+
         <LinearLayout
             android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
+
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
