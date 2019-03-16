@@ -78,7 +78,7 @@ AppController controller;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TextView child=(TextView) parent.getChildAt(0);
-                child.setTextColor(getResources().getColor(R.color.blue));
+                child.setTextColor(getResources().getColor(R.color.blue,getTheme()));
                 child.setTextSize(18);
                // child.setTypeface(getResources().getFont(R.font.light));
             }
@@ -89,13 +89,14 @@ AppController controller;
             }
         });
         isactive.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked)
                 {
-                    isactive.setTextColor(getResources().getColor(R.color.blue));
+                    isactive.setTextColor(getResources().getColor(R.color.blue,getTheme()));
                 }else {
-                    isactive.setTextColor(getResources().getColor(R.color.grey));
+                    isactive.setTextColor(getResources().getColor(R.color.grey,getTheme()));
                 }
             }
         });
@@ -104,7 +105,7 @@ AppController controller;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TextView child=(TextView) parent.getChildAt(0);
-                child.setTextColor(getResources().getColor(R.color.blue));
+                child.setTextColor(getResources().getColor(R.color.blue,getTheme()));
                 child.setTextSize(18);
               //  child.setTypeface(getResources().getFont(R.font.light));
             }
@@ -176,7 +177,7 @@ switch (v.getId())
     {
         if((fname.getText().length()>0)&&(lname.getText().length()>0)&&(email.getText().length()>0))
         {
-            if(validation.isEmailIdValid(email)) {
+            if(validation.isValidEmail(email.getText().toString())) {
                 return true;
             }
         }else{
@@ -193,6 +194,7 @@ switch (v.getId())
         }
         return false;
     }
+@RequiresApi(api = Build.VERSION_CODES.M)
 public boolean getCheck(String value)
 {
     boolean status=false;
@@ -200,12 +202,12 @@ public boolean getCheck(String value)
     {
         case "1":
             status=true;
-            isactive.setTextColor(getResources().getColor(R.color.blue));
+            isactive.setTextColor(getResources().getColor(R.color.blue,getTheme()));
 
             break;
         case "0":
             status=false;
-            isactive.setTextColor(getResources().getColor(R.color.grey));
+            isactive.setTextColor(getResources().getColor(R.color.grey,getTheme()));
             break;
     }
     return status;

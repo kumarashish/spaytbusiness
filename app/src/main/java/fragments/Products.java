@@ -1,9 +1,12 @@
 package fragments;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
+
+
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -51,7 +54,7 @@ public class Products extends Fragment implements WebApiResponseCallback,View.On
     BusinessProductClicked callback;
     int apiCall;
     int getApiCall=1,deleteApiCAll=2;
-    ProgressDialog progressDialog;
+   Dialog progressDialog;
     WebApiResponseCallback webApiResponseCallback;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,9 +69,10 @@ public class Products extends Fragment implements WebApiResponseCallback,View.On
         // Inflate the layout for this fragment
          callback=this;
         webApiResponseCallback=this;
-        progressDialog=new ProgressDialog(getActivity());
-        progressDialog.setMessage("Please wait....");
-        progressDialog.setCancelable(false);
+     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            progressDialog=Utils.getProgressDailog(getActivity());
+        };
+
         View v= inflater.inflate(R.layout.offers, container, false);
         heading=(TextView)v.findViewById(R.id.name);
         count=(TextView)v.findViewById(R.id.count);

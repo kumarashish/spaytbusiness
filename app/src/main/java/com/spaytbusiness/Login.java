@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -60,8 +63,12 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
     public int apicall;
     int login=1,signUpwithPaypal=2;
     String token="";
+    @BindView(R.id.input_email)
+    android.support.design.widget.TextInputLayout email_input_layout;
+    @BindView(R.id.input_layout_password)
+    android.support.design.widget.TextInputLayout password_input_layout;
     private static PayPalConfiguration config = new PayPalConfiguration()
-            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX     )
+            .environment(PayPalConfiguration.ENVIRONMENT_PRODUCTION)
             .clientId(Common.paypalClientId)
             .merchantName("Spayt GmbH")
             .merchantPrivacyPolicyUri(Uri.parse("https://www.spayt.de"))
@@ -79,6 +86,8 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
         controller=(AppController)getApplicationContext();
         validation=new Validation(Login.this);
         forgotPassword.setOnClickListener(this);
+        emailId.addTextChangedListener(new MyTextWatcher(emailId));
+        password.addTextChangedListener(new MyTextWatcher(password));
         Intent intent=new Intent(this,PayPalService.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
         startService(intent);
@@ -120,15 +129,22 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
                 break;
 
             case R.id.submit:
-                if((validation.isEmailIdValid(emailId))&&(validation.isNotNull(password)))
-                {
-                    if(Utils.isNetworkAvailable(Login.this))
-                    {apicall=login;
-                        progressbar.setVisibility(View.VISIBLE);
-                        view.setVisibility(View.GONE);
-                        controller.getWebApiCall().login(Common.login,emailId.getText().toString().trim(),password.getText().toString().trim(),token,this);
-                    }
+
+                if (!validation.validateEmail(emailId, email_input_layout)) {
+                    return;
                 }
+                if (!validation.validatePassword(password, password_input_layout)) {
+                    return;
+                }
+
+                if (Utils.isNetworkAvailable(Login.this)) {
+                    apicall = login;
+                    progressbar.setVisibility(View.VISIBLE);
+                    view.setVisibility(View.GONE);
+                    controller.getWebApiCall().login(Common.login, emailId.getText().toString().trim(), password.getText().toString().trim(), token, this);
+
+                }
+
 
 
                 break;
@@ -141,6 +157,12 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
                 break;
         }
 
+    }
+
+    public void requestFocus(View view) {
+        if (view.requestFocus()) {
+           getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
     }
 
     @Override
@@ -213,6 +235,30 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
                 }
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 Log.i("ProfileSharingExample", "The user canceled.");
+            }
+        }
+    }
+
+    private class MyTextWatcher implements TextWatcher {
+        private View view;
+        private MyTextWatcher(View view) {
+            this.view = view;
+        }
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+        public void afterTextChanged(Editable editable) {
+            switch (view.getId()) {
+                case R.id.email_id:
+                    if(emailId.getText().length()>4) {
+                        validation.validateEmail(emailId, email_input_layout);
+                    }
+                    break;
+                case R.id.password:
+                    validation.validatePassword(password,password_input_layout);
+                    break;
+
             }
         }
     }

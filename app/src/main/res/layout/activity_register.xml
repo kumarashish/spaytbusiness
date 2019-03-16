@@ -61,7 +61,12 @@ android:layout_marginLeft="10dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
+            <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="10dp"
+                android:id="@+id/input_layout_password"
+                android:textColorHint="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
         <LinearLayout
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
@@ -87,11 +92,13 @@ android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
+            </android.support.design.widget.TextInputLayout>
             <View
                 android:layout_marginTop="5dp"
                 android:background="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"/>
+
             <LinearLayout
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
@@ -237,7 +244,7 @@ android:layout_marginLeft="10dp"
                     android:id="@+id/zipCode"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/lightText"
-                    android:hint="ZipCode"
+                    android:hint="PLZ"
                     android:textSize="18dp"
                     android:textColor="@android:color/white"
                     android:background="@android:color/transparent"
@@ -297,7 +304,7 @@ android:layout_marginLeft="10dp"
                 android:id="@+id/companyEmailId"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/lightText"
-                android:hint="Company Email Id"
+                android:hint="Company Email"
                 android:textSize="18dp"
                 android:textColor="@android:color/white"
                 android:layout_marginLeft="10dp"
@@ -357,7 +364,7 @@ android:layout_marginLeft="10dp"
                 android:id="@+id/paypalId"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/lightText"
-                android:hint="PayPal Email id"
+                android:hint="PayPal Email"
                 android:textSize="18dp"
                 android:textColor="@android:color/white"
                 android:layout_marginLeft="10dp"

@@ -1,9 +1,11 @@
 package fragments;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
+
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -45,7 +47,7 @@ public class Locations extends Fragment implements WebApiResponseCallback,View.O
     TextView nodata;
     ArrayList<Business_locations> businessLocationList=new ArrayList<>();
 OnListItemSelected callback;
-ProgressDialog progressDialog;
+Dialog progressDialog;
 int apiCall;
 int getApiCall=1,deleteApiCAll=2;
 WebApiResponseCallback webApiResponseCallback;
@@ -63,10 +65,9 @@ WebApiResponseCallback webApiResponseCallback;
         // Inflate the layout for this fragment
 
         View v= inflater.inflate(R.layout.offers, container, false);
-        progressDialog=new ProgressDialog(getActivity());
-        progressDialog.setMessage("Please wait....");
-        progressDialog.setCancelable(false);
-        webApiResponseCallback=this;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            progressDialog=Utils.getProgressDailog(getActivity());
+        }
         heading=(TextView)v.findViewById(R.id.name);
         count=(TextView)v.findViewById(R.id.count);
         add=(ImageView) v.findViewById(R.id.add);

@@ -2,18 +2,20 @@ package utils;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.WakefulBroadcastReceiver;
+
+import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
 
 import com.spaytbusiness.R;
 import com.spaytbusiness.Splash;
 
-public class FirebaseDataReceiver extends WakefulBroadcastReceiver {
+public class FirebaseDataReceiver extends BroadcastReceiver {
 
     private final String TAG = "FirebaseDataReceiver";
 
@@ -32,7 +34,7 @@ public class FirebaseDataReceiver extends WakefulBroadcastReceiver {
         NotificationManager  mNotificationManager = (NotificationManager)context. getSystemService(Context.NOTIFICATION_SERVICE);
         Intent notificationIntent = new Intent(context, Splash.class);
         PendingIntent contentIntent = PendingIntent.getActivity(context, 123, notificationIntent, 0);
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+        Builder mBuilder = new Builder(context)
                 .setSmallIcon(R.drawable.logo)
                 .setContentTitle(title)
                 .setContentText(message)

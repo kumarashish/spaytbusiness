@@ -1,6 +1,8 @@
 package com.spaytbusiness;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.CircularProgressDrawable;
@@ -17,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -301,23 +304,57 @@ public void getLocation()
                                 customerName = jsonObject.getString("first_name") + " " + jsonObject.getString("last_name");
                                 customerId=jsonObject.getString("consumer_id");
                                 customer_name.setText(customerName);
-                                progress2.setVisibility(View.GONE);
+                                progress.setVisibility(View.GONE);
                                 getLocation();
 
                             }catch (Exception ex)
                             {
                                 ex.fillInStackTrace();
+
+                                progress.setVisibility(View.GONE);
+                                startActivity(new Intent(AddItem.this,ScanActivity.class));
+                                finish();
                             }
                         }else{
-                            Utils.showToast(AddItem.this,Utils.getMessage(value));
-                            progress2.setVisibility(View.GONE);
+                            invalidQRCodeAlert(Utils.getMessage(value));
+
+                            progress.setVisibility(View.GONE);
+
                         }
                         break;
 
 
     }}});
         }
+public void invalidQRCodeAlert(String message)
+{
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);;
 
+
+    //Setting message manually and performing action on button click
+    builder.setMessage(message)
+            .setCancelable(false)
+            .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                    startActivity(new Intent(AddItem.this,ScanActivity.class));
+                    finish();
+
+                }
+            })
+            .setNegativeButton("exit", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    //  Action for 'NO' Button
+                    dialog.cancel();
+                   finish();
+                }
+            });
+    //Creating dialog box
+    AlertDialog alert = builder.create();
+    //Setting the title manually
+    alert.setTitle("Aler");
+    alert.show();
+}
 
         public void getProducts()
         {
@@ -331,6 +368,12 @@ public void getLocation()
 
     @Override
     public void onError(String value) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
 
     }
 }

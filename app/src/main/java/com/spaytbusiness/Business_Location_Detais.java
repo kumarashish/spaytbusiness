@@ -1,8 +1,10 @@
 package com.spaytbusiness;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
+
+import android.app.Dialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -113,7 +115,7 @@ public class Business_Location_Detais extends Activity implements View.OnClickLi
     Button submit;
     public static Business_locations model=null;
     AppController controller;
-    ProgressDialog dialog;
+   Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,9 +124,9 @@ public class Business_Location_Detais extends Activity implements View.OnClickLi
         controller=(AppController)getApplicationContext();
         back.setOnClickListener(this);
         submit.setOnClickListener(this);
-        dialog=new ProgressDialog(this);
-        dialog.setMessage("Please wait....");
-        dialog.setCancelable(false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog=Utils.getProgressDailog(Business_Location_Detais.this);
+        }
         setValue();
     }
 

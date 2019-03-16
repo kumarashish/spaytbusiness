@@ -86,8 +86,9 @@ salutation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 onBackPressed();
                 break;
             case R.id.next:
-                if((validation.isNotNull(fname))&&(validation.isNotNull(lname))&&(validation.isEmailIdValid(email))&&(validation.isNotNull(password)&&(validation.isPassword_ConfirmPasswordSame(password,confirmPassword))))
+                if((validation.isNotNull(fname))&&(validation.isNotNull(lname))&&(validation.isValidEmail(email.getText().toString()))&&(validation.isNotNull(password)&&(validation.isPassword_ConfirmPasswordSame(password,confirmPassword))))
                 {
+
                     if(Utils.isNetworkAvailable(Registration.this))
                     {
                         progressBar.setVisibility(View.VISIBLE);
@@ -95,6 +96,7 @@ salutation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         controller.getWebApiCall().forgetPassword(Common.isUserExists,email.getText().toString(),this);
                     }
                 }
+
                 break;
 
         }

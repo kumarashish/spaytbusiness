@@ -3,6 +3,7 @@ package utils;
 import android.app.Activity;
 
 import android.os.Build;
+import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.spaytbusiness.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,7 +36,7 @@ public class Validation {
     /***
      * validate password with given password regular expression
      */
-    public boolean isPasswordValid(EditText password) {
+    public boolean isPasswordValid(EditText password,Activity act) {
         boolean matches = false;
         if (isNotNull(password)) {
             String pwd = password.getText().toString().trim();
@@ -43,8 +45,6 @@ public class Validation {
             } else {
                 return true;
             }
-        }else{
-            Toast.makeText(context, "Please enter password ", Toast.LENGTH_SHORT).show();
         }
 
         return matches;
@@ -64,7 +64,7 @@ public class Validation {
         return false;
     }
 
-    private static boolean isValidEmail(String email) {
+    public static boolean isValidEmail(String email) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
             return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
         }
@@ -79,21 +79,62 @@ public class Validation {
         }
     }
 
-    /***
-     * validate email string with given email regular expression
-     */
-    public boolean isEmailIdValid(EditText email) {
-        if ((isNotNull(email))&&(isValidEmail(email.getText().toString()))) {
-           return true;
+
+    public boolean validateEmail(EditText edt_email, TextInputLayout inputLayoutEmail) {
+        String email = edt_email.getText().toString().trim();
+
+        if (email.isEmpty() == false) {
+            if (isValidEmail(email)) {
+                inputLayoutEmail.setErrorEnabled(false);
+                return true;
+            } else {
+                inputLayoutEmail.setError(context.getString(R.string.err_msg_email));
+                requestFocus(edt_email);
+                return false;
+            }
 
         } else {
-            Toast.makeText(context, "Please enter valid email Id", Toast.LENGTH_SHORT).show();
+            inputLayoutEmail.setError(context.getString(R.string.err_msg_email_null));
+            requestFocus(edt_email);
+            return false;
 
         }
-        return false;
+
+
     }
 
 
+    public boolean validatePassword(EditText edt_password, TextInputLayout  inputLayoutPassword) {
+        if (edt_password.getText().toString().trim().isEmpty()) {
+            inputLayoutPassword.setError(context.getString(R.string.err_msg_password));
+            requestFocus(edt_password);
+            return false;
+        } else {
+            inputLayoutPassword.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+    public boolean validateConfirmPassword(EditText edt_password, TextInputLayout  inputLayoutPassword) {
+        if (edt_password.getText().toString().trim().isEmpty()) {
+            inputLayoutPassword.setError(context.getString(R.string.err_msg_confirm_password));
+            requestFocus(edt_password);
+            return false;
+        } else {
+            inputLayoutPassword.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+    public boolean  validatePasswordConfirmPassword(EditText edt_password, TextInputLayout  inputLayoutPassword,EditText confirmpassword, TextInputLayout  inputLayoutConfirmPassword) {
+        if (edt_password.getText().toString().equals(confirmpassword.getText().toString())) {
+            return true;
+        }else{
+            requestFocus(edt_password);
+            inputLayoutConfirmPassword.setError(context.getString(R.string.err_msg_different_password));
+        }
+        return false;
+    }
 
     /**
      * check whether string contains value or not
@@ -133,22 +174,5 @@ public class Validation {
     }
 
 
-    /***
-     * validate phone string with given phone regular expression
-     */
-    public boolean isPhoneNumberValid(EditText phone) {
-        boolean matches = false;
-        if (isNotNull(phone)) {
-            String phoneNumber = phone.getText().toString().trim();
-            if(phoneNumber.length() == 10){
-                matches = true;
-            }else{
-                Toast.makeText(context, "Phone number should be of 10 characters ", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            Toast.makeText(context, "Phone number should not be empty", Toast.LENGTH_SHORT).show();
-        }
-        return matches;
-    }
 
 }

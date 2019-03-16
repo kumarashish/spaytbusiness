@@ -3,6 +3,8 @@ package com.spaytbusiness;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,6 +33,8 @@ public class ForgetPassword extends Activity implements View.OnClickListener , W
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
     AppController controller;
+    @BindView(R.id.input_layout_email)
+    android.support.design.widget.TextInputLayout email_input_layout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,7 @@ public class ForgetPassword extends Activity implements View.OnClickListener , W
         back.setOnClickListener(this);
         submit.setOnClickListener(this);
         validation=new Validation(ForgetPassword.this);
+        emailId.addTextChangedListener(new MyTextWatcher(emailId));
     }
 
     @Override
@@ -50,15 +55,18 @@ public class ForgetPassword extends Activity implements View.OnClickListener , W
                 finish();
                 break;
             case R.id.submit:
-                if(validation.isEmailIdValid(emailId))
-                {
+
+
+                if (!validation.validateEmail(emailId, email_input_layout)) {
+                    return;
+                }
                     if(Utils.isNetworkAvailable(ForgetPassword.this))
                     {
                         submit.setVisibility(View.GONE);
                         progressBar.setVisibility(View.VISIBLE);
                         controller.getWebApiCall().forgetPassword(Common.forgetPassword,emailId.getText().toString(),this);
                     }
-                }
+
 
 
                 break;
@@ -73,8 +81,9 @@ public class ForgetPassword extends Activity implements View.OnClickListener , W
             public void run() {
                 if(Utils.getStatus(value))
                 {
-finish();
+
                     Toast.makeText(ForgetPassword.this,Utils.getMessage(value),Toast.LENGTH_SHORT).show();
+                    finish();
 
                 }else{
                     Toast.makeText(ForgetPassword.this,Utils.getMessage(value),Toast.LENGTH_SHORT).show();
@@ -98,4 +107,23 @@ finish();
         });
 
     }
+    private class MyTextWatcher implements TextWatcher {
+        private View view;
+        private MyTextWatcher(View view) {
+            this.view = view;
+        }
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+        public void afterTextChanged(Editable editable) {
+            switch (view.getId()) {
+                case R.id.emailId:
+                    if(emailId.getText().length()>4) {
+                        validation.validateEmail(emailId, email_input_layout);
+                    }
+                    break;
+
+            }
+        }}
 }

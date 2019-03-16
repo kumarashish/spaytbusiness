@@ -2,7 +2,7 @@ package com.spaytbusiness;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
+
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
@@ -240,7 +240,7 @@ if(model!=null) {
                                     @Override
                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                         TextView child=(TextView) parent.getChildAt(0);
-                                        child.setTextColor(getResources().getColor(R.color.blue));
+                                        child.setTextColor(getResources().getColor(R.color.blue,getTheme()));
                                         child.setTextSize(18);
                                         //  child.setTypeface(getResources().getFont(R.font.light));
                                     }

@@ -1,8 +1,10 @@
 package com.spaytbusiness;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
+
+import android.app.Dialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -40,7 +42,7 @@ public class MyCart extends Activity implements View.OnClickListener , WebApiRes
     Button submit;
     @BindView(R.id.customer_name)
     TextView customer_name;
-    ProgressDialog pd;
+   Dialog pd;
     String locationId="";
     int apiCall;
     int createOrder=1,submitOrder=2;
@@ -59,9 +61,9 @@ String customerId="";
         customer_name.setText(customerName);
         back.setOnClickListener(this);
         submit.setOnClickListener(this);
-        pd=new ProgressDialog(MyCart.this);
-        pd.setMessage("Please Wait....");
-        pd.setCancelable(false);
+       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            pd=Utils.getProgressDailog(MyCart.this);
+        }
 
         for (int i=0;i<controller.getGetMyCart().size();i++)
         {
@@ -217,8 +219,9 @@ String customerId="";
                             submitOrder(orderId);
                             break;
                         case 2:
+                            controller.getGetMyCart().clear();
                          Utils.sucessAlert(MyCart.this,orderId);
-                         controller.getGetMyCart().clear();
+
                             break;
                     }
 

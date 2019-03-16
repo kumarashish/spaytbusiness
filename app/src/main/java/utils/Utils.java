@@ -12,15 +12,22 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.provider.Settings;
+import android.support.annotation.RequiresApi;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.spaytbusiness.Dashboard;
 import com.spaytbusiness.Login;
 import com.spaytbusiness.MyCart;
+import com.spaytbusiness.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -142,23 +149,42 @@ public static JSONArray getJSonArray(String value)
 
     }
 
-    public static void sucessAlert(final Activity act,final String orderId){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(act);
-        alertDialogBuilder.setMessage("Your Order has been submited Sucessfully. Order Id : "+orderId);
-                alertDialogBuilder.setNeutralButton("Ok",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                Intent intent = new Intent(act, Dashboard.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                act.startActivity(intent);
-                            }
-                        });
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static AlertDialog getProgressDailog(Activity act)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(act);
+        builder.setCancelable(false); // if you want user to wait for some process to finish,
+        builder.setView(R.layout.progress_dialog);
+        AlertDialog dialog = builder.create();
+        return dialog;
+    }
+    public  static void sucessAlert(final Activity act,final String orderId)
+    {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(act);
+        LayoutInflater inflater = act.getLayoutInflater();
+        final View dialogLayout = inflater.inflate(R.layout.sucess_alert, null);
+        TextView caseId_TV=(TextView)dialogLayout.findViewById(R.id.caseId);
+        caseId_TV.setText("Order Id | "+orderId+" ");
+        builder.setView(dialogLayout);
+        final Button done=(Button) dialogLayout.findViewById(R.id.done);
+
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(act, Dashboard.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                act.startActivity(intent);
+                act.finish();
+
+            }
+        });
 
 
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
+        AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
 }

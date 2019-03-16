@@ -49,6 +49,7 @@ import utils.Utils;
  * Created by ashish.kumar on 26-02-2019.
  */
 
+@SuppressWarnings("ALL")
 public class BusinessOffersDetails extends Activity implements View.OnClickListener, WebApiResponseCallback, OnListItemSelected {
     public static Business_Offers model;
     AppController controller;
@@ -245,7 +246,7 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
                                             @Override
                                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                                 TextView child = (TextView) parent.getChildAt(0);
-                                                child.setTextColor(getResources().getColor(R.color.blue));
+                                                child.setTextColor(getResources().getColor(R.color.blue,getTheme()));
                                                 child.setTextSize(18);
                                                 //  child.setTypeface(getResources().getFont(R.font.light));
                                             }
