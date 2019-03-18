@@ -10,8 +10,8 @@
     <string name="err_msg_fname">  Please enter First name</string>
     <string name="err_msg_lname">  Please enter Last name</string>
     <string name="err_msg_email_null">   Please email address</string>
-    <string name="err_msg_email">&#032;&#032;Please valid email address</string>
-    <string name="err_msg_nullemail">&#032;&#032;Please enter email address</string>
+    <string name="err_msg_email">Please valid email address</string>
+    <string name="err_msg_nullemail">Please enter email address</string>
     <string name="err_msg_password">  Please enter  password</string>
     <string name="err_msg_confirm_password">  Please enter confirm password</string>
     <string name="err_msg_different_password">  Password and Confirm password should be same</string>

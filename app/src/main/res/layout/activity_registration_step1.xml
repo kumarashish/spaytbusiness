@@ -81,14 +81,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"/>
             <android.support.design.widget.TextInputLayout
-
+                android:layout_marginLeft="20dp"
                 android:id="@+id/input_fname"
                 android:textColorHint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
+
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -118,14 +118,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"/>
             <android.support.design.widget.TextInputLayout
-
+                android:layout_marginLeft="20dp"
                 android:id="@+id/input_lname"
                 android:textColorHint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
+
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -156,14 +156,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"/>
             <android.support.design.widget.TextInputLayout
-
+                android:layout_marginLeft="20dp"
                 android:id="@+id/input_email"
                 android:textColorHint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
+
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -193,14 +193,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"/>
             <android.support.design.widget.TextInputLayout
-
+                android:layout_marginLeft="20dp"
                 android:id="@+id/input_password"
                 android:textColorHint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
+
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -230,14 +230,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"/>
             <android.support.design.widget.TextInputLayout
-
+                android:layout_marginLeft="20dp"
                 android:id="@+id/input_c_password"
                 android:textColorHint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
+
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"

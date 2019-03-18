@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -49,7 +51,16 @@ public class Registration extends Activity implements View.OnClickListener, WebA
     ProgressBar progressBar;
     Validation validation;
     AppController controller;
-
+    @BindView(R.id.input_fname)
+    android.support.design.widget.TextInputLayout input_fname;
+    @BindView(R.id. input_lname)
+    android.support.design.widget.TextInputLayout  input_lname;
+    @BindView(R.id.input_email)
+    android.support.design.widget.TextInputLayout  input_email;
+    @BindView(R.id. input_password)
+    android.support.design.widget.TextInputLayout  input_password;
+    @BindView(R.id. input_c_password)
+    android.support.design.widget.TextInputLayout  input_c_password;
     public static RegistrationModel reg_model;
 
     @Override
@@ -61,14 +72,20 @@ public class Registration extends Activity implements View.OnClickListener, WebA
         next.setOnClickListener(this);
         controller=(AppController)getApplicationContext();
         validation=new Validation(Registration.this);
-salutation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        fname.addTextChangedListener(new MyTextWatcher(fname));
+        lname.addTextChangedListener(new MyTextWatcher(lname));
+        email.addTextChangedListener(new MyTextWatcher(email));
+        password.addTextChangedListener(new MyTextWatcher(password));
+        confirmPassword.addTextChangedListener(new MyTextWatcher(confirmPassword));
+        salutation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TextView child=(TextView) parent.getChildAt(0);
                 child.setTextColor(Color.WHITE);
                 child.setTextSize(18);
-                child.setTypeface(getResources().getFont(R.font.light));
+                //child.setTypeface(getResources().getFont(R.font.light));
             }
 
             @Override
@@ -80,14 +97,32 @@ salutation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.back:
                 onBackPressed();
                 break;
             case R.id.next:
-                if((validation.isNotNull(fname))&&(validation.isNotNull(lname))&&(validation.isValidEmail(email.getText().toString()))&&(validation.isNotNull(password)&&(validation.isPassword_ConfirmPasswordSame(password,confirmPassword))))
+
+                if (!validation.validateFname(fname, input_fname)) {
+                    return;
+                }
+                if (!validation.validatelname(lname, input_lname)) {
+                    return;
+                }
+                if (!validation.validateEmail(email, input_email)) {
+                    return;
+                }
+                if (!validation.validatePassword(password, input_password)) {
+                    return;
+                }
+                if (!validation. validateConfirmPassword(confirmPassword, input_c_password)) {
+                    return;
+                }
+                if (!validation.validatePasswordConfirmPassword(password, input_password,confirmPassword, input_c_password))
                 {
+                 return;
+
+                }
 
                     if(Utils.isNetworkAvailable(Registration.this))
                     {
@@ -95,9 +130,9 @@ salutation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         next.setVisibility(View.GONE);
                         controller.getWebApiCall().forgetPassword(Common.isUserExists,email.getText().toString(),this);
                     }
-                }
-
                 break;
+
+
 
         }
 
@@ -134,5 +169,41 @@ salutation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
         });
 
 
+    }
+    private class MyTextWatcher implements TextWatcher {
+        private View view;
+        private MyTextWatcher(View view) {
+            this.view = view;
+        }
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+        public void afterTextChanged(Editable editable) {
+            switch (view.getId()) {
+                case R.id.firstName:
+                    if(fname.getText().length()>4) {
+                        validation.validateFname(fname,input_fname);
+                    }
+                    break;
+                case R.id.lastName:
+                    if(lname.getText().length()>4) {
+                        validation.validatelname(lname,input_lname);
+                    }
+                    break;
+                case R.id.email:
+                    if(email.getText().length()>4) {
+                        validation.validatelname(email,input_email);
+                    }
+                    break;
+                case R.id.password:
+                    validation.validatePassword(password,input_password);
+                    break;
+                case R.id.confirmPassword:
+                    validation.validatePassword(confirmPassword,input_c_password);
+                    break;
+
+            }
+        }
     }
 }

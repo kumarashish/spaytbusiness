@@ -103,6 +103,54 @@ public class Validation {
 
     }
 
+    public boolean validateFname(EditText edt_email, TextInputLayout inputLayoutEmail) {
+        String email = edt_email.getText().toString().trim();
+
+        if (email.isEmpty() == false) {
+                inputLayoutEmail.setErrorEnabled(false);
+                return true;
+        } else {
+            inputLayoutEmail.setError(context.getString(R.string.err_msg_fname));
+            requestFocus(edt_email);
+            return false;
+
+        }
+
+
+    }
+    public boolean validatelname(EditText edt_email, TextInputLayout inputLayoutEmail) {
+        String email = edt_email.getText().toString().trim();
+
+        if (email.isEmpty() == false) {
+            inputLayoutEmail.setErrorEnabled(false);
+            return true;
+        } else {
+            inputLayoutEmail.setError(context.getString(R.string.err_msg_lname));
+            requestFocus(edt_email);
+            return false;
+
+        }
+
+
+    }
+
+    /**
+     * check whether string contains value or not
+     */
+    public boolean isNotNull(EditText txt, TextInputLayout inputLayout) {
+        String text=  txt.getText().toString().trim();
+        if ( text.isEmpty() == false) {
+            inputLayout.setErrorEnabled(false);
+            return true;
+        } else {
+            inputLayout.setError("Please enter value for "+txt.getHint().toString());
+            requestFocus(txt);
+            return false;
+
+        }
+
+        }
+
 
     public boolean validatePassword(EditText edt_password, TextInputLayout  inputLayoutPassword) {
         if (edt_password.getText().toString().trim().isEmpty()) {

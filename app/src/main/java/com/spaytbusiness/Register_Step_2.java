@@ -69,6 +69,22 @@ public class Register_Step_2 extends Activity implements View.OnClickListener , 
     @BindView(R.id.paypalId)
     EditText c_paypalId;
     Validation validation;
+
+    @BindView(R.id. input_company_name)
+    android.support.design.widget.TextInputLayout input_company_name;
+    @BindView(R.id. input_doornumber)
+    android.support.design.widget.TextInputLayout input_doornumber;
+    @BindView(R.id. input_sreet)
+    android.support.design.widget.TextInputLayout input_sreet;
+    @BindView(R.id. input_city)
+    android.support.design.widget.TextInputLayout input_city;
+    @BindView(R.id. input_pincode)
+    android.support.design.widget.TextInputLayout input_pincode;
+    @BindView(R.id. input_c_phone)
+    android.support.design.widget.TextInputLayout input_c_phone;
+    @BindView(R.id. input_c_email)
+    android.support.design.widget.TextInputLayout input_c_email;
+
     int apiCall=0;
     int validateBusinessName=2,submitRegistration=3;
 
@@ -81,7 +97,12 @@ public class Register_Step_2 extends Activity implements View.OnClickListener , 
         ButterKnife.bind(this);
         submit.setOnClickListener(this);
         back.setOnClickListener(this);
-
+        companyName.addTextChangedListener(new MyTextWatcher(companyName));
+        door.addTextChangedListener(new MyTextWatcher(door));
+        street.addTextChangedListener(new MyTextWatcher(street));
+        city.addTextChangedListener(new MyTextWatcher(city));
+        zipcode.addTextChangedListener(new MyTextWatcher(zipcode));
+        c_phone.addTextChangedListener(new MyTextWatcher(c_phone));
         categories.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -89,7 +110,7 @@ public class Register_Step_2 extends Activity implements View.OnClickListener , 
                 TextView child=(TextView) parent.getChildAt(0);
                 child.setTextColor(Color.WHITE);
                 child.setTextSize(18);
-                child.setTypeface(getResources().getFont(R.font.light));
+                //child.setTypeface(getResources().getFont(R.font.light));
             }
 
             @Override
@@ -159,6 +180,8 @@ public class Register_Step_2 extends Activity implements View.OnClickListener , 
               {if(Utils.getStatus(result)==true)
                   {
                       JSONArray jsonArray=Utils.getJSONArray(result);
+                      categorylist.clear();
+                      categorylistName.add("Select Business Category");
                       for(int i=0;i<jsonArray.length();i++)
                       {try {
                           JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -176,8 +199,7 @@ public class Register_Step_2 extends Activity implements View.OnClickListener , 
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                categories.setAdapter(new ArrayAdapter<String>(Register_Step_2.this,
-                                        android.R.layout.simple_spinner_item,categorylistName));
+                                categories.setAdapter(new ArrayAdapter<String>(Register_Step_2.this, android.R.layout.simple_spinner_item,categorylistName));
                                 progressBar.setVisibility(View.GONE);
                                 mainView.setVisibility(View.VISIBLE);
                             }
@@ -203,38 +225,37 @@ public class Register_Step_2 extends Activity implements View.OnClickListener , 
 
 
             case R.id.submit:
+                if (!validation.isNotNull(companyName, input_company_name)) {
+                    return;
+                }
+                if(categories.getSelectedItemPosition()==0)
+                {   Utils.showToast(Register_Step_2.this,"Please select business category");
+                    return;
+                }
+                if (!validation.isNotNull(door, input_doornumber)) {
+                    return;
+                }
+                if (!validation.isNotNull(street, input_sreet)) {
+                    return;
+                }
+                if (!validation.isNotNull(city, input_city)) {
+                    return;
+                }
+                if (!validation.isNotNull(zipcode, input_pincode)) {
+                    return;
+                }
+                if (!validation.isNotNull(c_phone, input_c_phone)) {
+                    return;
+                }
 
-              if((validation.isNotNull(companyName))&&(validation.isNotNull(street))&&(validation.isNotNull(door))&&(validation.isNotNull(city))&&(validation.isNotNull(zipcode))&&(validation.isNotNull(c_phone)))
-              {
-                  if(Utils.isNetworkAvailable(Register_Step_2.this)) {
-                      progressBar2.setVisibility(View.VISIBLE);
-                      submit.setVisibility(View.GONE);
-                      apiCall = validateBusinessName;
-                      controller.getWebApiCall().postFlormData(Common.isBusinessExists, "company_name", companyName.getText().toString(), Register_Step_2.this);
-                  }
+                if (Utils.isNetworkAvailable(Register_Step_2.this)) {
+                    progressBar2.setVisibility(View.VISIBLE);
+                    submit.setVisibility(View.GONE);
+                    apiCall = validateBusinessName;
+                    controller.getWebApiCall().postFlormData(Common.isBusinessExists, "company_name", companyName.getText().toString(), Register_Step_2.this);
 
-                  }else{
-                  if(companyName.getText().length()==0)
-                  {
-                      Toast.makeText(Register_Step_2.this,"Please enter Company name",Toast.LENGTH_SHORT).show();
-                  }
-                  else if(street.getText().length()==0)
-                  {
-                      Toast.makeText(Register_Step_2.this,"Please enter Street name",Toast.LENGTH_SHORT).show();
-                  }else if(door.getText().length()==0)
-                  {
-                      Toast.makeText(Register_Step_2.this,"Please enter Door Number",Toast.LENGTH_SHORT).show();
-                  }else if(city.getText().length()==0)
-                  {
-                      Toast.makeText(Register_Step_2.this,"Please enter City",Toast.LENGTH_SHORT).show();
-                  }else if(zipcode.getText().length()==0)
-                  {
-                      Toast.makeText(Register_Step_2.this,"Please enter Company zipcode",Toast.LENGTH_SHORT).show();
-                  }else if(c_phone.getText().length()==0)
-                  {   Toast.makeText(Register_Step_2.this,"Please enter Company Phone number",Toast.LENGTH_SHORT).show();
 
-                  }
-              }
+                }
 
                 break;
         }
@@ -247,7 +268,7 @@ public class Register_Step_2 extends Activity implements View.OnClickListener , 
     {
         apiCall=submitRegistration;
         Registration.reg_model.setCompany_name(companyName.getText().toString());
-        Registration.reg_model.setCategory_id(categorylist.get(categories.getSelectedItemPosition()).getCategoryId());
+        Registration.reg_model.setCategory_id(categorylist.get(categories.getSelectedItemPosition()-1).getCategoryId());
         Registration.reg_model.setStreet_name(street.getText().toString());
         Registration.reg_model.setDoor_no(door.getText().toString());
         Registration.reg_model.setCity(city.getText().toString());
@@ -301,5 +322,55 @@ public class Register_Step_2 extends Activity implements View.OnClickListener , 
                 submit.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    private class MyTextWatcher implements TextWatcher {
+        private View view;
+        private MyTextWatcher(View view) {
+            this.view = view;
+        }
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+        public void afterTextChanged(Editable editable) {
+            switch (view.getId()) {
+                case R.id.firstName:
+                    if(companyName.getText().length()>2) {
+                        validation.isNotNull(companyName,input_company_name);
+                    }
+                    break;
+
+
+                case R.id.doorNumber:
+                    if(door.getText().length()>1) {
+                        validation.isNotNull(door, input_doornumber);
+                    }
+                    break;
+                case R.id.street:
+                    if(street.getText().length()>4) {
+                        validation.isNotNull(street, input_sreet);
+                    }
+                    break;
+
+
+                case R.id.city:
+                    if(city.getText().length()>1) {
+                        validation.isNotNull(city, input_city);
+                    }
+                    break;
+                case R.id.zipcode:
+                    if(zipcode.getText().length()>1) {
+                        validation.isNotNull(zipcode, input_pincode);
+                    }
+                    break;
+                    case R.id.companyphonenumber:
+                        if(c_phone.getText().length()>4) {
+                            validation.isNotNull(c_phone, input_c_phone);
+                        }
+                        break;
+
+            }
+        }
     }
 }
