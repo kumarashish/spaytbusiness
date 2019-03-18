@@ -1,6 +1,5 @@
 package fragments;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -19,23 +18,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.spaytbusiness.R;
-import com.spaytbusiness.Register_Step_2;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import adapter.BusinessUserAdapter;
 import common.AppController;
 import common.Common;
 import interfaces.WebApiResponseCallback;
 import models.BusinessProfile;
 import models.CategoryModel;
-import models.UserProfile;
 import utils.Utils;
 
-public class ProfileSettings extends Fragment implements WebApiResponseCallback ,View.OnClickListener {
+public class Business extends Fragment implements WebApiResponseCallback ,View.OnClickListener {
     ProgressBar progress_bar;
     LinearLayout progress_bar2;
     AppController controller;
@@ -88,9 +84,9 @@ public class ProfileSettings extends Fragment implements WebApiResponseCallback 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TextView child=(TextView) parent.getChildAt(0);
-                child.setTextColor(getActivity().getColor(R.color.grey));
+                //child.setTextColor(getActivity().getColor(R.color.grey));
                 child.setTextSize(18);
-                child.setTypeface(getResources().getFont(R.font.light));
+                //child.setTypeface(getResources().getFont(R.font.light));
             }
 
             @Override
@@ -244,7 +240,7 @@ public class ProfileSettings extends Fragment implements WebApiResponseCallback 
                     apiCall = updateProile;
                     submit.setVisibility(View.GONE);
                     progress_bar2.setVisibility(View.VISIBLE);
-                    controller.getWebApiCall().postData(Common.updateBusinessProfile, controller.getManager().getUserToken(), Common.updateBusinessKeys, getData(), ProfileSettings.this);
+                    controller.getWebApiCall().postData(Common.updateBusinessProfile, controller.getManager().getUserToken(), Common.updateBusinessKeys, getData(), Business.this);
                 }
                 break;
         }

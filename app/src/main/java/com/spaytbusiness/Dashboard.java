@@ -4,19 +4,13 @@ package com.spaytbusiness;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
@@ -28,7 +22,7 @@ import fragments.Locations;
 import fragments.Notifications;
 import fragments.Offers;
 import fragments.Products;
-import fragments.ProfileSettings;
+import fragments.Business;
 import fragments.Transactions;
 import fragments.Users;
 import utils.Utils;
@@ -126,7 +120,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
             break;
             case R.id.profile_settings:
-                showFragment(new ProfileSettings());
+
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 }
@@ -162,7 +156,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 getSupportActionBar().setTitle("Locations");
                 break;
             case R.id.business_settings:
-                showFragment(new BusinessSettings());
+                showFragment(new Business());
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 }
