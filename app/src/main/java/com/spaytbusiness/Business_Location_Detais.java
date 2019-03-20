@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -39,8 +40,7 @@ public class Business_Location_Detais extends Activity implements View.OnClickLi
     EditText zipcode;
     @BindView(R.id.phone)
     EditText phone;
-    @BindView(R.id.description)
-    EditText description;
+
     @BindView(R.id.mondayMode)
     Spinner mondayMode;
     @BindView(R.id.m_mFrom)
@@ -113,6 +113,45 @@ public class Business_Location_Detais extends Activity implements View.OnClickLi
     EditText sun_aTo;
     @BindView(R.id.submit)
     Button submit;
+    @BindView(R.id.monday_morning_to)
+    LinearLayout monday_morning_to;
+    @BindView(R.id.monday_afternoon_to)
+    LinearLayout monday_afternoon_to;
+
+
+
+    @BindView(R.id.tuesday_afternoon_to)
+    LinearLayout tuesday_afternoon_to;
+    @BindView(R.id.tuesday_morning_to)
+    LinearLayout tuesday_morning_to;
+
+    @BindView(R.id.wednesday_morning_to)
+    LinearLayout wednesday_morning_to;
+    @BindView(R.id.wednesday_afternoon_to)
+    LinearLayout wednesday_afternoon_to;
+
+
+    @BindView(R.id.thursday_morning_to)
+    LinearLayout thursday_morning_to;
+    @BindView(R.id.thursday_afternoon_to)
+    LinearLayout thursday_afternoon_to;
+
+
+    @BindView(R.id.friday_morning_to)
+    LinearLayout friday_morning_to;
+    @BindView(R.id.friday_afternoon_to)
+    LinearLayout friday_afternoon_to;
+
+
+    @BindView(R.id.saturday_morning_to)
+    LinearLayout saturday_morning_to;
+    @BindView(R.id.saturday_afternon_to)
+    LinearLayout saturday_afternon_to;
+
+    @BindView(R.id.sunday_morning_to)
+    LinearLayout sunday_morning_to;
+    @BindView(R.id.sunday_afternoon_to)
+    LinearLayout sunday_afternon_to;
     public static Business_locations model=null;
     AppController controller;
    Dialog dialog;
@@ -142,97 +181,77 @@ public class Business_Location_Detais extends Activity implements View.OnClickLi
             city.setText(model.getCity());
             zipcode.setText(model.getZip_code());
             phone.setText(model.getPhone_number());
-            description.setText(model.getDescription());
-
-
             mondayMode.setSelection(getIndex(model.getMonday_mode()));
             m_mFrom.setText(model.getMonday_morning_from());
             m_mTo.setText(model.getMonday_morning_to());
             m_aFrom.setText(model.getMonday_afternoon_from());
             m_aTo.setText(model.getMonday_afternoon_to());
-            mondayMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    // your code here
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parentView) {
-                    // your code here
-                }
-
-            });
-            tuesdayMode.setSelection(getIndex(model.getTuesday_mode()));
-            tuesdayMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    // your code here
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parentView) {
-                    // your code here
-                }
-
-            });
             t_mFrom.setText(model.getTuesday_morning_from());
             t_mTo.setText(model.getTuesday_morning_to());
             t_aFrom.setText(model.getTuesday_afternoon_from());
             t_aTo.setText(model.getTuesday_afternoon_to());
-
+            tuesdayMode.setSelection(getIndex(model.getTuesday_mode()));
             wednesdayMode.setSelection(getIndex(model.getWednesday_mode()));
-            wednesdayMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    // your code here
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parentView) {
-                    // your code here
-                }
-            });
             w_mFrom.setText(model.getWednesday_morning_from());
             w_mTo.setText(model.getWednesday_morning_to());
             w_aFrom.setText(model.getWednesday_afternoon_from());
             w_aTo.setText(model.getWednesday_afternoon_to());
-
-            thursdayMode.setSelection(getIndex(model.getThursday_mode()));
-            thursdayMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    // your code here
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parentView) {
-                    // your code here
-                }
-            });
             th_mFrom.setText(model.getThursday_morning_from());
             th_mTo.setText(model.getThursday_morning_to());
             th_aFrom.setText(model.getThursday_afternoon_from());
             th_aTo.setText(model.getThursday_afternoon_to());
+            thursdayMode.setSelection(getIndex(model.getThursday_mode()));
             fridayMode.setSelection(getIndex(model.getFriday_mode()));
-            fridayMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    // your code here
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parentView) {
-                    // your code here
-                }
-            });
             f_mFrom.setText(model.getFriday_morning_from());
             f_mTo.setText(model.getFriday_morning_to());
             f_aFrom.setText(model.getFriday_afternoon_from());
             f_aTo.setText(model.getFriday_afternoon_to());
             saturdaymode.setSelection(getIndex(model.getSaturday_mode()));
-            saturdaymode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            sat_mFrom.setText(model.getSaturday_morning_from());
+            sat_mTo.setText(model.getSaturday_morning_to());
+            sat_aFrom.setText(model.getSaturday_afternoon_from());
+            sat_aTo.setText(model.getSaturday_afternoon_to());
+
+            sundayMode.setSelection(getIndex(model.getSunday_mode()));
+               sun_mFrom.setText(model.getSunday_morning_from());
+               sun_mTo.setText(model.getSunday_morning_to());
+               sun_aFrom.setText(model.getSunday_afternoon_from());
+            sun_aTo.setText(model.getSunday_afternoon_to());
+        }
+            mondayMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                   switch (position) {
+
+                       case 0:
+                           m_mFrom.setText("00:00");
+                           m_mTo.setText("23:59");
+                           monday_morning_to.setVisibility(View.VISIBLE);
+                           monday_afternoon_to.setVisibility(View.GONE);
+
+
+                           break;
+                       case 1:
+                           m_mFrom.setText("");
+                           m_mTo.setText("");
+                           monday_morning_to.setVisibility(View.VISIBLE);
+
+                           monday_afternoon_to.setVisibility(View.GONE);
+                           break;
+                       case 2:
+                           m_mFrom.setText("");
+                           m_mTo.setText("");
+                           m_aFrom.setText("");
+                           m_aTo.setText("");
+                           monday_morning_to.setVisibility(View.VISIBLE);
+
+                           monday_afternoon_to.setVisibility(View.VISIBLE);
+                           break;
+                       case 3:
+                           monday_morning_to.setVisibility(View.GONE);
+                           monday_afternoon_to.setVisibility(View.GONE);
+                           break;
+                   }
                     // your code here
                 }
 
@@ -240,19 +259,87 @@ public class Business_Location_Detais extends Activity implements View.OnClickLi
                 public void onNothingSelected(AdapterView<?> parentView) {
                     // your code here
                 }
+
             });
-            sat_mFrom.setText(model.getSaturday_morning_from());
-            sat_mTo.setText(model.getSaturday_morning_to());
-            sat_aFrom.setText(model.getSaturday_afternoon_from());
-            sat_aTo.setText(model.getSaturday_afternoon_to());
-            sundayMode.setSelection(getIndex(model.getSunday_mode()));
-            sundayMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            tuesdayMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    // your code here
-                    if(position==0)
-                    {
+                    switch (position) {
 
+                        case 0:
+                            t_mFrom.setText("00:00");
+                            t_mTo.setText("23:59");
+                            tuesday_morning_to.setVisibility(View.VISIBLE);
+                            tuesday_afternoon_to.setVisibility(View.GONE);
+
+
+                            break;
+                        case 1:
+                            t_mFrom.setText("");
+                            t_mTo.setText("");
+                            tuesday_morning_to.setVisibility(View.VISIBLE);
+
+                            tuesday_afternoon_to.setVisibility(View.GONE);
+                            break;
+                        case 2:
+                            t_mFrom.setText("");
+                            t_mTo.setText("");
+                            t_aFrom.setText("");
+                            t_aTo.setText("");
+                            tuesday_morning_to.setVisibility(View.VISIBLE);
+
+                            tuesday_afternoon_to.setVisibility(View.VISIBLE);
+                            break;
+                        case 3:
+                            tuesday_morning_to.setVisibility(View.GONE);
+                            tuesday_afternoon_to.setVisibility(View.GONE);
+                            break;
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parentView) {
+                    // your code here
+                }
+
+            });
+
+
+
+            wednesdayMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                    switch (position) {
+
+                        case 0:
+                            w_mFrom.setText("00:00");
+                            w_mTo.setText("23:59");
+                           wednesday_morning_to.setVisibility(View.VISIBLE);
+                            wednesday_afternoon_to.setVisibility(View.GONE);
+
+
+                            break;
+                        case 1:
+                            w_mFrom.setText("");
+                            w_mTo.setText("");
+                            wednesday_morning_to.setVisibility(View.VISIBLE);
+
+                            wednesday_afternoon_to.setVisibility(View.GONE);
+                            break;
+                        case 2:
+                            w_mFrom.setText("");
+                            w_mTo.setText("");
+                            w_aFrom.setText("");
+                            w_aTo.setText("");
+                            wednesday_morning_to.setVisibility(View.VISIBLE);
+
+                            wednesday_afternoon_to.setVisibility(View.VISIBLE);
+                            break;
+                        case 3:
+                            wednesday_morning_to.setVisibility(View.GONE);
+                            wednesday_afternoon_to.setVisibility(View.GONE);
+                            break;
                     }
                 }
 
@@ -261,11 +348,180 @@ public class Business_Location_Detais extends Activity implements View.OnClickLi
                     // your code here
                 }
             });
-            sun_mFrom.setText(model.getSunday_morning_from());
-            sun_mTo.setText(model.getSunday_morning_to());
-            sun_aFrom.setText(model.getSunday_afternoon_from());
-            sun_aTo.setText(model.getSunday_afternoon_to());
-        }
+
+            thursdayMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                    switch (position) {
+
+                        case 0:
+                            th_mFrom.setText("00:00");
+                            th_mTo.setText("23:59");
+                            thursday_morning_to.setVisibility(View.VISIBLE);
+                            thursday_afternoon_to.setVisibility(View.GONE);
+
+
+                            break;
+                        case 1:
+                            th_mFrom.setText("");
+                            th_mTo.setText("");
+                            thursday_morning_to.setVisibility(View.VISIBLE);
+
+                            thursday_afternoon_to.setVisibility(View.GONE);
+                            break;
+                        case 2:
+                            th_mFrom.setText("");
+                            th_mTo.setText("");
+                            th_aFrom.setText("");
+                            th_aTo.setText("");
+                            thursday_morning_to.setVisibility(View.VISIBLE);
+
+                            thursday_afternoon_to.setVisibility(View.VISIBLE);
+                            break;
+                        case 3:
+                            thursday_morning_to.setVisibility(View.GONE);
+                            thursday_afternoon_to.setVisibility(View.GONE);
+                            break;
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parentView) {
+                    // your code here
+                }
+            });
+
+            fridayMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                    switch (position) {
+
+                        case 0:
+                            f_mFrom.setText("00:00");
+                            f_mTo.setText("23:59");
+                            friday_morning_to.setVisibility(View.VISIBLE);
+                            friday_afternoon_to.setVisibility(View.GONE);
+
+
+                            break;
+                        case 1:
+                            f_mFrom.setText("");
+                            f_mTo.setText("");
+                            friday_morning_to.setVisibility(View.VISIBLE);
+
+                            friday_afternoon_to.setVisibility(View.GONE);
+                            break;
+                        case 2:
+                            f_mFrom.setText("");
+                            f_mTo.setText("");
+                            f_aFrom.setText("");
+                            f_aTo.setText("");
+                            friday_morning_to.setVisibility(View.VISIBLE);
+
+                            friday_afternoon_to.setVisibility(View.VISIBLE);
+                            break;
+                        case 3:
+                            friday_morning_to.setVisibility(View.GONE);
+                            friday_afternoon_to.setVisibility(View.GONE);
+                            break;
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parentView) {
+                    // your code here
+                }
+            });
+
+            saturdaymode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                    switch (position) {
+
+                        case 0:
+                            sat_mFrom.setText("00:00");
+                            sat_mTo.setText("23:59");
+                            saturday_morning_to.setVisibility(View.VISIBLE);
+                            saturday_afternon_to.setVisibility(View.GONE);
+
+
+                            break;
+                        case 1:
+                            sat_mFrom.setText("");
+                            sat_mTo.setText("");
+                            saturday_morning_to.setVisibility(View.VISIBLE);
+
+                            saturday_afternon_to.setVisibility(View.GONE);
+                            break;
+                        case 2:
+                            sat_mFrom.setText("");
+                            sat_mTo.setText("");
+                            sat_aFrom.setText("");
+                            sat_aTo.setText("");
+                            saturday_morning_to.setVisibility(View.VISIBLE);
+
+                            saturday_afternon_to.setVisibility(View.VISIBLE);
+                            break;
+                        case 3:
+                            saturday_morning_to.setVisibility(View.GONE);
+                            saturday_afternon_to.setVisibility(View.GONE);
+                            break;
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parentView) {
+                    // your code here
+                }
+            });
+
+            sundayMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                    // your code here
+                    switch (position) {
+
+                        case 0:
+                            sun_mFrom.setText("00:00");
+                            sun_mTo.setText("23:59");
+                            sunday_morning_to.setVisibility(View.VISIBLE);
+                            sunday_afternon_to.setVisibility(View.GONE);
+
+
+                            break;
+                        case 1:
+                            sun_mFrom.setText("");
+                            sun_mTo.setText("");
+                            sunday_morning_to.setVisibility(View.VISIBLE);
+
+                            sunday_afternon_to.setVisibility(View.GONE);
+                            break;
+                        case 2:
+                            sun_mFrom.setText("");
+                            sun_mTo.setText("");
+                            sun_aFrom.setText("");
+                            sun_aTo.setText("");
+                            sunday_morning_to.setVisibility(View.VISIBLE);
+
+                            sunday_afternon_to.setVisibility(View.VISIBLE);
+                            break;
+                        case 3:
+                            sunday_morning_to.setVisibility(View.GONE);
+                            sunday_afternon_to.setVisibility(View.GONE);
+                            break;
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parentView) {
+                    // your code here
+                }
+            });
+
+
+
+
+
     }
 
     @Override

@@ -63,7 +63,7 @@ public class Business extends Fragment implements WebApiResponseCallback ,View.O
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v=inflater.inflate(R.layout.profile_settings, container, false);
+        View v=inflater.inflate(R.layout.business_profile_settings, container, false);
         progress_bar=(ProgressBar)v.findViewById(R.id.progress_bar);
         progress_bar2=(LinearLayout)v.findViewById(R.id.progress_bar2);
         mainLayout=(LinearLayout)v.findViewById(R.id.mainView);

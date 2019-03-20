@@ -13,7 +13,9 @@ public class Common {
     public static String businessUserUrl=baseUrl+"/business_users";
     public static String offersUrl=baseUrl+"/business_products_offers";
     public static String businessProducts=baseUrl+"/business_products";
+    public static String getBusinessProductCategories=baseUrl+"/business_products/categories";
     public static String businessProfile=baseUrl+"/business";
+    public static String myDetails=baseUrl+"/business_users/my_details";
     public static String updateBusinessProfile=baseUrl+"/business/update";
     public static String addBusinessUser=baseUrl+"/business_users/add";
     public static String updateBusinessUser=baseUrl+"/business_users/update";

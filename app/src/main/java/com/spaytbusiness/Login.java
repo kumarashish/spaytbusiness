@@ -94,7 +94,7 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
 
 
         token=  FirebaseInstanceId.getInstance().getToken();
-        Log.d("TAG", token);
+//        Log.d("TAG", token);
 
 
 

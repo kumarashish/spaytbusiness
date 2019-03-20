@@ -17,12 +17,12 @@ import android.widget.FrameLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import common.AppController;
-import fragments.BusinessSettings;
 import fragments.Locations;
 import fragments.Notifications;
 import fragments.Offers;
 import fragments.Products;
 import fragments.Business;
+import fragments.ProfileSettings;
 import fragments.Transactions;
 import fragments.Users;
 import utils.Utils;
@@ -125,7 +125,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                     drawer.closeDrawer(GravityCompat.START);
                 }
                 getSupportActionBar().setTitle("Profile Settings");
-
+                showFragment(new ProfileSettings());
                 break;
             case R.id.offers:
                 showFragment(new Offers());

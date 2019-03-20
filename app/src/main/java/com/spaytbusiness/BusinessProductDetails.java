@@ -208,7 +208,7 @@ if(modell!=null) {
             @Override
             public void run() {
 
-                String result=controller.getWebApiCall().getData(Common.getCategories);
+                String result=controller.getWebApiCall().getData(Common.getBusinessProductCategories,controller.getManager().getUserToken());
                 if(result!=null)
                 {if(Utils.getStatus(result)==true)
                 {

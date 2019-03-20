@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:visibility="gone"
+            android:progressDrawable="@color/blue"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <ScrollView
+            android:id="@+id/mainLayout"
+            android:fillViewport="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <ImageView
+                        android:tint="@color/blue"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/user"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+                    <Spinner
+                        android:backgroundTint="@color/blue"
+                        android:id="@+id/salutation"
+                        android:entries="@array/salutation"
+                        android:inputType="textPersonName"
+                        android:fontFamily="@font/light"
+                        android:textColorHint="@color/lightText"
+                        android:hint="Salutation"
+                        android:textSize="18dp"
+                        android:textColor="@color/blue"
+                        android:layout_marginLeft="10dp"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+                <View
+                    android:layout_marginTop="5dp"
+                    android:background="@color/blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"/>
+                <LinearLayout
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <ImageView
+                        android:tint="@color/blue"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/user"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+                    <EditText
+                        android:id="@+id/firstName"
+                        android:inputType="textPersonName"
+                        android:fontFamily="@font/light"
+                        android:textColorHint="@color/lightText"
+                        android:hint="First Name"
+                        android:textSize="18dp"
+                        android:textColor="@color/blue"
+                        android:layout_marginLeft="10dp"
+                        android:background="@android:color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+                <View
+                    android:layout_marginTop="5dp"
+                    android:background="@color/blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"/>
+                <LinearLayout
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <ImageView
+                        android:tint="@color/blue"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/user"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+                    <EditText
+                        android:id="@+id/lastName"
+                        android:inputType="textPersonName"
+                        android:fontFamily="@font/light"
+                        android:textColorHint="@color/lightText"
+                        android:hint="Last Name"
+                        android:textSize="18dp"
+                        android:textColor="@color/blue"
+                        android:layout_marginLeft="10dp"
+                        android:background="@android:color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+                <View
+                    android:layout_marginTop="5dp"
+                    android:background="@color/blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"/>
+                <LinearLayout
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <ImageView
+                        android:tint="@color/blue"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/email"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+                    <EditText
+                        android:id="@+id/email"
+                        android:inputType="textEmailAddress"
+                        android:fontFamily="@font/light"
+                        android:textColorHint="@color/lightText"
+                        android:hint="Email"
+                        android:textSize="18dp"
+                        android:textColor="@color/blue"
+                        android:layout_marginLeft="10dp"
+                        android:background="@android:color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+                <View
+                    android:layout_marginTop="5dp"
+                    android:background="@color/blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"/>
+                <LinearLayout
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <Switch
+
+                        android:id="@+id/isactive"
+                       android:enabled="false"
+                        android:checked="true"
+                        android:inputType="textEmailAddress"
+                        android:fontFamily="@font/light"
+                        android:textColorHint="@color/lightText"
+                        android:text="Is Active"
+                        android:textSize="18dp"
+                        android:textColor="@color/blue"
+                        android:layout_marginLeft="10dp"
+                        android:background="@android:color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+                <View
+                    android:layout_marginTop="5dp"
+                    android:background="@color/blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"/>
+                <LinearLayout
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <ImageView
+                        android:tint="@color/blue"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/user"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+                    <Spinner
+                        android:clickable="false"
+                        android:backgroundTint="@color/blue"
+                        android:id="@+id/role"
+                        android:entries="@array/roles"
+                        android:inputType="textPersonName"
+                        android:fontFamily="@font/light"
+                        android:textColorHint="@color/lightText"
+                        android:hint="Salutation"
+                        android:textSize="18dp"
+                        android:textColor="@color/blue"
+                        android:layout_marginLeft="10dp"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+                <View
+                    android:layout_marginTop="5dp"
+                    android:background="@color/blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <Button
+                        android:layout_alignParentBottom="true"
+                        android:id="@+id/submit"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/blue"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:fontFamily="@font/light"
+                        android:text="Submit"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+                    <ProgressBar
+
+                        android:id="@+id/progress_bar2"
+                        android:visibility="gone"
+                        android:progressDrawable="@color/blue"
+                        android:layout_marginTop="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -78,6 +78,7 @@ WebApiResponseCallback webApiResponseCallback;
         count.setText("");
         callback=this;
         ButterKnife.bind(getActivity());
+        webApiResponseCallback=this;
         if(Utils.isNetworkAvailable(getActivity()))
         {apiCall=getApiCall;
             progress_bar.setVisibility(View.VISIBLE);

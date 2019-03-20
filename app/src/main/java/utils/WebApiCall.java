@@ -307,6 +307,10 @@ public class WebApiCall {
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS).build();
         RequestBody formBody = null;
+        if(deviceId==null)
+        {
+            deviceId="";
+        }
 
         formBody = new FormBody.Builder()
                 .add("email", email)
