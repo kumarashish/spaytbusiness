@@ -37,6 +37,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import common.AppController;
 import common.Common;
+import fragments.Business;
 import interfaces.OnListItemSelected;
 import interfaces.WebApiResponseCallback;
 import models.BusinessProductModel;
@@ -103,6 +104,31 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
     ProgressBar progressBar;
     @BindView(R.id.mainLayout)
     ScrollView mainView;
+    @BindView(R.id.afternoon_mode)
+    LinearLayout afternoon_mode;
+    @BindView(R.id.morning_mode)
+    LinearLayout morning_mode;
+    @BindView(R.id.total_price_view)
+    LinearLayout total_price_view;
+    @BindView(R.id.per_liter_price_view)
+    LinearLayout per_liter_price_view;
+    @BindView(R.id.per_hour_price_view)
+    LinearLayout per_hour_price_view;
+    @BindView(R.id.minimum_parking_hours_view)
+    LinearLayout minimum_parking_hours_view;
+    @BindView(R.id.maximum_parking_fee_perday_view)
+    LinearLayout maximum_parking_fee_perday_view;
+
+    @BindView(R.id.view1)
+    View view1;
+    @BindView(R.id.view2)
+    View view2;
+    @BindView(R.id.view3)
+    View view3;
+    @BindView(R.id.view4)
+    View view4;
+    @BindView(R.id.view5)
+    View view5;
     Dialog dialog;
     int apiCall;
     OnListItemSelected callback;
@@ -130,7 +156,53 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         setValue();
+    mode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (position) {
 
+            case 0:
+                m_mFrom.setText("00:00");
+                m_mTo.setText("23:59");
+                m_aFrom.setText("");
+                m_aTo.setText("");
+               morning_mode.setVisibility(View.VISIBLE);
+                afternoon_mode.setVisibility(View.GONE);
+
+
+                break;
+            case 1:
+                m_mFrom.setText("");
+                m_mTo.setText("");
+                m_aFrom.setText("");
+                m_aTo.setText("");
+                morning_mode.setVisibility(View.VISIBLE);
+                afternoon_mode.setVisibility(View.GONE);
+                break;
+            case 2:
+                m_mFrom.setText("");
+                m_mTo.setText("");
+                m_aFrom.setText("");
+                m_aTo.setText("");
+                morning_mode.setVisibility(View.VISIBLE);
+                afternoon_mode.setVisibility(View.VISIBLE);
+                break;
+            case 3:
+                m_mFrom.setText("");
+                m_mTo.setText("");
+                m_aFrom.setText("");
+                m_aTo.setText("");
+                morning_mode.setVisibility(View.GONE);
+                afternoon_mode.setVisibility(View.GONE);
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+});
     }
     @Override
     protected Dialog onCreateDialog(int id) {
@@ -202,6 +274,26 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
             m_aFrom.setText(model.getAfternoon_from());
             m_aTo.setText(model.getAfternoon_to());
             addedView.addAll(model.getLocations());
+            if (Double.parseDouble(model.getTotal_price()) == 0.0) {
+                total_price_view.setVisibility(View.GONE);
+                view1.setVisibility(View.GONE);
+            }
+            if (Double.parseDouble(model.getPrice_per_liter()) == 0.0) {
+                per_liter_price_view.setVisibility(View.GONE);
+                view2.setVisibility(View.GONE);
+            }
+            if (Double.parseDouble(model.getParking_fee_per_hour()) == 0.0) {
+                per_hour_price_view.setVisibility(View.GONE);
+                view3.setVisibility(View.GONE);
+            }
+            if (Double.parseDouble(model.getMinimum_parking_hours()) == 0) {
+                minimum_parking_hours_view.setVisibility(View.GONE);
+                view4.setVisibility(View.GONE);
+            }
+            if (Double.parseDouble(model.getMaximum_parking_fee_perday()) == 0) {
+                maximum_parking_fee_perday_view.setVisibility(View.GONE);
+                view5.setVisibility(View.GONE);
+            }
             addView();
         }
             if (Utils.isNetworkAvailable(BusinessOffersDetails.this)) {
@@ -246,7 +338,11 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
                                             @Override
                                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                                 TextView child = (TextView) parent.getChildAt(0);
-                                                child.setTextColor(getResources().getColor(R.color.blue,getTheme()));
+                                                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                    child.setTextColor(getResources().getColor(R.color.blue, getTheme()));
+                                                }else {
+                                                    child.setTextColor(getResources().getColor(R.color.blue));
+                                                }
                                                 child.setTextSize(18);
                                                 //  child.setTypeface(getResources().getFont(R.font.light));
                                             }
@@ -256,9 +352,14 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
 
                                             }
                                         });
+
                                     }
                                 });
+                            }else{
+                                Utils.showToast(BusinessOffersDetails.this,"You dont have any product,please add atleast one product first.");
                             }
+                            progressBar2.setVisibility(View.GONE);
+                            mainView.setVisibility(View.VISIBLE);
                         }
 
                     }
@@ -348,7 +449,11 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
                 finish();
                 break;
             case R.id.add_location:
-                showAlert();
+                if(businessLocationList.size()>0) {
+                    showAlert();
+                }else{
+                    Utils.showToast(BusinessOffersDetails.this,"You have not added any business location,Please add business location");
+                }
                 break;
             case R.id.startDate:
                 isStartDateSelected=true;
@@ -416,8 +521,7 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
                         } catch (Exception ex) {
                             ex.fillInStackTrace();
                         }
-                        progressBar2.setVisibility(View.GONE);
-                        mainView.setVisibility(View.VISIBLE);
+
                         break;
                     case 2:
                         if(Utils.getStatus(value))

@@ -70,7 +70,7 @@
                 android:textSize="18dp"
                 android:textColor="@color/blue"
                 android:layout_marginLeft="10dp"
-                android:background="@android:color/transparent"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
@@ -440,10 +440,15 @@
                 android:textSize="18dp"
                 android:textColor="@color/blue"
                 android:layout_marginLeft="10dp"
-                android:background="@android:color/transparent"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/morning_mode"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <TextView
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
@@ -497,6 +502,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/afternoon_mode"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <TextView
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
@@ -549,6 +560,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+        </LinearLayout>
         </LinearLayout>
         <View
             android:layout_marginTop="5dp"

@@ -144,12 +144,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>
-                <View
-                    android:layout_marginTop="5dp"
-                    android:background="@color/blue"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"/>
+
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_marginRight="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
@@ -179,6 +176,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"/>
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_marginRight="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"

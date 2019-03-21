@@ -19,6 +19,7 @@ public class Common {
     public static String updateBusinessProfile=baseUrl+"/business/update";
     public static String addBusinessUser=baseUrl+"/business_users/add";
     public static String updateBusinessUser=baseUrl+"/business_users/update";
+    public static String updateMyProfile=baseUrl+"/business_users/update_me";
     public static String updateBusinessProducts=baseUrl+"/business_products/update";
     public static String addBusinessProducts=baseUrl+"/business_products/add";
     public static String deleteBusinessProduct=baseUrl+"/business_products/delete";
@@ -40,6 +41,8 @@ public class Common {
     public static String[] locationIdKey={"location_id"};
     public static String[] updateBusinessKeys = {"business_email","category_id", "company_name", "street_name", "door_no", "city", "zip_code", "phone_number", "paypal_email", "vat_id"};
     public static String []updateUserKeys={"id","first_name","last_name","salutation","email","is_active","user_type"};
+    public static String []updateMeKeys={"salutation","first_name","last_name","email"};
+
     public static String []addUserKeys={"first_name","last_name","salutation","email","is_active","user_type","password"};
     public static String[] addBusinessOffersKeys = {"product_id",
             "business_location_ids",

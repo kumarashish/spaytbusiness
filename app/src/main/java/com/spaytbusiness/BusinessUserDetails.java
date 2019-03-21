@@ -56,6 +56,7 @@ public class BusinessUserDetails  extends Activity implements View.OnClickListen
     Validation validation;
 AppController controller;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +74,7 @@ AppController controller;
                 TextView child=(TextView) parent.getChildAt(0);
 
                 child.setTextSize(18);
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                    // child.setTypeface(getResources().getFont(R.font.light));
                     child.setTextColor(getResources().getColor(R.color.blue,getTheme()));
                 } else{
@@ -94,9 +95,17 @@ AppController controller;
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked)
                 {
-                    isactive.setTextColor(getResources().getColor(R.color.blue,getTheme()));
+                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        isactive.setTextColor(getResources().getColor(R.color.blue, getTheme()));
+                    }else {
+                        isactive.setTextColor(getResources().getColor(R.color.blue));
+                    }
                 }else {
-                    isactive.setTextColor(getResources().getColor(R.color.grey,getTheme()));
+                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        isactive.setTextColor(getResources().getColor(R.color.grey, getTheme()));
+                    }else {
+                        isactive.setTextColor(getResources().getColor(R.color.grey));
+                    }
                 }
             }
         });
@@ -105,16 +114,12 @@ AppController controller;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TextView child=(TextView) parent.getChildAt(0);
-
                 child.setTextSize(18);
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
-                  //  child.setTypeface(getResources().getFont(R.font.light));
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                     child.setTextColor(getResources().getColor(R.color.blue,getTheme()));
                 } else{
-
                     child.setTextColor(getResources().getColor(R.color.blue));
                 }
-
             }
 
             @Override
@@ -124,7 +129,7 @@ AppController controller;
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     public void setValue() {
         if (model == null) {
             heading.setText("Add User");
@@ -150,8 +155,6 @@ switch (v.getId())
         break;
     case R.id.submit:
         if(controller.getProfile().getRole().equalsIgnoreCase("Admin")) {
-
-
         if(isAllFildsValidated()) {
 
             submit.setVisibility(View.GONE);
@@ -162,7 +165,6 @@ switch (v.getId())
             }else {
                 apiCall =updateUser;
                 controller.getWebApiCall().postData(Common.updateBusinessUser, controller.getManager().getUserToken(), Common.updateUserKeys, getData(), BusinessUserDetails.this);
-
             }
         }
         }else{
@@ -203,12 +205,12 @@ switch (v.getId())
                 Toast.makeText(BusinessUserDetails.this,"Please enter last name",Toast.LENGTH_SHORT).show();
             }else  if(email.getText().length()==0)
             {
-                Toast.makeText(BusinessUserDetails.this,"Please enter Email Id name",Toast.LENGTH_SHORT).show();
+                Toast.makeText(BusinessUserDetails.this,"Please enter Email Id ",Toast.LENGTH_SHORT).show();
             }
         }
         return false;
     }
-@RequiresApi(api = Build.VERSION_CODES.M)
+
 public boolean getCheck(String value)
 {
     boolean status=false;
@@ -216,12 +218,26 @@ public boolean getCheck(String value)
     {
         case "1":
             status=true;
-            isactive.setTextColor(getResources().getColor(R.color.blue,getTheme()));
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                // child.setTypeface(getResources().getFont(R.font.light));
+                isactive.setTextColor(getResources().getColor(R.color.blue,getTheme()));
+            } else{
+
+                isactive.setTextColor(getResources().getColor(R.color.blue));
+            }
+
 
             break;
         case "0":
             status=false;
-            isactive.setTextColor(getResources().getColor(R.color.grey,getTheme()));
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                // child.setTypeface(getResources().getFont(R.font.light));
+                isactive.setTextColor(getResources().getColor(R.color.grey,getTheme()));
+            } else{
+
+                isactive.setTextColor(getResources().getColor(R.color.grey));
+            }
+
             break;
     }
     return status;

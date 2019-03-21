@@ -1,17 +1,22 @@
 package fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.spaytbusiness.BusinessUserDetails;
 import com.spaytbusiness.R;
 
 import org.json.JSONObject;
@@ -23,6 +28,7 @@ import interfaces.WebApiResponseCallback;
 import models.BusinessProfile;
 import models.UserProfile;
 import utils.Utils;
+import utils.Validation;
 
 public class ProfileSettings extends Fragment implements WebApiResponseCallback {
     AppController controller;
@@ -45,6 +51,7 @@ public class ProfileSettings extends Fragment implements WebApiResponseCallback 
     int apiCall;
     int getData=1,updateData=2;
     public static UserProfile model=null;
+    Validation validation;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +62,7 @@ public class ProfileSettings extends Fragment implements WebApiResponseCallback 
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.profile_setting, container, false);
+        validation=new Validation(getActivity());
         controller=(AppController)getActivity().getApplicationContext();
         salutation=(Spinner)v.findViewById(R.id.salutation);
         mainLayout=(ScrollView)v.findViewById(R.id.mainLayout);
@@ -64,12 +72,54 @@ public class ProfileSettings extends Fragment implements WebApiResponseCallback 
          progress_bar=(ProgressBar)v.findViewById(R.id.progress_bar);
         progress_bar2=(ProgressBar)v.findViewById(R.id.progress_bar2);
         role=(Spinner)v.findViewById(R.id.role);
+        salutation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TextView child=(TextView) parent.getChildAt(0);
+                child.setTextSize(18);
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    child.setTextColor(getResources().getColor(R.color.blue,getActivity().getTheme()));
+                } else{
+                    child.setTextColor(getResources().getColor(R.color.blue));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        role.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TextView child=(TextView) parent.getChildAt(0);
+                child.setTextSize(18);
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    child.setTextColor(getResources().getColor(R.color.blue,getActivity().getTheme()));
+                } else{
+                    child.setTextColor(getResources().getColor(R.color.blue));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         submit=(Button)v.findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(isAllFildsValidated()) {
 
+                    submit.setVisibility(View.GONE);
+                    progress_bar2.setVisibility(View.VISIBLE);
+                        apiCall =updateData;
+                        controller.getWebApiCall().postData(Common.updateMyProfile, controller.getManager().getUserToken(), Common.updateMeKeys, getData(), ProfileSettings.this);
+
+                }
             }
         });
         if(Utils.isNetworkAvailable(getActivity()))
@@ -112,10 +162,10 @@ public void setData()
     lname.setText(model.getLast_name());
     email.setText(model.getEmail());
     salutation.setSelection(getIndex(model.getSalutation()));
-            role.setSelection(getIndexRole(model.getRole()));
-
+    role.setSelection(getIndexRole(model.getRole()));
     progress_bar.setVisibility(View.GONE);
     mainLayout.setVisibility(View.VISIBLE);
+
 }
     @Override
     public void onSucess(final String value) {
@@ -151,5 +201,32 @@ public void setData()
     public void onError(String value) {
         Utils.showToast(getActivity(),Utils.getMessage(value));
 
+    }
+    public String[] getData() {
+
+
+            return new String[]{salutation.getSelectedItem().toString(),fname.getText().toString(), lname.getText().toString(), email.getText().toString()};
+
+    }
+    public boolean isAllFildsValidated()
+    {
+        if((fname.getText().length()>0)&&(lname.getText().length()>0)&&(email.getText().length()>0))
+        {
+            if(validation.isValidEmail(email.getText().toString())) {
+                return true;
+            }
+        }else{
+            if(fname.getText().length()==0)
+            {
+                Toast.makeText(getActivity(),"Please enter first name",Toast.LENGTH_SHORT).show();
+            }else  if(lname.getText().length()==0)
+            {
+                Toast.makeText(getActivity(),"Please enter last name",Toast.LENGTH_SHORT).show();
+            }else  if(email.getText().length()==0)
+            {
+                Toast.makeText(getActivity(),"Please enter Email Id",Toast.LENGTH_SHORT).show();
+            }
+        }
+        return false;
     }
 }

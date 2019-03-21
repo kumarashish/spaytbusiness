@@ -83,11 +83,11 @@ public class PrefManager {
     }
 
     public void setUserProfile(String profile) {
-        editor.putString("businessProfile",profile);
+        editor.putString("userProfile",profile);
         editor.commit();
     }
     public void setBusinessProfile(String profile) {
-        editor.putString("userProfile",profile);
+        editor.putString("businessProfile",profile);
         editor.commit();
     }
   public String  getUserProfile()

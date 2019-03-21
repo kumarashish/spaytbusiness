@@ -173,23 +173,23 @@ if(modell!=null) {
             parking_fee_per_hou.setText(model.getParking_fee_per_hour() );
             minimum_parking_hours.setText(model.getMinimum_parking_hours() );
             maximum_parking_fee_perday.setText(model.getMaximum_parking_fee_perday());
-            if (model.getTotal_price().length() == 0) {
+            if (Double.parseDouble(model.getTotal_price()) == 0.0) {
                 total_price_view.setVisibility(View.GONE);
                 view1.setVisibility(View.GONE);
             }
-            if (model.getPrice_per_liter().length() == 0) {
+            if (Double.parseDouble(model.getPrice_per_liter()) == 0.0) {
                 per_liter_price_view.setVisibility(View.GONE);
                 view2.setVisibility(View.GONE);
             }
-            if (model.getParking_fee_per_hour().length() == 0) {
+            if (Double.parseDouble(model.getParking_fee_per_hour()) == 0.0) {
                 per_hour_price_view.setVisibility(View.GONE);
                 view3.setVisibility(View.GONE);
             }
-            if (model.getMinimum_parking_hours().length() == 0) {
+            if (Double.parseDouble(model.getMinimum_parking_hours()) == 0) {
                 minimum_parking_hours_view.setVisibility(View.GONE);
                 view4.setVisibility(View.GONE);
             }
-            if (model.getMaximum_parking_fee_perday().length() == 0) {
+            if (Double.parseDouble(model.getMaximum_parking_fee_perday()) == 0) {
                 maximum_parking_fee_perday_view.setVisibility(View.GONE);
                 view5.setVisibility(View.GONE);
             }
