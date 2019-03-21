@@ -177,8 +177,7 @@ public void setData()
                         try {
                             JSONObject jsonObject = new JSONObject(value);
                             JSONObject user_details = jsonObject.getJSONObject("my_details");
-
-                          model = new UserProfile(user_details);
+                            model = new UserProfile(user_details);
                             setData();
 
                         } catch (Exception ex) {
@@ -188,7 +187,12 @@ public void setData()
                         progress_bar.setVisibility(View.GONE);
                         break;
                     case 2:
-                        Utils.showToast(getActivity(),Utils.getMessage(value));
+                        if(Utils.getStatus(value)==true)
+                        {
+                            Utils.showToast(getActivity(),"Profile Udpated Sucessfully.");
+                        }else {
+                            Utils.showToast(getActivity(), Utils.getMessage(value));
+                        }
                         progress_bar2.setVisibility(View.GONE);
                         submit.setVisibility(View.VISIBLE);
                         break;

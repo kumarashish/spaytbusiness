@@ -337,6 +337,7 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
                                             @RequiresApi(api = Build.VERSION_CODES.O)
                                             @Override
                                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                BusinessProductModel model=businessProductsList.get(position);
                                                 TextView child = (TextView) parent.getChildAt(0);
                                                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                                     child.setTextColor(getResources().getColor(R.color.blue, getTheme()));
@@ -344,6 +345,43 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
                                                     child.setTextColor(getResources().getColor(R.color.blue));
                                                 }
                                                 child.setTextSize(18);
+
+                                                if (Double.parseDouble(model.getTotal_price())>0.0) {
+                                                    total_price_view.setVisibility(View.VISIBLE);
+                                                    view1.setVisibility(View.VISIBLE);
+                                                    per_liter_price_view.setVisibility(View.GONE);
+                                                    view2.setVisibility(View.GONE);
+                                                    per_hour_price_view.setVisibility(View.GONE);
+                                                    view3.setVisibility(View.GONE);
+                                                    minimum_parking_hours_view.setVisibility(View.GONE);
+                                                    view4.setVisibility(View.GONE);
+                                                    maximum_parking_fee_perday_view.setVisibility(View.GONE);
+                                                    view5.setVisibility(View.GONE);
+                                                }
+                                                else if (Double.parseDouble(model.getPrice_per_liter())> 0.0) {
+                                                    total_price_view.setVisibility(View.GONE);
+                                                    view1.setVisibility(View.GONE);
+                                                    per_liter_price_view.setVisibility(View.VISIBLE);
+                                                    view2.setVisibility(View.VISIBLE);
+                                                    per_hour_price_view.setVisibility(View.GONE);
+                                                    view3.setVisibility(View.GONE);
+                                                    minimum_parking_hours_view.setVisibility(View.GONE);
+                                                    view4.setVisibility(View.GONE);
+                                                    maximum_parking_fee_perday_view.setVisibility(View.GONE);
+                                                    view5.setVisibility(View.GONE);
+                                                }else{
+                                                    total_price_view.setVisibility(View.GONE);
+                                                    view1.setVisibility(View.GONE);
+                                                    per_liter_price_view.setVisibility(View.GONE);
+                                                    view2.setVisibility(View.GONE);
+                                                    per_hour_price_view.setVisibility(View.VISIBLE);
+                                                    view3.setVisibility(View.VISIBLE);
+                                                    minimum_parking_hours_view.setVisibility(View.VISIBLE);
+                                                    view4.setVisibility(View.VISIBLE);
+                                                    maximum_parking_fee_perday_view.setVisibility(View.VISIBLE);
+                                                    view5.setVisibility(View.VISIBLE);
+                                                }
+
                                                 //  child.setTypeface(getResources().getFont(R.font.light));
                                             }
 
@@ -352,14 +390,16 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
 
                                             }
                                         });
+                                        progressBar2.setVisibility(View.GONE);
+                                        mainView.setVisibility(View.VISIBLE);
 
                                     }
+
                                 });
                             }else{
                                 Utils.showToast(BusinessOffersDetails.this,"You dont have any product,please add atleast one product first.");
                             }
-                            progressBar2.setVisibility(View.GONE);
-                            mainView.setVisibility(View.VISIBLE);
+
                         }
 
                     }

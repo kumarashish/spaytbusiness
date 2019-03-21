@@ -284,7 +284,7 @@ if(model!=null) {
                                         {
                                             per_liter_price_view.setVisibility(View.GONE);
                                             view2.setVisibility(View.GONE);
-                                            total_price_view.setVisibility(View.VISIBLE);
+                                            total_price_view.setVisibility(View.GONE);
                                             view1.setVisibility(View.VISIBLE);
                                             per_hour_price_view.setVisibility(View.VISIBLE);
                                             view3.setVisibility(View.VISIBLE);
