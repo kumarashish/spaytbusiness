@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.spaytbusiness.BusinessProductDetails;
 import com.spaytbusiness.BusinessUserDetails;
@@ -78,8 +79,12 @@ public class Users extends Fragment implements WebApiResponseCallback,View.OnCli
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BusinessUserDetails.model=null;
-                getActivity().startActivityForResult(new Intent(getActivity(),BusinessUserDetails.class),2);
+                if(controller.getProfile().getRole().equalsIgnoreCase("Admin")) {
+                    BusinessUserDetails.model = null;
+                    getActivity().startActivityForResult(new Intent(getActivity(), BusinessUserDetails.class), 2);
+                }else{
+                    Utils.showToast(getActivity(),"You are not authorised to add user");
+                }
             }
         });
         return v;

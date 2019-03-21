@@ -71,9 +71,16 @@ AppController controller;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TextView child=(TextView) parent.getChildAt(0);
-                child.setTextColor(getResources().getColor(R.color.blue,getTheme()));
+
                 child.setTextSize(18);
-               // child.setTypeface(getResources().getFont(R.font.light));
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+                   // child.setTypeface(getResources().getFont(R.font.light));
+                    child.setTextColor(getResources().getColor(R.color.blue,getTheme()));
+                } else{
+
+                    child.setTextColor(getResources().getColor(R.color.blue));
+                }
+
             }
 
             @Override
@@ -98,9 +105,16 @@ AppController controller;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TextView child=(TextView) parent.getChildAt(0);
-                child.setTextColor(getResources().getColor(R.color.blue,getTheme()));
+
                 child.setTextSize(18);
-              //  child.setTypeface(getResources().getFont(R.font.light));
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+                  //  child.setTypeface(getResources().getFont(R.font.light));
+                    child.setTextColor(getResources().getColor(R.color.blue,getTheme()));
+                } else{
+
+                    child.setTextColor(getResources().getColor(R.color.blue));
+                }
+
             }
 
             @Override
@@ -110,6 +124,7 @@ AppController controller;
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void setValue() {
         if (model == null) {
             heading.setText("Add User");
@@ -134,6 +149,9 @@ switch (v.getId())
         finish();
         break;
     case R.id.submit:
+        if(controller.getProfile().getRole().equalsIgnoreCase("Admin")) {
+
+
         if(isAllFildsValidated()) {
 
             submit.setVisibility(View.GONE);
@@ -146,6 +164,9 @@ switch (v.getId())
                 controller.getWebApiCall().postData(Common.updateBusinessUser, controller.getManager().getUserToken(), Common.updateUserKeys, getData(), BusinessUserDetails.this);
 
             }
+        }
+        }else{
+            Utils.showToast(BusinessUserDetails.this,"You are not authorized to update data");
         }
             break;
 }

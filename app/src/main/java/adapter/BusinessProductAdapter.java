@@ -63,12 +63,12 @@ public class BusinessProductAdapter extends BaseAdapter {
         holder.delete.setVisibility(View.VISIBLE);
         holder.productname.setText(model.getName());
         holder.description.setText(model.getDescription());
-        if (model.getPrice_per_liter().length() > 0) {
-            holder.price.setText(model.getPrice_per_liter() + " € / liter");
-        } else if(model.getParking_fee_per_hour().length()>0) {
-            holder.price.setText(model.getParking_fee_per_hour() + " € / hour");
-        }else{
+        if (Double.parseDouble(model.getTotal_price()) > 0.0) {
             holder.price.setText(model.getTotal_price() + " € ");
+        } else if (Double.parseDouble(model.getPrice_per_liter()) > 0.0) {
+            holder.price.setText(model.getPrice_per_liter() + " € / liter");
+        } else if (Double.parseDouble(model.getParking_fee_per_hour()) > 0.0) {
+            holder.price.setText(model.getParking_fee_per_hour() + " € / hour");
         }
 
         holder.delete.setOnClickListener(new View.OnClickListener() {

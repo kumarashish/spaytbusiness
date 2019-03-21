@@ -112,6 +112,7 @@ public class BusinessProductDetails extends Activity implements View.OnClickList
       Dialog dialog;
       int apiCall;
       int getBusinessList=1,updateProduct=3,addPRoduct=2;
+      int selectedPos=-1;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -212,7 +213,7 @@ if(modell!=null) {
                 if(result!=null)
                 {if(Utils.getStatus(result)==true)
                 {
-                    JSONArray jsonArray=Utils.getJSONArray(result);
+                    JSONArray jsonArray=Utils.getJSONArray(result,"productcategories");
                     for(int i=0;i<jsonArray.length();i++)
                     {try {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -240,9 +241,60 @@ if(model!=null) {
                                     @Override
                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                         TextView child=(TextView) parent.getChildAt(0);
-                                        child.setTextColor(getResources().getColor(R.color.blue,getTheme()));
+                                        //
                                         child.setTextSize(18);
-                                        //  child.setTypeface(getResources().getFont(R.font.light));
+                                        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                            child.setTextColor(getResources().getColor(R.color.blue,getTheme()));
+                                        } else{
+
+                                            child.setTextColor(getResources().getColor(R.color.blue));
+                                        }
+
+                                        CategoryModel model=categorylist.get(position);
+                                        if(selectedPos!=-1)
+                                        {
+                                            clearAll();
+                                        }
+                                        selectedPos=position;
+
+                                        if(model.getField_names().equalsIgnoreCase("price_per_liter"))
+                                        {   per_liter_price_view.setVisibility(View.VISIBLE);
+                                            view2.setVisibility(View.VISIBLE);
+                                            total_price_view.setVisibility(View.GONE);
+                                            view1.setVisibility(View.GONE);
+                                            per_hour_price_view.setVisibility(View.GONE);
+                                            view3.setVisibility(View.GONE);
+                                            minimum_parking_hours_view.setVisibility(View.GONE);
+                                            view4.setVisibility(View.GONE);
+                                            maximum_parking_fee_perday_view.setVisibility(View.GONE);
+                                            view5.setVisibility(View.GONE);
+                                        }else if(model.getField_names().equalsIgnoreCase("total_price"))
+                                        {
+                                            per_liter_price_view.setVisibility(View.GONE);
+                                            view2.setVisibility(View.GONE);
+                                            total_price_view.setVisibility(View.VISIBLE);
+                                            view1.setVisibility(View.VISIBLE);
+                                            per_hour_price_view.setVisibility(View.GONE);
+                                            view3.setVisibility(View.GONE);
+                                            minimum_parking_hours_view.setVisibility(View.GONE);
+                                            view4.setVisibility(View.GONE);
+                                            maximum_parking_fee_perday_view.setVisibility(View.GONE);
+                                            view5.setVisibility(View.GONE);
+                                        }else
+                                        {
+                                            per_liter_price_view.setVisibility(View.GONE);
+                                            view2.setVisibility(View.GONE);
+                                            total_price_view.setVisibility(View.VISIBLE);
+                                            view1.setVisibility(View.VISIBLE);
+                                            per_hour_price_view.setVisibility(View.VISIBLE);
+                                            view3.setVisibility(View.VISIBLE);
+                                            minimum_parking_hours_view.setVisibility(View.VISIBLE);
+                                            view4.setVisibility(View.VISIBLE);
+                                            maximum_parking_fee_perday_view.setVisibility(View.VISIBLE);
+                                            view5.setVisibility(View.VISIBLE);
+                                        }
+
+
                                     }
 
                                     @Override
@@ -250,6 +302,9 @@ if(model!=null) {
 
                                     }
                                 });
+
+                                progressBar2.setVisibility(View.GONE);
+                                mainView.setVisibility(View.VISIBLE);
                             }
                         });
                     }
@@ -262,6 +317,13 @@ if(model!=null) {
         t.start();
     }
 
+    public void clearAll() {
+        per_liter_price.setText("");
+        total_price.setText("");
+        parking_fee_per_hou.setText("");
+        minimum_parking_hours.setText("");
+        maximum_parking_fee_perday.setText("");
+    }
 public int getCategoryIndex()
 {
     for(int i=0;i<categorylist.size();i++)
@@ -328,8 +390,6 @@ public int getCategoryIndex()
                     } catch (Exception ex) {
                         ex.fillInStackTrace();
                     }
-                    progressBar2.setVisibility(View.GONE);
-                    mainView.setVisibility(View.VISIBLE);
                     break;
                     case 2:
                         if(Utils.getStatus(value))

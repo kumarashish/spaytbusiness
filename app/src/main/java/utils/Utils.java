@@ -105,7 +105,18 @@ public class Utils {
         }
         return null;
     }
-
+    public static JSONArray getJSONArray(String value,String key)
+    {
+        try{
+            JSONObject jsonObject=new JSONObject(value);
+            JSONArray jsonArray=jsonObject.getJSONArray(key);
+            return jsonArray;
+        }catch (Exception ex)
+        {
+            ex.fillInStackTrace();
+        }
+        return null;
+    }
 
 
 
