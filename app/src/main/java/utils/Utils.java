@@ -97,7 +97,8 @@ public class Utils {
     {
         try{
             JSONObject jsonObject=new JSONObject(value);
-            JSONArray jsonArray=jsonObject.getJSONArray("businesscategories");
+            JSONArray jsonArray=jsonObject.isNull("businesscategories")?jsonObject.getJSONArray("productcategories"):jsonObject.getJSONArray("businesscategories");
+
             return jsonArray;
         }catch (Exception ex)
         {
