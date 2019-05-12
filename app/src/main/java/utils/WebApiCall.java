@@ -1,6 +1,7 @@
 package utils;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -207,13 +208,19 @@ public class WebApiCall {
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS).build();
         FormBody.Builder formBuilder = new FormBody.Builder();
+        Log.d("TAG", "url: "+url);
         for(int i=0;i<key.length;i++)
         {
 
                 formBuilder.add(key[i], values[i]);
 
+
+            Log.d("TAG", ""+key[i]+" :"+values[i]);
         }
+
+        Log.d("TAG", "postData: "+url+" :"+formBuilder);
         RequestBody formBody= formBuilder.build();
+        Log.d("TAG", "X-Businesstoken ");
         Request request = new Request.Builder().header("X-Businesstoken",token).url(url).post(formBody).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
