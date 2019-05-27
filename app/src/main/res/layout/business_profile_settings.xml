@@ -48,6 +48,7 @@
                 android:layout_height="100dp" />
 
             <ImageView
+                android:visibility="invisible"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
 
@@ -333,7 +334,7 @@ android:id="@+id/companyEmailId"
                 android:id="@+id/vatId"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/darkText"
-                android:hint="VAT ID"
+                android:hint="VAT ID(Optional)"
                 android:textSize="18dp"
                 android:textColor="@color/grey"
                 android:layout_marginLeft="10dp"
@@ -364,7 +365,7 @@ android:id="@+id/companyEmailId"
                 android:id="@+id/paypalId"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/darkText"
-                android:hint="PayPal Email id"
+                android:hint="PayPal Email id(Optional)"
                 android:textSize="18dp"
                 android:textColor="@color/grey"
                 android:layout_marginLeft="10dp"

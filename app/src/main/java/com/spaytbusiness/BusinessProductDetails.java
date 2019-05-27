@@ -344,7 +344,11 @@ public int getCategoryIndex()
                 finish();
                 break;
             case R.id.add_location:
-                showAlert();
+                if(businessLocationList.size()>0) {
+                    showAlert();
+                }else{
+                    Toast.makeText(BusinessProductDetails.this,"No Location added,Please add atlease one location",Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.submit:
                 if(isFieldsValidated())

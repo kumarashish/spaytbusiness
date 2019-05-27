@@ -312,7 +312,7 @@
                 <EditText
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
-                    android:inputType="number"
+
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
@@ -371,7 +371,7 @@
                 <EditText
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
-                    android:inputType="number"
+
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
@@ -468,7 +468,7 @@
                 <EditText
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
-                    android:inputType="number"
+
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
@@ -527,7 +527,7 @@
                 <EditText
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
-                    android:inputType="number"
+
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
@@ -622,7 +622,7 @@
                 <EditText
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
-                    android:inputType="number"
+
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
@@ -681,7 +681,7 @@
                 <EditText
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
-                    android:inputType="number"
+
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
@@ -777,7 +777,7 @@
                 <EditText
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
-                    android:inputType="number"
+
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
@@ -836,7 +836,7 @@
                 <EditText
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
-                    android:inputType="number"
+
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
@@ -931,7 +931,7 @@
                 <EditText
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
-                    android:inputType="number"
+
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
@@ -990,7 +990,7 @@
                 <EditText
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
-                    android:inputType="number"
+
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
@@ -1083,7 +1083,7 @@
                 <EditText
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
-                    android:inputType="number"
+
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
@@ -1142,7 +1142,7 @@
                 <EditText
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
-                    android:inputType="number"
+
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
@@ -1238,7 +1238,7 @@
                 <EditText
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
-                    android:inputType="number"
+
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
@@ -1297,7 +1297,7 @@
                 <EditText
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
-                    android:inputType="number"
+
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
