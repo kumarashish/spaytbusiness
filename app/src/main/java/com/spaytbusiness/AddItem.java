@@ -43,7 +43,7 @@ public class AddItem extends Activity implements View.OnClickListener , WebApiRe
     View myCart;
     @BindView(R.id.customer_name)
     TextView customer_name;
-    String customerCode="";
+    //String customerCode="";
     AppController controller;
     @BindView(R.id.content)
     RelativeLayout content;
@@ -63,7 +63,7 @@ public class AddItem extends Activity implements View.OnClickListener , WebApiRe
     EditText price;
     @BindView(R.id.quantity)
     EditText quantity;
-String customerId="";
+String customerId="0";
 String customerName="";
 
 @BindView(R.id.submit)
@@ -89,14 +89,15 @@ Button submit;
         myCart.setOnClickListener(this);
         submit.setOnClickListener(this);
 
-        customerCode=getIntent().getStringExtra("code");
+       // customerCode=getIntent().getStringExtra("code");
         controller=(AppController)getApplicationContext();
+        getLocation();
 
-            if(Utils.isNetworkAvailable(AddItem.this))
-            {apiCall=getCustomerFromCode;
-                progress.setVisibility(View.VISIBLE);
-                controller.getWebApiCall().postData(Common.getCustomerFromQRCodeUrl,controller.getManager().getUserToken(),Common.qrCodeKey,new String[]{customerCode},this);
-            }
+//            if(Utils.isNetworkAvailable(AddItem.this))
+//            {apiCall=getCustomerFromCode;
+//                progress.setVisibility(View.VISIBLE);
+//                controller.getWebApiCall().postData(Common.getCustomerFromQRCodeUrl,controller.getManager().getUserToken(),Common.qrCodeKey,new String[]{customerCode},this);
+//            }
 
         locations.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -296,65 +297,11 @@ public void getLocation()
                         }
                           progress2.setVisibility(View.GONE);
                             break;
-                    case 3:
-                        if(Utils.getStatus(value))
-                        {
-                            JSONObject jsonObject=Utils.getJSONObject(value,"consumer_details");
-                            try {
-                                customerName = jsonObject.getString("first_name") + " " + jsonObject.getString("last_name");
-                                customerId=jsonObject.getString("consumer_id");
-                                customer_name.setText(customerName);
-                                progress.setVisibility(View.GONE);
-                                getLocation();
-
-                            }catch (Exception ex)
-                            {
-                                ex.fillInStackTrace();
-
-                                progress.setVisibility(View.GONE);
-                                startActivity(new Intent(AddItem.this,ScanActivity.class));
-                                finish();
-                            }
-                        }else{
-                            invalidQRCodeAlert(Utils.getMessage(value));
-
-                            progress.setVisibility(View.GONE);
-
-                        }
-                        break;
 
 
     }}});
         }
-public void invalidQRCodeAlert(String message)
-{
-    AlertDialog.Builder builder = new AlertDialog.Builder(this);;
 
-
-    //Setting message manually and performing action on button click
-    builder.setMessage(message)
-            .setCancelable(false)
-            .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                    startActivity(new Intent(AddItem.this,ScanActivity.class));
-                    finish();
-
-                }
-            })
-            .setNegativeButton("exit", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    //  Action for 'NO' Button
-                    dialog.cancel();
-                   finish();
-                }
-            });
-    //Creating dialog box
-    AlertDialog alert = builder.create();
-    //Setting the title manually
-    alert.setTitle("Aler");
-    alert.show();
-}
 
         public void getProducts()
         {

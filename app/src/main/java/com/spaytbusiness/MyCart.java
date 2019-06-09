@@ -2,7 +2,9 @@ package com.spaytbusiness;
 
 import android.app.Activity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -21,6 +24,8 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import javax.net.ssl.SSLEngineResult;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,20 +50,21 @@ public class MyCart extends Activity implements View.OnClickListener , WebApiRes
    Dialog pd;
     String locationId="";
     int apiCall;
-    int createOrder=1,submitOrder=2;
+    int createOrder=1,submitOrder=2,getCustomerFromCode=3;
     String orderId="";
 String customerName="";
 String customerId="";
+@BindView(R.id.progressbar2)
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_cart);
         controller=(AppController)getApplicationContext();
         ButterKnife.bind(this);
+
         locationId=getIntent().getStringExtra("locationId");
-        customerName=getIntent().getStringExtra("customerName");
-        customerId=getIntent().getStringExtra("customerId");
-        customer_name.setText(customerName);
+
         back.setOnClickListener(this);
         submit.setOnClickListener(this);
        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -153,17 +159,27 @@ String customerId="";
             case R.id.submit:
                 if(controller.getTotalPrice()>0.0)
                 if (Utils.isNetworkAvailable(MyCart.this)) {
-                    if (orderId.length() > 0) {
-                        submitOrder(orderId);
-                    } else {
-                        apiCall = createOrder;
-                        pd.show();
-                        controller.getWebApiCall().postData(Common.getCreateOrderUrl, controller.getManager().getUserToken(), getCreateOrderJson("10", locationId).toString(), MyCart.this);
+
+                    if (customerId.length() == 0) {
+                        startActivityForResult(new Intent(MyCart.this,ScanActivity.class),2);     }
+                     else {
+                        submitOrder();
                     }
                 }
                 break;
 
 
+        }
+    }
+
+    public void submitOrder()
+    {
+        if (orderId.length() > 0) {
+            submitOrder(orderId);
+        } else {
+            apiCall = createOrder;
+            pd.show();
+            controller.getWebApiCall().postData(Common.getCreateOrderUrl, controller.getManager().getUserToken(), getCreateOrderJson(customerId, locationId).toString(), MyCart.this);
         }
     }
 
@@ -223,6 +239,32 @@ String customerId="";
                          Utils.sucessAlert(MyCart.this,orderId);
 
                             break;
+                        case 3:
+                        if(Utils.getStatus(value))
+                        {
+                            JSONObject jsonObject=Utils.getJSONObject(value,"consumer_details");
+                            try {
+                                customerName = jsonObject.getString("first_name") + " " + jsonObject.getString("last_name");
+                                customerId=jsonObject.getString("consumer_id");
+                                customer_name.setText(customerName);
+                                progressBar.setVisibility(View.GONE);
+                                submit.setVisibility(View.VISIBLE);
+                                submitOrder();
+
+                            }catch (Exception ex)
+                            {
+                                ex.fillInStackTrace();
+
+                                progressBar.setVisibility(View.GONE);
+                                startActivityForResult(new Intent(MyCart.this,ScanActivity.class),2);
+
+                            }
+                        }else{
+                            invalidQRCodeAlert(Utils.getMessage(value));
+
+                            progressBar.setVisibility(View.GONE);
+
+                        }
                     }
 
                 }else{
@@ -232,6 +274,36 @@ String customerId="";
         });
 
 
+    }
+
+    public void invalidQRCodeAlert(String message)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);;
+
+
+        //Setting message manually and performing action on button click
+        builder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        startActivityForResult(new Intent(MyCart.this,ScanActivity.class),2);
+                        finish();
+
+                    }
+                })
+                .setNegativeButton("exit", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //  Action for 'NO' Button
+                        dialog.cancel();
+                        finish();
+                    }
+                });
+        //Creating dialog box
+        AlertDialog alert = builder.create();
+        //Setting the title manually
+        alert.setTitle("Alert");
+        alert.show();
     }
 public String getOrderId(String value)
 {
@@ -257,6 +329,20 @@ public String getOrderId(String value)
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if((requestCode==2)&&(resultCode==RESULT_OK))
+        {String customerCode=data.getStringExtra("code");
+            if(Utils.isNetworkAvailable(MyCart.this))
+            {apiCall=getCustomerFromCode;
+                progressBar.setVisibility(View.VISIBLE);
+                submit.setVisibility(View.GONE);
+                controller.getWebApiCall().postData(Common.getCustomerFromQRCodeUrl,controller.getManager().getUserToken(),Common.qrCodeKey,new String[]{customerCode},this);
+            }
+        }
     }
 }
 

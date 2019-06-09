@@ -1,6 +1,7 @@
 package com.spaytbusiness;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -106,9 +107,9 @@ public class ScanActivity  extends AppCompatActivity implements ZXingScannerView
 
     @Override
     public void handleResult(Result rawResult) {
-        Intent intent = new Intent(ScanActivity.this, AddItem.class);
+        Intent intent = new Intent();
         intent.putExtra("code", rawResult.getText());
-        startActivity(intent);
+        setResult(Activity.RESULT_OK,   intent);
         finish();
     }
 }
