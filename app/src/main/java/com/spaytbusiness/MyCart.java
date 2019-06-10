@@ -323,6 +323,11 @@ public String getOrderId(String value)
             @Override
             public void run() {
                 Utils.showToast(MyCart.this,Utils.getMessage(value));
+                if(progressBar.getVisibility()==View.VISIBLE)
+                {
+                    progressBar.setVisibility(View.GONE);
+                    submit.setVisibility(View.VISIBLE);
+                }
                 if(pd!=null)
                 {
                     pd.cancel();

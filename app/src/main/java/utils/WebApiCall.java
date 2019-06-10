@@ -211,10 +211,7 @@ public class WebApiCall {
         Log.d("TAG", "url: "+url);
         for(int i=0;i<key.length;i++)
         {
-
                 formBuilder.add(key[i], values[i]);
-
-
             Log.d("TAG", ""+key[i]+" :"+values[i]);
         }
 
