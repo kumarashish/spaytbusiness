@@ -104,6 +104,39 @@
             android:layout_width="match_parent"
             android:layout_height="40dp">
             <ImageView
+                android:scaleType="fitXY"
+                android:tint="@color/darkText"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/home1"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+            <Spinner
+                android:id="@+id/categories"
+                android:fontFamily="@font/light"
+                android:textColorHint="@color/darkText"
+                android:hint="Category"
+                android:textSize="18dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/grey"
+                android:layout_marginLeft="5dp"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="5dp"
+            android:background="@color/grey"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
                 android:layout_marginLeft="-10dp"
                 android:tint="@color/darkText"
                 
@@ -220,38 +253,7 @@
             android:background="@color/grey"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"/>
-        <LinearLayout
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="40dp">
-            <ImageView
-                android:scaleType="fitXY"
-                android:tint="@color/darkText"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/home1"
-                android:layout_width="40dp"
-                android:layout_height="40dp" />
-            <Spinner
-                android:id="@+id/categories"
-                android:fontFamily="@font/light"
-                android:textColorHint="@color/darkText"
-                android:hint="Category"
-                android:textSize="18dp"
-                android:gravity="center_vertical"
-                android:textColor="@color/grey"
-                android:layout_marginLeft="5dp"
-                android:background="@android:color/transparent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-        <View
-            android:layout_marginTop="5dp"
-            android:background="@color/grey"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"/>
+
         <LinearLayout
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
