@@ -92,7 +92,7 @@ public class Login  extends Activity implements View.OnClickListener, WebApiResp
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
         startService(intent);
         token=  FirebaseInstanceId.getInstance().getToken();
-        Log.d("TAG", token);
+        //Log.d("TAG", token);
 
 
 

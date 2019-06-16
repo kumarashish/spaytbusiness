@@ -29,7 +29,8 @@ public class Common {
     public static String addBusinessOffers=baseUrl+"/business_products_offers/add";
     public static String updateBusinessOffers=baseUrl+"/business_products_offers/update";
     public static String deleteBusinessOffers=baseUrl+"/business_products_offers/delete";
-    public static String getBusinessTransactions=baseUrl+"/order/get_my_business_orders";
+    public static String getBusinessOrders=baseUrl+"/order/get_my_business_orders";
+    public static String getOutstandingBusinessOrders=baseUrl+"/order/get_outstanding_business_orders";
     public static String getBusinessProductsOffers=baseUrl+"/order/get_products_with_offers";
     public static String getCreateOrderUrl=baseUrl+"/order/create_order";
     public static String  getSubmitOrderUrl=baseUrl+"/order/submit_order";

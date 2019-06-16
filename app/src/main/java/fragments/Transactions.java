@@ -15,13 +15,18 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.spaytbusiness.NewTransaction;
 import com.spaytbusiness.R;
 
+import javax.net.ssl.SSLEngineResult;
+
+import adapter.TransactionAdapter;
 import butterknife.ButterKnife;
 import common.AppController;
 import common.Common;
 import interfaces.WebApiResponseCallback;
+import models.OutstandingOrder;
 import utils.Utils;
 
 public class Transactions extends Fragment  implements WebApiResponseCallback{
@@ -32,6 +37,8 @@ public class Transactions extends Fragment  implements WebApiResponseCallback{
     int getApiCall=1;
     ListView transactions;
     TextView noTransactions;
+    OutstandingOrder model;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,16 +57,11 @@ public class Transactions extends Fragment  implements WebApiResponseCallback{
         new_transaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),NewTransaction.class));
+                startActivityForResult(new Intent(getActivity(),NewTransaction.class),2);
             }
         });
         ButterKnife.bind(getActivity());
-        if(Utils.isNetworkAvailable(getActivity()))
-        {
-            apiCall=getApiCall;
-            progress_bar.setVisibility(View.VISIBLE);
-            controller.getWebApiCall().getDataCommon(Common.getBusinessTransactions,controller.getManager().getUserToken(),this);
-        }
+        refreshData();
 
         return v;
     }
@@ -71,7 +73,9 @@ public class Transactions extends Fragment  implements WebApiResponseCallback{
             public void run() {
               if( Utils.getStatus(value))
               {
-                  Utils.showToast(getActivity(),Utils.getMessage(value));
+
+                  model= new Gson().fromJson(value,  OutstandingOrder.class);
+                  setValue();
               }else{
               Utils.showToast(getActivity(),Utils.getMessage(value));
               }
@@ -89,5 +93,34 @@ public class Transactions extends Fragment  implements WebApiResponseCallback{
                 progress_bar.setVisibility(View.GONE);
             }
         });
+    }
+
+    public void setValue()
+    {
+       if(model.getOrderData().size()>0)
+       {
+           noTransactions.setVisibility(View.GONE);
+           transactions.setVisibility(View.VISIBLE);
+           transactions.setAdapter(new TransactionAdapter(getActivity(),model.getOrderData()));
+       }
+    }
+public void refreshData()
+{
+    if(Utils.isNetworkAvailable(getActivity()))
+    {
+        apiCall=getApiCall;
+        progress_bar.setVisibility(View.VISIBLE);
+        controller.getWebApiCall().getDataCommon(Common.getBusinessOrders,controller.getManager().getUserToken(),this);
+    }
+
+}
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if((requestCode==2)&&(resultCode== -1))
+        {
+            refreshData();
+
+        }
     }
 }
