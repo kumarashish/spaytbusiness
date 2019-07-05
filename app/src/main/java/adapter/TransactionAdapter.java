@@ -64,7 +64,7 @@ public class TransactionAdapter extends BaseAdapter  {
         }
         convertView.setTag(holder);
         holder.name.setText(model.getConsumerFullname());
-        holder.amount.setText("Net Amount : "+model.getNetAmount()+" £");
+        holder.amount.setText("Net Amount : "+model.getNetAmount()+" €");
         holder.date.setText("Order Date : "+model.getUpdatedOn());
         holder.orderstatus.setText("Order status : "+model.getStatus());
         if(model.getPaypalTransactionId()!=null)

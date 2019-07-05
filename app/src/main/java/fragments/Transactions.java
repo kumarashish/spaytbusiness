@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.spaytbusiness.AddItem;
 import com.spaytbusiness.NewTransaction;
 import com.spaytbusiness.R;
 
@@ -57,7 +58,7 @@ public class Transactions extends Fragment  implements WebApiResponseCallback{
         new_transaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(getActivity(),NewTransaction.class),2);
+                startActivityForResult(new Intent(getActivity(), AddItem.class),2);
             }
         });
         ButterKnife.bind(getActivity());

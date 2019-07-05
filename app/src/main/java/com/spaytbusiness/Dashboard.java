@@ -142,8 +142,6 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 getSupportActionBar().setTitle("Products");
                 break;
             case R.id.manage_users:
-
-
                 showFragment(new Users());
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
