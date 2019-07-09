@@ -18,6 +18,13 @@ public class BusinessProfile {
     String vat_id;
     String phone_number;
     public BusinessProfile(){}
+
+    public void UpdateDefaultLocation(Business_locations model) {
+        door_no = model.getDoor_no();
+        street_name = model.getStreet_name();
+        city = model.getCity();
+        zip_code = model.getZip_code();
+    }
     public BusinessProfile(String value)
     {
         try{
@@ -27,7 +34,7 @@ public class BusinessProfile {
             category_name=jsonObject.isNull("category_name")?"":jsonObject.getString("category_name");;
             company_name=jsonObject.isNull("company_name")?"":jsonObject.getString("company_name");;
             street_name=jsonObject.isNull("street_name")?"":jsonObject.getString("street_name");;
-           door_no=jsonObject.isNull("door_no")?"":jsonObject.getString("door_no");;
+            door_no=jsonObject.isNull("door_no")?"":jsonObject.getString("door_no");;
             city=jsonObject.isNull("city")?"":jsonObject.getString("city");;
             zip_code=jsonObject.isNull("zip_code")?"":jsonObject.getString("zip_code");;
             latitude=jsonObject.isNull("latitude")?"":jsonObject.getString("latitude");;

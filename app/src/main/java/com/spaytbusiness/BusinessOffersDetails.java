@@ -581,7 +581,6 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
                     case 3:
                 if(Utils.getStatus(value))
                 {
-
                     Utils.showToast(BusinessOffersDetails.this,"Business Offer Updated sucessfully");
                     Intent data = new Intent();
                     setResult(RESULT_OK, data);

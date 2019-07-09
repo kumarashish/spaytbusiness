@@ -1,14 +1,17 @@
 package fragments;
 
+import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -22,12 +25,16 @@ import com.spaytbusiness.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import adapter.BusinessLocationAdapter;
+import adapter.LocationAdapter;
 import butterknife.BindView;
 import common.AppController;
 import common.Common;
+import interfaces.OnListItemSelected;
 import interfaces.WebApiResponseCallback;
 import models.BusinessProfile;
 import models.Business_locations;
@@ -35,7 +42,7 @@ import models.UserProfile;
 import utils.Utils;
 import utils.Validation;
 
-public class ProfileSettings extends Fragment implements WebApiResponseCallback {
+public class ProfileSettings extends Fragment implements WebApiResponseCallback, OnListItemSelected {
     AppController controller;
 
     Spinner salutation;
@@ -50,13 +57,18 @@ public class ProfileSettings extends Fragment implements WebApiResponseCallback 
     ScrollView mainLayout;
 
     Spinner role;
+    TextView locationName;
+    Button change;
 
    ProgressBar progress_bar,progress_bar2;
     Button submit;
     int apiCall;
     int getData=1,updateData=2,getBusinessList=3;
     public static UserProfile model=null;
+    BusinessProfile businessProfile=null;
     Validation validation;
+    Dialog dialog;
+    OnListItemSelected callback;
     ArrayList<Business_locations> businessLocationList=new ArrayList<>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,15 +81,19 @@ public class ProfileSettings extends Fragment implements WebApiResponseCallback 
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.profile_setting, container, false);
         validation=new Validation(getActivity());
+        callback=this;
         controller=(AppController)getActivity().getApplicationContext();
         salutation=(Spinner)v.findViewById(R.id.salutation);
         mainLayout=(ScrollView)v.findViewById(R.id.mainLayout);
          fname=(EditText)v.findViewById(R.id.firstName);
          lname=(EditText)v.findViewById(R.id.lastName);
          email=(EditText)v.findViewById(R.id.email);
+         locationName=(TextView) v.findViewById(R.id.locationName);
+         change=(Button) v.findViewById(R.id.change);
          progress_bar=(ProgressBar)v.findViewById(R.id.progress_bar);
         progress_bar2=(ProgressBar)v.findViewById(R.id.progress_bar2);
         role=(Spinner)v.findViewById(R.id.role);
+        businessProfile=controller.getBusinessProfile();
         salutation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -119,7 +135,6 @@ public class ProfileSettings extends Fragment implements WebApiResponseCallback 
             @Override
             public void onClick(View v) {
                 if(isAllFildsValidated()) {
-
                     submit.setVisibility(View.GONE);
                     progress_bar2.setVisibility(View.VISIBLE);
                         apiCall =updateData;
@@ -128,26 +143,54 @@ public class ProfileSettings extends Fragment implements WebApiResponseCallback 
                 }
             }
         });
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(businessLocationList.size()>0) {
+                    showAlert();
+                }else {
+                    Toast.makeText(getActivity(),"No location available,Please add some location",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         if(Utils.isNetworkAvailable(getActivity()))
-        {
-            progress_bar.setVisibility(View.VISIBLE);
+        {   progress_bar.setVisibility(View.VISIBLE);
             mainLayout.setVisibility(View.GONE);
             apiCall=getData;
             controller.getWebApiCall().getDataCommon(Common.myDetails,controller.getManager().getUserToken(),this);
-            getLocations();
+
 
         }
         return v;
     }
 
+    public void showAlert()
+    {
+        dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.choose_location);
 
-    public void getLocations(){
-        if(Utils.isNetworkAvailable(getActivity()))
-        {
-            apiCall=getBusinessList;
-            controller.getWebApiCall().getDataCommon(Common.businessLocationUrl,controller.getManager().getUserToken(),this);
-        }
+        ListView listView = (ListView) dialog.findViewById(R.id.listView);
+        listView.setAdapter(new LocationAdapter( businessLocationList,getActivity(),callback));
+
+        dialog.show();
     }
+    public void getLocations() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (Utils.isNetworkAvailable(getActivity())) {
+                    progress_bar.setVisibility(View.VISIBLE);
+                    mainLayout.setVisibility(View.GONE);
+                    apiCall = getBusinessList;
+                    controller.getWebApiCall().getDataCommon(Common.businessLocationUrl, controller.getManager().getUserToken(), ProfileSettings.this);
+                }
+            }
+        });
+
+    }
+
     public int getIndex(String value) {
         int index = 0;
         switch (value) {
@@ -172,17 +215,36 @@ public class ProfileSettings extends Fragment implements WebApiResponseCallback 
         }
         return index;
     }
-public void setData()
-{
-    fname.setText(model.getFirst_name());
-    lname.setText(model.getLast_name());
-    email.setText(model.getEmail());
-    salutation.setSelection(getIndex(model.getSalutation()));
-    role.setSelection(getIndexRole(model.getRole()));
-    progress_bar.setVisibility(View.GONE);
-    mainLayout.setVisibility(View.VISIBLE);
 
-}
+    public void setData() {
+        fname.setText(model.getFirst_name());
+        lname.setText(model.getLast_name());
+        email.setText(model.getEmail());
+        salutation.setSelection(getIndex(model.getSalutation()));
+        role.setSelection(getIndexRole(model.getRole()));
+        progress_bar.setVisibility(View.GONE);
+        mainLayout.setVisibility(View.VISIBLE);
+        if(businessLocationList.size()>0)
+        {
+            locationName.setText(getDefaultLocation(model.getDefaultlocationId()));
+        }
+
+    }
+
+    public String getDefaultLocation(int locationId) {
+        if (locationId == -1) {
+            showAlert();
+            Toast.makeText(getActivity(), "Please select your default location", Toast.LENGTH_SHORT).show();
+        } else {
+            for (int i = 0; i < businessLocationList.size(); i++) {
+                if (Integer.parseInt(businessLocationList.get(i).getId()) == locationId) {
+                    return businessProfile.getStreet_name() + "," + businessProfile.getCity() + "," + businessProfile.getDoor_no();
+                }
+            }
+        }
+        return "";
+
+    }
     @Override
     public void onSucess(final String value) {
         getActivity().runOnUiThread(new Runnable() {
@@ -194,13 +256,13 @@ public void setData()
                             JSONObject jsonObject = new JSONObject(value);
                             JSONObject user_details = jsonObject.getJSONObject("my_details");
                             model = new UserProfile(user_details);
-                            setData();
+                            getLocations();
 
                         } catch (Exception ex) {
                             ex.fillInStackTrace();
                         }
 
-                        progress_bar.setVisibility(View.GONE);
+
                         break;
                     case 2:
                         if(Utils.getStatus(value)==true)
@@ -213,20 +275,21 @@ public void setData()
                         submit.setVisibility(View.VISIBLE);
                         break;
                     case 3:
-try{
-                        JSONObject jsonObject = new JSONObject(value);
-                        JSONArray businesslocations_details = jsonObject.getJSONArray("businesslocations_details");
-                        if ((businesslocations_details != null) && (businesslocations_details.length() > 0)) {
-                            for (int i = 0; i < businesslocations_details.length(); i++) {
-                                businessLocationList.add(new Business_locations(businesslocations_details.getJSONObject(i)));
+                        try {
+                            JSONObject jsonObject = new JSONObject(value);
+                            JSONArray businesslocations_details = jsonObject.getJSONArray("businesslocations_details");
+                            if ((businesslocations_details != null) && (businesslocations_details.length() > 0)) {
+                                for (int i = 0; i < businesslocations_details.length(); i++) {
+                                    businessLocationList.add(new Business_locations(businesslocations_details.getJSONObject(i)));
+
+                                }
+
 
                             }
-
-
+                            setData();
+                        } catch (Exception ex) {
+                            ex.fillInStackTrace();
                         }
-                } catch (Exception ex) {
-                    ex.fillInStackTrace();
-                }
                         break;
                 }
 
@@ -241,7 +304,7 @@ try{
     public String[] getData() {
 
 
-            return new String[]{salutation.getSelectedItem().toString(),fname.getText().toString(), lname.getText().toString(), email.getText().toString()};
+            return new String[]{salutation.getSelectedItem().toString(),fname.getText().toString(), lname.getText().toString(), email.getText().toString(),Integer.toBinaryString(model.getDefaultlocationId())};
 
     }
     public boolean isAllFildsValidated()
@@ -264,5 +327,24 @@ try{
             }
         }
         return false;
+    }
+
+    @Override
+    public void onBusinessLocationSlected(final Business_locations seletctedmodel) {
+      model.setDefaultlocationId(Integer.parseInt(seletctedmodel.getId()));
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (dialog != null) {
+                    dialog.cancel();
+                    locationName.setText(seletctedmodel.getStreet_name() + "," + seletctedmodel.getCity() + "," + seletctedmodel.getDoor_no());
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onDeleteCLicked(Business_locations model) {
+
     }
 }

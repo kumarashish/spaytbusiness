@@ -88,32 +88,9 @@ Button submit;
         back.setOnClickListener(this);
         myCart.setOnClickListener(this);
         submit.setOnClickListener(this);
-
-       // customerCode=getIntent().getStringExtra("code");
         controller=(AppController)getApplicationContext();
-        //getLocation();
         getProductsList();
 
-//            if(Utils.isNetworkAvailable(AddItem.this))
-//            {apiCall=getCustomerFromCode;
-//                progress.setVisibility(View.VISIBLE);
-//                controller.getWebApiCall().postData(Common.getCustomerFromQRCodeUrl,controller.getManager().getUserToken(),Common.qrCodeKey,new String[]{customerCode},this);
-//            }
-
-        locations.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position!=0)
-                {
-                    getProducts();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         product.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -172,7 +149,7 @@ public void getProductsList()
     if(Utils.isNetworkAvailable(AddItem.this))
     {apiCall=getProducts;
         progress.setVisibility(View.VISIBLE);
-        controller.getWebApiCall().postData(Common.getBusinessProductsOffers,controller.getManager().getUserToken(),Common.locationIdKey,new String[]{""},this);
+        controller.getWebApiCall().getDataCommon(Common.getBusinessProductsOffers,controller.getManager().getUserToken(),this);
     }
 }
     @Override

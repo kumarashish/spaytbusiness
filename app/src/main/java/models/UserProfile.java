@@ -12,6 +12,7 @@ public class UserProfile {
     String role;
     String role_id;
    String  is_active;
+   int defaultlocationId;
     public UserProfile(){}
     public UserProfile(String value) {
         try {
@@ -25,6 +26,7 @@ public class UserProfile {
             role = jsonObject.isNull("role") ? "" : jsonObject.getString("role");
             role_id = jsonObject.isNull("role_id") ? "" : jsonObject.getString("role_id");
             is_active= jsonObject.isNull("is_active") ? "" : jsonObject.getString("is_active");
+            defaultlocationId=jsonObject.isNull("default_location_id") ? -1 : Integer.parseInt(jsonObject.getString("default_location_id"));
         } catch (Exception ex)
         {
             ex.fillInStackTrace();
@@ -46,6 +48,7 @@ public class UserProfile {
             role = jsonObject.isNull("user_type_name") ? "" : jsonObject.getString("user_type_name");
             role_id = jsonObject.isNull("user_type") ? "" : jsonObject.getString("user_type");
             is_active= jsonObject.isNull("is_active") ? "" : jsonObject.getString("is_active");
+            defaultlocationId=jsonObject.isNull("default_location_id") ? -1 : jsonObject.getInt("default_location_id");
         } catch (Exception ex)
         {
             ex.fillInStackTrace();
@@ -86,5 +89,13 @@ public class UserProfile {
 
     public String getUser_id() {
         return user_id;
+    }
+
+    public int getDefaultlocationId() {
+        return defaultlocationId;
+    }
+
+    public void setDefaultlocationId(int defaultlocationId) {
+        this.defaultlocationId = defaultlocationId;
     }
 }
