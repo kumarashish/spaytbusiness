@@ -128,7 +128,7 @@ String customerId="";
                 public void afterTextChanged(Editable s) {
                     if((price.getText().length()>0)&&(s.length()>0))
                     {   double val=Double.parseDouble(price.getText().toString().trim())*Integer.parseInt(quantity.getText().toString().trim());
-                        total_price.setText(Double.toString(val)+" £");
+                        total_price.setText(Double.toString(val)+" €");
                         int index=controller.getIndexOfModel(model);
                         model.setQuantity(Integer.parseInt(quantity.getText().toString()));
                         controller.updateModel(model,index);
@@ -263,12 +263,14 @@ String customerId="";
                             invalidQRCodeAlert(Utils.getMessage(value));
 
                             progressBar.setVisibility(View.GONE);
-
+                            submit.setVisibility(View.VISIBLE);
                         }
                     }
 
                 }else{
                     Utils.showToast(MyCart.this,Utils.getMessage(value));
+                    progressBar.setVisibility(View.GONE);
+                    submit.setVisibility(View.VISIBLE);
                 }
             }
         });

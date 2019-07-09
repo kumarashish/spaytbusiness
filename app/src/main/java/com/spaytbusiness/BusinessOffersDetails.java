@@ -331,7 +331,8 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
                                         product.setAdapter(new ArrayAdapter<String>(BusinessOffersDetails.this,
                                                 android.R.layout.simple_spinner_item, businessProductsName));
                                         if (model != null) {
-                                            product.setSelection(getCategoryIndex());
+                                            int catIndex=getCategoryIndex();
+                                            product.setSelection(catIndex);
                                         }
                                         product.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -412,7 +413,7 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
 
     public int getCategoryIndex() {
         for (int i = 0; i < businessProductsList.size(); i++) {
-            if (model.getId().equalsIgnoreCase(businessProductsList.get(i).getId())) {
+            if (model.getProduct_id().equalsIgnoreCase(businessProductsList.get(i).getId())) {
                 return i;
 
             }
@@ -566,7 +567,6 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
                     case 2:
                         if(Utils.getStatus(value))
                         {
-
                                 Utils.showToast(BusinessOffersDetails.this,"Business Offer added sucessfully");
                                 Intent data = new Intent();
                                 setResult(RESULT_OK, data);
