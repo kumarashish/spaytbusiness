@@ -26,8 +26,8 @@ public class BusinessProductModel {
         id = jsonObject.isNull("id") ? "" : jsonObject.getString("id");
         business_id= jsonObject.isNull("business_id") ? "" : jsonObject.getString("business_id");
                 product_category_id= jsonObject.isNull("product_category_id") ? "" : jsonObject.getString("product_category_id");
-                name= jsonObject.isNull("name") ? "" : jsonObject.getString("name");
-                description= jsonObject.isNull("description") ? "" : jsonObject.getString("description");
+                name= jsonObject.isNull("name") ? jsonObject.getString("offer_name"): jsonObject.getString("name");
+                description= jsonObject.isNull("description") ? jsonObject.getString("offer_description") : jsonObject.getString("description");
                 total_price= jsonObject.isNull("total_price") ? "" : jsonObject.getString("total_price");
                 price_per_liter= jsonObject.isNull("price_per_liter") ? "" : jsonObject.getString("price_per_liter");
                 parking_fee_per_hour= jsonObject.isNull("parking_fee_per_hour") ? "" : jsonObject.getString("parking_fee_per_hour");

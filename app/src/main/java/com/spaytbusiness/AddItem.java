@@ -95,8 +95,14 @@ Button submit;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position!=0) {
-                    price.setText(businessproductList.get(position - 1).getTotal_price());
+                    String pricevalue=businessproductList.get(position - 1).getTotal_price();
+                    if(Double.parseDouble(pricevalue)==0)
+                    {
+                        pricevalue=businessproductList.get(position - 1).getPrice_per_liter();
+                    }
+
                     quantity.setText("1");
+                    price.setText(pricevalue);
                 }
             }
 
@@ -185,9 +191,9 @@ public void getProductsList()
                 break;
             case R.id.mycartView:
                 if(controller.getGetMyCart().size()>0) {
-                    int pos=locations.getSelectedItemPosition()-1;
+
                     Intent in=new Intent(this, MyCart.class);
-                    in.putExtra("locationId",businessLocationList.get(pos).getId());
+                    in.putExtra("locationId",Integer.toString(controller.getProfile().getDefaultlocationId()));
                     in.putExtra("customerName",customerName);
                     in.putExtra("customerId",customerId);
 
@@ -249,8 +255,8 @@ public void getProductsList()
                             JSONArray locationproducts=jsonObject.getJSONArray("locationproducts");
                             JSONArray offerproducts=jsonObject.getJSONArray("locationproductoffers");
                             if ((locationproducts.length() > 0) || (offerproducts.length() > 0)) {
-                                  for(int i=0;i<locationproducts.length();i++)
-                                  {BusinessProductModel model=new BusinessProductModel(locationproducts.getJSONObject(i));
+                                  for(int i=0;i<offerproducts.length();i++)
+                                  {BusinessProductModel model=new BusinessProductModel(offerproducts.getJSONObject(i));
                                       businessproductList.add(model);
                                       productNames.add(model.getName());
                                   }
@@ -263,7 +269,8 @@ public void getProductsList()
                                     product.setAdapter(new ArrayAdapter<String>(AddItem.this,android.R.layout.simple_list_item_1,productNames));
                                 }
                                 content.setVisibility(View.VISIBLE);
-                                  progress2.setVisibility(View.GONE);
+                                mainLayout.setVisibility(View.VISIBLE);
+                                  progress.setVisibility(View.GONE);
                             } else {
                                 Utils.showToast(AddItem.this, "No products available for selected location");
                             }
@@ -273,7 +280,7 @@ public void getProductsList()
                         }}else {
                             Utils.showToast(AddItem.this,Utils.getMessage(value));
                         }
-                          progress2.setVisibility(View.GONE);
+                          progress.setVisibility(View.GONE);
                             break;
 
 
@@ -281,15 +288,15 @@ public void getProductsList()
         }
 
 
-        public void getProducts()
-        {
-            if(Utils.isNetworkAvailable(AddItem.this))
-            {apiCall=getProducts;
-                progress2.setVisibility(View.VISIBLE);
-                int pos=locations.getSelectedItemPosition()-1;
-              //  controller.getWebApiCall().postData(Common.getBusinessProductsOffers,controller.getManager().getUserToken(),Common.locationIdKey,new String[]{businessLocationList.get(pos).getId()},this);
-            }
-        }
+////        public void getProducts()
+////        {
+////            if(Utils.isNetworkAvailable(AddItem.this))
+////            {apiCall=getProducts;
+////                progress2.setVisibility(View.VISIBLE);
+////                int pos=locations.getSelectedItemPosition()-1;
+////              //  controller.getWebApiCall().postData(Common.getBusinessProductsOffers,controller.getManager().getUserToken(),Common.locationIdKey,new String[]{businessLocationList.get(pos).getId()},this);
+////            }
+//        }
 
     @Override
     public void onError(String value) {

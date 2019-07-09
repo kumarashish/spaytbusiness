@@ -74,7 +74,6 @@ public class Transactions extends Fragment  implements WebApiResponseCallback{
             public void run() {
               if( Utils.getStatus(value))
               {
-
                   model= new Gson().fromJson(value,  OutstandingOrder.class);
                   setValue();
               }else{

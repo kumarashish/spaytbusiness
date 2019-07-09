@@ -266,7 +266,7 @@ public class ProfileSettings extends Fragment implements WebApiResponseCallback,
                         break;
                     case 2:
                         if(Utils.getStatus(value)==true)
-                        {
+                        {   controller.setProfile(model);
                             Utils.showToast(getActivity(),"Profile Udpated Sucessfully.");
                         }else {
                             Utils.showToast(getActivity(), Utils.getMessage(value));
@@ -304,7 +304,7 @@ public class ProfileSettings extends Fragment implements WebApiResponseCallback,
     public String[] getData() {
 
 
-            return new String[]{salutation.getSelectedItem().toString(),fname.getText().toString(), lname.getText().toString(), email.getText().toString(),Integer.toBinaryString(model.getDefaultlocationId())};
+            return new String[]{salutation.getSelectedItem().toString(),fname.getText().toString(), lname.getText().toString(), email.getText().toString(),Integer.toString(model.getDefaultlocationId())};
 
     }
     public boolean isAllFildsValidated()
