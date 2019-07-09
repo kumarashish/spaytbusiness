@@ -91,7 +91,8 @@ Button submit;
 
        // customerCode=getIntent().getStringExtra("code");
         controller=(AppController)getApplicationContext();
-        getLocation();
+        //getLocation();
+        getProductsList();
 
 //            if(Utils.isNetworkAvailable(AddItem.this))
 //            {apiCall=getCustomerFromCode;
@@ -166,12 +167,12 @@ if((price.getText().length()>0)&&(s.length()>0))
             }
         });
     }
-public void getLocation()
+public void getProductsList()
 {
     if(Utils.isNetworkAvailable(AddItem.this))
-    {apiCall=getLocation;
+    {apiCall=getProducts;
         progress.setVisibility(View.VISIBLE);
-        controller.getWebApiCall().getDataCommon(Common.businessLocationUrl,controller.getManager().getUserToken(),this);
+        controller.getWebApiCall().postData(Common.getBusinessProductsOffers,controller.getManager().getUserToken(),Common.locationIdKey,new String[]{""},this);
     }
 }
     @Override
@@ -309,7 +310,7 @@ public void getLocation()
             {apiCall=getProducts;
                 progress2.setVisibility(View.VISIBLE);
                 int pos=locations.getSelectedItemPosition()-1;
-                controller.getWebApiCall().postData(Common.getBusinessProductsOffers,controller.getManager().getUserToken(),Common.locationIdKey,new String[]{businessLocationList.get(pos).getId()},this);
+              //  controller.getWebApiCall().postData(Common.getBusinessProductsOffers,controller.getManager().getUserToken(),Common.locationIdKey,new String[]{businessLocationList.get(pos).getId()},this);
             }
         }
 

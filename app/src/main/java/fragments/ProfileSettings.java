@@ -16,16 +16,21 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.spaytbusiness.BusinessProductDetails;
 import com.spaytbusiness.BusinessUserDetails;
 import com.spaytbusiness.R;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import common.AppController;
 import common.Common;
 import interfaces.WebApiResponseCallback;
 import models.BusinessProfile;
+import models.Business_locations;
 import models.UserProfile;
 import utils.Utils;
 import utils.Validation;
@@ -49,9 +54,10 @@ public class ProfileSettings extends Fragment implements WebApiResponseCallback 
    ProgressBar progress_bar,progress_bar2;
     Button submit;
     int apiCall;
-    int getData=1,updateData=2;
+    int getData=1,updateData=2,getBusinessList=3;
     public static UserProfile model=null;
     Validation validation;
+    ArrayList<Business_locations> businessLocationList=new ArrayList<>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,9 +134,19 @@ public class ProfileSettings extends Fragment implements WebApiResponseCallback 
             mainLayout.setVisibility(View.GONE);
             apiCall=getData;
             controller.getWebApiCall().getDataCommon(Common.myDetails,controller.getManager().getUserToken(),this);
+            getLocations();
 
         }
         return v;
+    }
+
+
+    public void getLocations(){
+        if(Utils.isNetworkAvailable(getActivity()))
+        {
+            apiCall=getBusinessList;
+            controller.getWebApiCall().getDataCommon(Common.businessLocationUrl,controller.getManager().getUserToken(),this);
+        }
     }
     public int getIndex(String value) {
         int index = 0;
@@ -195,6 +211,22 @@ public void setData()
                         }
                         progress_bar2.setVisibility(View.GONE);
                         submit.setVisibility(View.VISIBLE);
+                        break;
+                    case 3:
+try{
+                        JSONObject jsonObject = new JSONObject(value);
+                        JSONArray businesslocations_details = jsonObject.getJSONArray("businesslocations_details");
+                        if ((businesslocations_details != null) && (businesslocations_details.length() > 0)) {
+                            for (int i = 0; i < businesslocations_details.length(); i++) {
+                                businessLocationList.add(new Business_locations(businesslocations_details.getJSONObject(i)));
+
+                            }
+
+
+                        }
+                } catch (Exception ex) {
+                    ex.fillInStackTrace();
+                }
                         break;
                 }
 
