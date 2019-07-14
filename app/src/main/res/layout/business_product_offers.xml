@@ -474,7 +474,7 @@
                 android:padding="10dp"
                 android:textColor="@color/blue"
                 android:layout_marginLeft="10dp"
-
+                android:inputType="time"
                 android:textSize="18dp"
                 android:hint="From(HH:MM)"
                 android:id="@+id/m_mFrom"
@@ -489,7 +489,7 @@
             <EditText
                 android:background="@drawable/rectangle"
                 android:padding="10dp"
-                android:inputType="number"
+                android:inputType="time"
                 android:entries="@array/business_opnening_options"
                 android:textSize="18dp"
                 android:hint="To(HH:MM)"
@@ -533,7 +533,7 @@
                 android:padding="10dp"
                 android:textColor="@color/blue"
                 android:layout_marginLeft="10dp"
-
+                android:inputType="time"
                 android:textSize="18dp"
                 android:hint="From(HH:MM)"
                 android:id="@+id/m_aFrom"
@@ -548,7 +548,7 @@
             <EditText
                 android:background="@drawable/rectangle"
                 android:padding="10dp"
-                android:inputType="number"
+
                 android:entries="@array/business_opnening_options"
                 android:textSize="18dp"
                 android:hint="To(HH:MM)"
@@ -557,7 +557,7 @@
                 android:textColorHint="@color/grey"
                 android:textColor="@color/blue"
                 android:layout_marginLeft="10dp"
-
+                android:inputType="time"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

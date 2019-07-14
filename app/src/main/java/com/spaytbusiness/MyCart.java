@@ -76,18 +76,16 @@ String customerId="";
             final BusinessProductModel model=controller.getGetMyCart().get(i);
             View row = getLayoutInflater().inflate(R.layout.my_cart_row, null);
 
-            TextView date=(TextView)row.findViewById(R.id.date) ;
             TextView productName=(TextView)row.findViewById(R.id.productName) ;
             final TextView total_price=(TextView)row.findViewById(R.id.total_price);
           final  EditText quantity=(EditText) row.findViewById(R.id.quantity) ;
            final EditText price=(EditText) row.findViewById(R.id.price) ;
 
-            date.setText(getDate());
             productName.setText(model.getName());
             quantity.setText(Integer.toString(model.getQuantity()));
             price.setText(model.getPrice());
             Double priceValue=Double.parseDouble(model.getPrice())*(model.getQuantity());
-            total_price.setText(Double.toString(priceValue)+" £");
+            total_price.setText(Double.toString(priceValue)+" €");
 
             price.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -104,11 +102,11 @@ String customerId="";
                 public void afterTextChanged(Editable s) {
                     if((quantity.getText().length()>0)&&(s.length()>0))
                     {  double val=Double.parseDouble(price.getText().toString())*Integer.parseInt(quantity.getText().toString());
-                        total_price.setText(Double.toString(val)+" £");
+                        total_price.setText(Double.toString(val)+" €");
                         int index=controller.getIndexOfModel(model);
                         model.setPrice(price.getText().toString());
                         controller.updateModel(model,index);
-                        grandTotal.setText(Double.toString(controller.getTotalPrice())+" £");
+                        grandTotal.setText(Double.toString(controller.getTotalPrice())+" €");
                     }
 
                 }
@@ -132,14 +130,15 @@ String customerId="";
                         int index=controller.getIndexOfModel(model);
                         model.setQuantity(Integer.parseInt(quantity.getText().toString()));
                         controller.updateModel(model,index);
-                        grandTotal.setText(Double.toString(controller.getTotalPrice())+" £");
+                        grandTotal.setText(Double.toString(controller.getTotalPrice())+" €");
                     }
                 }
             });
             content.addView(row);
 
         }
-        grandTotal.setText(Double.toString(controller.getTotalPrice())+" £");
+        grandTotal.setText(Double.toString(controller.getTotalPrice())+" €");
+
     }
 
     public String getDate()
@@ -236,7 +235,7 @@ String customerId="";
                             break;
                         case 2:
                             controller.getGetMyCart().clear();
-                         Utils.sucessAlert(MyCart.this,orderId);
+                           Utils.sucessAlert(MyCart.this,orderId);
 
                             break;
                         case 3:
@@ -254,14 +253,14 @@ String customerId="";
                             }catch (Exception ex)
                             {
                                 ex.fillInStackTrace();
-
+                                Utils.showToast(MyCart.this,Utils.getMessage(value));
                                 progressBar.setVisibility(View.GONE);
                                 startActivityForResult(new Intent(MyCart.this,ScanActivity.class),2);
 
                             }
                         }else{
+                            Utils.showToast(MyCart.this,Utils.getMessage(value));
                             invalidQRCodeAlert(Utils.getMessage(value));
-
                             progressBar.setVisibility(View.GONE);
                             submit.setVisibility(View.VISIBLE);
                         }
@@ -281,8 +280,6 @@ String customerId="";
     public void invalidQRCodeAlert(String message)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);;
-
-
         //Setting message manually and performing action on button click
         builder.setMessage(message)
                 .setCancelable(false)

@@ -30,7 +30,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:fontFamily="@font/rgular"
-                android:text="Neue Transaktionen"
+                android:text="NEUE TRANSAKTION"
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"
                 android:textSize="18dp"

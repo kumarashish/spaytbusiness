@@ -34,10 +34,10 @@ public class FirebaseDataReceiver extends BroadcastReceiver {
         if(dataBundle!=null) {
              Log.d(TAG, dataBundle);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                sendNotification(title, dataBundle, context);
+                sendNotification(title,"Your Order Id "+dataBundle+" has been paid" , context);
 
             }else {
-                showNotification(title, dataBundle, context);
+                showNotification(title, "Your Order Id "+dataBundle+" has been paid", context);
             }
            ;
         }

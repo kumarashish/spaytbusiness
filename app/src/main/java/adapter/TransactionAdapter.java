@@ -69,7 +69,7 @@ public class TransactionAdapter extends BaseAdapter  {
         holder.orderstatus.setText("Order status : "+model.getStatus());
         if(model.getPaypalTransactionId()!=null)
         {
-            holder.paymentstatus.setText("Payment status : Paid, Paypal Id "+model.getPaypalTransactionId());
+            holder.paymentstatus.setText("Your Order Id : "+model.getId()+" has been paid.\nPaypal Id : "+model.getPaypalTransactionId());
         }else{
             holder.paymentstatus.setText("Payment : pending");
 

@@ -94,10 +94,10 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
     Button submit;
     @BindView(R.id.heading)
     TextView heading;
-    ArrayList<Business_locations> addedView=new ArrayList<>();
-    ArrayList<Business_locations> businessLocationList=new ArrayList<>();
-    ArrayList<BusinessProductModel>businessProductsList=new ArrayList<>();
-    ArrayList<String>businessProductsName=new ArrayList<>();
+    ArrayList<Business_locations> addedView = new ArrayList<>();
+    ArrayList<Business_locations> businessLocationList = new ArrayList<>();
+    ArrayList<BusinessProductModel> businessProductsList = new ArrayList<>();
+    ArrayList<String> businessProductsName = new ArrayList<>();
     @BindView(R.id.progress_bar2)
     ProgressBar progressBar2;
     @BindView(R.id.progress_bar)
@@ -132,20 +132,21 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
     Dialog dialog;
     int apiCall;
     OnListItemSelected callback;
-    int getProductList=1,addOffer=2,updateOffer=3;
+    int getProductList = 1, addOffer = 2, updateOffer = 3;
     private DatePicker datePicker;
     private Calendar calendar;
     private int year, month, day;
-    boolean isStartDateSelected=false;
-    String startDateValue="";
-    String endDateValue="";
+    boolean isStartDateSelected = false;
+    String startDateValue = "";
+    String endDateValue = "";
+
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.business_product_offers);
         ButterKnife.bind(this);
-        controller=(AppController)getApplicationContext();
-        callback=this;
+        controller = (AppController) getApplicationContext();
+        callback = this;
         back.setOnClickListener(this);
         submit.setOnClickListener(this);
         startDate.setOnClickListener(this);
@@ -156,54 +157,55 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         setValue();
-    mode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (position) {
+        mode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
 
-            case 0:
-                m_mFrom.setText("00:00");
-                m_mTo.setText("23:59");
-                m_aFrom.setText("");
-                m_aTo.setText("");
-               morning_mode.setVisibility(View.VISIBLE);
-                afternoon_mode.setVisibility(View.GONE);
+                    case 0:
+                        m_mFrom.setText("00:00");
+                        m_mTo.setText("23:59");
+                        m_aFrom.setText("");
+                        m_aTo.setText("");
+                        morning_mode.setVisibility(View.VISIBLE);
+                        afternoon_mode.setVisibility(View.GONE);
 
 
-                break;
-            case 1:
-                m_mFrom.setText("");
-                m_mTo.setText("");
-                m_aFrom.setText("");
-                m_aTo.setText("");
-                morning_mode.setVisibility(View.VISIBLE);
-                afternoon_mode.setVisibility(View.GONE);
-                break;
-            case 2:
-                m_mFrom.setText("");
-                m_mTo.setText("");
-                m_aFrom.setText("");
-                m_aTo.setText("");
-                morning_mode.setVisibility(View.VISIBLE);
-                afternoon_mode.setVisibility(View.VISIBLE);
-                break;
-            case 3:
-                m_mFrom.setText("");
-                m_mTo.setText("");
-                m_aFrom.setText("");
-                m_aTo.setText("");
-                morning_mode.setVisibility(View.GONE);
-                afternoon_mode.setVisibility(View.GONE);
-                break;
-        }
+                        break;
+                    case 1:
+                        m_mFrom.setText("");
+                        m_mTo.setText("");
+                        m_aFrom.setText("");
+                        m_aTo.setText("");
+                        morning_mode.setVisibility(View.VISIBLE);
+                        afternoon_mode.setVisibility(View.GONE);
+                        break;
+                    case 2:
+                        m_mFrom.setText("");
+                        m_mTo.setText("");
+                        m_aFrom.setText("");
+                        m_aTo.setText("");
+                        morning_mode.setVisibility(View.VISIBLE);
+                        afternoon_mode.setVisibility(View.VISIBLE);
+                        break;
+                    case 3:
+                        m_mFrom.setText("");
+                        m_mTo.setText("");
+                        m_aFrom.setText("");
+                        m_aTo.setText("");
+                        morning_mode.setVisibility(View.GONE);
+                        afternoon_mode.setVisibility(View.GONE);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-});
-    }
     @Override
     protected Dialog onCreateDialog(int id) {
         // TODO Auto-generated method stub
@@ -223,46 +225,48 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
                     // arg1 = year
                     // arg2 = month
                     // arg3 = day
-                    showDate(arg1, arg2+1, arg3);
+                    showDate(arg1, arg2 + 1, arg3);
                 }
             };
+
     private void showDate(int year, int month, int day) {
-        String monthValue=Integer.toString(month);
-        String dayValue=Integer.toString(day);
+        String monthValue = Integer.toString(month);
+        String dayValue = Integer.toString(day);
 
-        if(month<10)
-        {
-            monthValue="0"+month;
+        if (month < 10) {
+            monthValue = "0" + month;
         }
-        if(day<10)
-        {
-            dayValue="0"+day;
+        if (day < 10) {
+            dayValue = "0" + day;
         }
-       if( isStartDateSelected) {
+        if (isStartDateSelected) {
 
 
-           startDate.setText(new StringBuilder().append(year).append("-")
-                   .append(monthValue).append("-").append(dayValue));
-           startDateValue=startDate.getText().toString();
+            startDate.setText(new StringBuilder().append(year).append("-")
+                    .append(monthValue).append("-").append(dayValue));
+            startDateValue = startDate.getText().toString();
 
-       }else {
+        } else {
 
-           end_date.setText(new StringBuilder().append(year).append("-")
-                   .append(monthValue).append("-").append(dayValue));
-           endDateValue=end_date.getText().toString();
-       }
+            end_date.setText(new StringBuilder().append(year).append("-")
+                    .append(monthValue).append("-").append(dayValue));
+            endDateValue = end_date.getText().toString();
+        }
     }
+
     public void setValue() {
         if (model == null) {
             heading.setText("Add Offer");
+            product.setEnabled(true);
         } else {
             //product
+            product.setEnabled(false);
             offername.setText(model.getOffer_name());
             description.setText(model.getOffer_description());
             startDate.setText(model.getFrom_date());
-            startDateValue=startDate.getText().toString();
+            startDateValue = startDate.getText().toString();
             end_date.setText(model.getTo_date());
-            endDateValue=end_date.getText().toString();
+            endDateValue = end_date.getText().toString();
             total_price.setText(model.getTotal_price());
             per_liter_price.setText(model.getPrice_per_liter());
             parking_fee_per_hou.setText(model.getParking_fee_per_hour());
@@ -296,118 +300,13 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
             }
             addView();
         }
-            if (Utils.isNetworkAvailable(BusinessOffersDetails.this)) {
-                apiCall = getProductList;
-                progressBar2.setVisibility(View.VISIBLE);
-                mainView.setVisibility(View.GONE);
-                controller.getWebApiCall().getDataCommon(Common.businessLocationUrl, controller.getManager().getUserToken(), this);
-            }
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
+        if (Utils.isNetworkAvailable(BusinessOffersDetails.this)) {
+            apiCall = getProductList;
+            progressBar2.setVisibility(View.VISIBLE);
+            mainView.setVisibility(View.GONE);
+            controller.getWebApiCall().getDataCommon(Common.businessProducts, controller.getManager().getUserToken(), this);
+        }
 
-                    String result = controller.getWebApiCall().getData(Common.businessProducts,controller.getManager().getUserToken());
-                    if (result != null) {
-                        if (Utils.getStatus(result) == true) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(result);
-                                JSONArray productList = jsonObject.getJSONArray("businessproducts_details");
-                                if ((productList != null) && (productList.length() > 0)) {
-                                    for (int i = 0; i < productList.length(); i++) {
-                                        BusinessProductModel model = new BusinessProductModel(productList.getJSONObject(i));
-                                        businessProductsList.add(model);
-                                        businessProductsName.add(model.getName());
-                                    }
-                                }
-
-
-                            } catch (Exception ex) {
-                                ex.fillInStackTrace();
-                            }
-                            if (businessProductsList.size() > 0) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        product.setAdapter(new ArrayAdapter<String>(BusinessOffersDetails.this,
-                                                android.R.layout.simple_spinner_item, businessProductsName));
-                                        if (model != null) {
-                                            int catIndex=getCategoryIndex();
-                                            product.setSelection(catIndex);
-                                        }
-                                        product.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                            @RequiresApi(api = Build.VERSION_CODES.O)
-                                            @Override
-                                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                BusinessProductModel model=businessProductsList.get(position);
-                                                TextView child = (TextView) parent.getChildAt(0);
-                                                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                                    child.setTextColor(getResources().getColor(R.color.blue, getTheme()));
-                                                }else {
-                                                    child.setTextColor(getResources().getColor(R.color.blue));
-                                                }
-                                                child.setTextSize(18);
-
-                                                if (Double.parseDouble(model.getTotal_price())>0.0) {
-                                                    total_price_view.setVisibility(View.VISIBLE);
-                                                    view1.setVisibility(View.VISIBLE);
-                                                    per_liter_price_view.setVisibility(View.GONE);
-                                                    view2.setVisibility(View.GONE);
-                                                    per_hour_price_view.setVisibility(View.GONE);
-                                                    view3.setVisibility(View.GONE);
-                                                    minimum_parking_hours_view.setVisibility(View.GONE);
-                                                    view4.setVisibility(View.GONE);
-                                                    maximum_parking_fee_perday_view.setVisibility(View.GONE);
-                                                    view5.setVisibility(View.GONE);
-                                                }
-                                                else if (Double.parseDouble(model.getPrice_per_liter())> 0.0) {
-                                                    total_price_view.setVisibility(View.GONE);
-                                                    view1.setVisibility(View.GONE);
-                                                    per_liter_price_view.setVisibility(View.VISIBLE);
-                                                    view2.setVisibility(View.VISIBLE);
-                                                    per_hour_price_view.setVisibility(View.GONE);
-                                                    view3.setVisibility(View.GONE);
-                                                    minimum_parking_hours_view.setVisibility(View.GONE);
-                                                    view4.setVisibility(View.GONE);
-                                                    maximum_parking_fee_perday_view.setVisibility(View.GONE);
-                                                    view5.setVisibility(View.GONE);
-                                                }else{
-                                                    total_price_view.setVisibility(View.GONE);
-                                                    view1.setVisibility(View.GONE);
-                                                    per_liter_price_view.setVisibility(View.GONE);
-                                                    view2.setVisibility(View.GONE);
-                                                    per_hour_price_view.setVisibility(View.VISIBLE);
-                                                    view3.setVisibility(View.VISIBLE);
-                                                    minimum_parking_hours_view.setVisibility(View.VISIBLE);
-                                                    view4.setVisibility(View.VISIBLE);
-                                                    maximum_parking_fee_perday_view.setVisibility(View.VISIBLE);
-                                                    view5.setVisibility(View.VISIBLE);
-                                                }
-
-                                                //  child.setTypeface(getResources().getFont(R.font.light));
-                                            }
-
-                                            @Override
-                                            public void onNothingSelected(AdapterView<?> parent) {
-
-                                            }
-                                        });
-                                        progressBar2.setVisibility(View.GONE);
-                                        mainView.setVisibility(View.VISIBLE);
-
-                                    }
-
-                                });
-                            }else{
-                                Utils.showToast(BusinessOffersDetails.this,"You dont have any product,please add atleast one product first.");
-                            }
-
-                        }
-
-                    }
-
-                }
-            });
-            t.start();
 
     }
 
@@ -422,8 +321,7 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
         return 0;
     }
 
-    public void addView()
-    {
+    public void addView() {
         locationList.removeAllViews();
         for (int i = 0; i < addedView.size(); i++) {
             Business_locations modelItems = addedView.get(i);
@@ -439,8 +337,8 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Business_locations modell=addedView.get(v.getId());
-                    if(modell!=null) {
+                    Business_locations modell = addedView.get(v.getId());
+                    if (modell != null) {
                         removeItemFromList(modell);
                     }
 
@@ -452,6 +350,7 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
             locationList.addView(view);
         }
     }
+
     public boolean isItemPresent(Business_locations modell) {
         boolean status = false;
         for (int i = 0; i < addedView.size(); i++) {
@@ -463,6 +362,7 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
         }
         return status;
     }
+
     public void addItemToList(Business_locations modell) {
 
         if (isItemPresent(modell)) {
@@ -474,48 +374,47 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
         }
 
     }
-    public void removeItemFromList(Business_locations modell)
-    {
-        if(isItemPresent(modell))
-        {
+
+    public void removeItemFromList(Business_locations modell) {
+        if (isItemPresent(modell)) {
             addedView.remove(modell);
             addView();
         }
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.back:
                 finish();
                 break;
             case R.id.add_location:
-                if(businessLocationList.size()>0) {
+                if (businessLocationList.size() > 0) {
                     showAlert();
-                }else{
-                    Utils.showToast(BusinessOffersDetails.this,"You have not added any business location,Please add business location");
+                } else {
+                    Utils.showToast(BusinessOffersDetails.this, "You have not added any business location,Please add business location");
                 }
                 break;
             case R.id.startDate:
-                isStartDateSelected=true;
+                isStartDateSelected = true;
                 showDialog(999);
                 break;
             case R.id.end_date:
-                isStartDateSelected=false;
+                isStartDateSelected = false;
                 showDialog(999);
                 break;
             case R.id.submit:
-                if(isFieldsValidated()) {
+                if (isFieldsValidated()) {
                     submit.setVisibility(View.GONE);
                     progressBar.setVisibility(View.VISIBLE);
                     String url = Common.updateBusinessOffers;
                     String[] keys = null;
                     if (model == null) {
-                        apiCall=addOffer;
+                        apiCall = addOffer;
                         url = Common.addBusinessOffers;
                         keys = Common.addBusinessOffersKeys;
                     } else {
-                        apiCall=updateOffer;
+                        apiCall = updateOffer;
                         keys = Common.updateBusinessOffersKeys;
                     }
 
@@ -527,16 +426,14 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
         }
 
     }
-    public void showAlert()
-    {
+
+    public void showAlert() {
         dialog = new Dialog(BusinessOffersDetails.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.choose_location);
-
         ListView listView = (ListView) dialog.findViewById(R.id.listView);
-        listView.setAdapter(new BusinessLocationAdapter( businessLocationList,BusinessOffersDetails.this,callback));
-
+        listView.setAdapter(new BusinessLocationAdapter(businessLocationList, BusinessOffersDetails.this, callback));
         dialog.show();
     }
 
@@ -547,49 +444,33 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
             public void run() {
                 switch (apiCall) {
                     case 1:
-                        try {
-                            businessLocationList.clear();
-                            JSONObject jsonObject = new JSONObject(value);
-                            JSONArray businesslocations_details = jsonObject.getJSONArray("businesslocations_details");
-                            if ((businesslocations_details != null) && (businesslocations_details.length() > 0)) {
-                                for (int i = 0; i < businesslocations_details.length(); i++) {
-                                    businessLocationList.add(new Business_locations(businesslocations_details.getJSONObject(i)));
-
-                                }
-
-
-                            }
-                        } catch (Exception ex) {
-                            ex.fillInStackTrace();
-                        }
+                        handleProduct(value);
 
                         break;
                     case 2:
-                        if(Utils.getStatus(value))
-                        {
-                                Utils.showToast(BusinessOffersDetails.this,"Business Offer added sucessfully");
-                                Intent data = new Intent();
-                                setResult(RESULT_OK, data);
-                                finish();
+                        if (Utils.getStatus(value)) {
+                            Utils.showToast(BusinessOffersDetails.this, "Business Offer added sucessfully");
+                            Intent data = new Intent();
+                            setResult(RESULT_OK, data);
+                            finish();
 
-                        }else{
+                        } else {
                             submit.setVisibility(View.VISIBLE);
                             progressBar.setVisibility(View.GONE);
-                            Utils.showToast(BusinessOffersDetails.this,Utils.getMessage(value));
+                            Utils.showToast(BusinessOffersDetails.this, Utils.getMessage(value));
                         }
                         break;
                     case 3:
-                if(Utils.getStatus(value))
-                {
-                    Utils.showToast(BusinessOffersDetails.this,"Business Offer Updated sucessfully");
-                    Intent data = new Intent();
-                    setResult(RESULT_OK, data);
-                    finish();
-                }else{
-                    submit.setVisibility(View.VISIBLE);
-                    progressBar.setVisibility(View.GONE);
-                    Utils.showToast(BusinessOffersDetails.this,Utils.getMessage(value));
-                }
+                        if (Utils.getStatus(value)) {
+                            Utils.showToast(BusinessOffersDetails.this, "Business Offer Updated sucessfully");
+                            Intent data = new Intent();
+                            setResult(RESULT_OK, data);
+                            finish();
+                        } else {
+                            submit.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+                            Utils.showToast(BusinessOffersDetails.this, Utils.getMessage(value));
+                        }
                         break;
                 }
             }
@@ -620,29 +501,20 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
 
     }
 
-    public boolean isFieldsValidated()
-    {
-        if((offername.getText().length()>0)&&(description.getText().length()>0)&&(startDateValue.length()>0)&&(startDateValue.length()>0)&&(endDateValue.length()>0)&&(addedView.size()>0))
-        {
+    public boolean isFieldsValidated() {
+        if ((offername.getText().length() > 0) && (description.getText().length() > 0) && (startDateValue.length() > 0) && (startDateValue.length() > 0) && (endDateValue.length() > 0) && (addedView.size() > 0)) {
             return true;
-        }else{
-            if(offername.getText().length()==0)
-            {
-                Utils.showToast(BusinessOffersDetails.this,"Please enter offer name");
-            }else if(description.getText().length()==0)
-            {
-                Utils.showToast(BusinessOffersDetails.this,"Please enter description");
-            }
-            else if(startDateValue.length()==0)
-            {
-                Utils.showToast(BusinessOffersDetails.this,"Please select offer start date");
-            }
-            else if(endDateValue.length()==0)
-            {
-                Utils.showToast(BusinessOffersDetails.this,"Please select offer end date");
-            }else if(addedView.size()==0)
-            {
-                Utils.showToast(BusinessOffersDetails.this,"Please add business location");
+        } else {
+            if (offername.getText().length() == 0) {
+                Utils.showToast(BusinessOffersDetails.this, "Please enter offer name");
+            } else if (description.getText().length() == 0) {
+                Utils.showToast(BusinessOffersDetails.this, "Please enter description");
+            } else if (startDateValue.length() == 0) {
+                Utils.showToast(BusinessOffersDetails.this, "Please select offer start date");
+            } else if (endDateValue.length() == 0) {
+                Utils.showToast(BusinessOffersDetails.this, "Please select offer end date");
+            } else if (addedView.size() == 0) {
+                Utils.showToast(BusinessOffersDetails.this, "Please add business location");
             }
             return false;
         }
@@ -734,6 +606,7 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
         }
 
     }
+
     public String getProductId(String categoryName) {
         for (int i = 0; i < businessProductsList.size(); i++) {
             if (categoryName.equalsIgnoreCase(businessProductsList.get(i).getName())) {
@@ -743,16 +616,14 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
         }
         return "";
     }
-    public String getBusinessId()
-    {
-        String id="";
-        for(int i=0;i<addedView.size();i++)
-        {
-            if(i==0)
-            {
-                id=addedView.get(i).getId();
-            }else{
-                id+=","+addedView.get(i).getId();
+
+    public String getBusinessId() {
+        String id = "";
+        for (int i = 0; i < addedView.size(); i++) {
+            if (i == 0) {
+                id = addedView.get(i).getId();
+            } else {
+                id += "," + addedView.get(i).getId();
             }
         }
         return id;
@@ -760,7 +631,110 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
 
     @Override
     protected void onDestroy() {
-        model=null;
+        model = null;
         super.onDestroy();
     }
+
+
+    public void handleProduct(String result) {
+        if (result != null) {
+            if (Utils.getStatus(result) == true) {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONArray productList = jsonObject.getJSONArray("businessproducts_details");
+                    if ((productList != null) && (productList.length() > 0)) {
+                        for (int i = 0; i < productList.length(); i++) {
+                            BusinessProductModel model = new BusinessProductModel(productList.getJSONObject(i));
+                            businessProductsList.add(model);
+                            businessProductsName.add(model.getName());
+                        }
+                    }
+
+
+                } catch (Exception ex) {
+                    ex.fillInStackTrace();
+                }
+                if (businessProductsList.size() > 0) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            product.setAdapter(new ArrayAdapter<String>(BusinessOffersDetails.this,
+                                    android.R.layout.simple_spinner_item, businessProductsName));
+                            if (model != null) {
+                                businessLocationList.clear();
+                                int catIndex = getCategoryIndex();
+                                product.setSelection(catIndex);
+                                businessLocationList.addAll(businessProductsList.get(catIndex).getList());
+                            }
+                            product.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @RequiresApi(api = Build.VERSION_CODES.O)
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    BusinessProductModel model = businessProductsList.get(position);
+                                    businessLocationList.clear();
+                                    businessLocationList.addAll(businessProductsList.get(position).getList());
+                                    TextView child = (TextView) parent.getChildAt(0);
+                                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                        child.setTextColor(getResources().getColor(R.color.blue, getTheme()));
+                                    } else {
+                                        child.setTextColor(getResources().getColor(R.color.blue));
+                                    }
+                                    child.setTextSize(18);
+
+                                    if (Double.parseDouble(model.getTotal_price()) > 0.0) {
+                                        total_price_view.setVisibility(View.VISIBLE);
+                                        view1.setVisibility(View.VISIBLE);
+                                        per_liter_price_view.setVisibility(View.GONE);
+                                        view2.setVisibility(View.GONE);
+                                        per_hour_price_view.setVisibility(View.GONE);
+                                        view3.setVisibility(View.GONE);
+                                        minimum_parking_hours_view.setVisibility(View.GONE);
+                                        view4.setVisibility(View.GONE);
+                                        maximum_parking_fee_perday_view.setVisibility(View.GONE);
+                                        view5.setVisibility(View.GONE);
+                                    } else if (Double.parseDouble(model.getPrice_per_liter()) > 0.0) {
+                                        total_price_view.setVisibility(View.GONE);
+                                        view1.setVisibility(View.GONE);
+                                        per_liter_price_view.setVisibility(View.VISIBLE);
+                                        view2.setVisibility(View.VISIBLE);
+                                        per_hour_price_view.setVisibility(View.GONE);
+                                        view3.setVisibility(View.GONE);
+                                        minimum_parking_hours_view.setVisibility(View.GONE);
+                                        view4.setVisibility(View.GONE);
+                                        maximum_parking_fee_perday_view.setVisibility(View.GONE);
+                                        view5.setVisibility(View.GONE);
+                                    } else {
+                                        total_price_view.setVisibility(View.GONE);
+                                        view1.setVisibility(View.GONE);
+                                        per_liter_price_view.setVisibility(View.GONE);
+                                        view2.setVisibility(View.GONE);
+                                        per_hour_price_view.setVisibility(View.VISIBLE);
+                                        view3.setVisibility(View.VISIBLE);
+                                        minimum_parking_hours_view.setVisibility(View.VISIBLE);
+                                        view4.setVisibility(View.VISIBLE);
+                                        maximum_parking_fee_perday_view.setVisibility(View.VISIBLE);
+                                        view5.setVisibility(View.VISIBLE);
+                                    }
+
+                                    //  child.setTypeface(getResources().getFont(R.font.light));
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+                            });
+                            progressBar2.setVisibility(View.GONE);
+                            mainView.setVisibility(View.VISIBLE);
+
+                        }
+
+                    });
+                } else {
+                    Utils.showToast(BusinessOffersDetails.this, "You dont have any product,please add atleast one product first.");
+                }
+            }
+        }
+    }
 }
+

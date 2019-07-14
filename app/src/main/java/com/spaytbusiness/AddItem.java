@@ -126,7 +126,7 @@ Button submit;
             public void afterTextChanged(Editable s) {
 if((price.getText().length()>0)&&(s.length()>0))
 {  double val=Double.parseDouble(price.getText().toString())*Integer.parseInt(quantity.getText().toString());
-    total.setText(Double.toString(val)+" £");
+    total.setText(Double.toString(val)+" €");
 }
             }
         });
@@ -145,7 +145,7 @@ if((price.getText().length()>0)&&(s.length()>0))
             public void afterTextChanged(Editable s) {
                 if((quantity.getText().length()>0)&&(s.length()>0))
                 {  double val=Double.parseDouble(price.getText().toString())*Integer.parseInt(quantity.getText().toString());
-                    total.setText(Double.toString(val)+" £");
+                    total.setText(Double.toString(val)+" €");
                 }
             }
         });
@@ -252,25 +252,30 @@ public void getProductsList()
                         try {
                             productNames.add("Select");
                             JSONObject jsonObject=new JSONObject(value);
-                            JSONArray locationproducts=jsonObject.getJSONArray("locationproducts");
-                            JSONArray offerproducts=jsonObject.getJSONArray("locationproductoffers");
-                            if ((locationproducts.length() > 0) || (offerproducts.length() > 0)) {
-                                  for(int i=0;i<offerproducts.length();i++)
-                                  {BusinessProductModel model=new BusinessProductModel(offerproducts.getJSONObject(i));
-                                      businessproductList.add(model);
-                                      productNames.add(model.getName());
-                                  }
-                                for(int i=0;i<offerproducts.length();i++)
-                                {
-                                    offerproductList.add(new BusinessProductModel(offerproducts.getJSONObject(i)));
+                            JSONArray locationproducts=jsonObject.isNull("locationproducts")?new JSONArray():jsonObject.getJSONArray("locationproducts");
+                            JSONArray offerproducts=jsonObject.isNull("locationproductoffers")?new JSONArray():jsonObject.getJSONArray("locationproductoffers");
+                            if ((offerproducts.length() > 0) || (locationproducts.length() > 0)) {
+                                if ((offerproducts.length() > 0)) {
+                                    for (int i = 0; i < offerproducts.length(); i++) {
+                                        BusinessProductModel model = new BusinessProductModel(offerproducts.getJSONObject(i));
+                                        businessproductList.add(model);
+                                        productNames.add(model.getName());
+                                    }
                                 }
-                                if(productNames.size()>0)
-                                {
-                                    product.setAdapter(new ArrayAdapter<String>(AddItem.this,android.R.layout.simple_list_item_1,productNames));
+                                if (locationproducts.length() > 0) {
+                                    for (int i = 0; i < locationproducts.length(); i++) {
+                                        BusinessProductModel model = new BusinessProductModel(locationproducts.getJSONObject(i));
+                                        businessproductList.add(model);
+                                        productNames.add(model.getName());
+                                    }
+                                }
+
+                                if (productNames.size() > 0) {
+                                    product.setAdapter(new ArrayAdapter<String>(AddItem.this, android.R.layout.simple_list_item_1, productNames));
                                 }
                                 content.setVisibility(View.VISIBLE);
                                 mainLayout.setVisibility(View.VISIBLE);
-                                  progress.setVisibility(View.GONE);
+                                progress.setVisibility(View.GONE);
                             } else {
                                 Utils.showToast(AddItem.this, "No products available for selected location");
                             }
