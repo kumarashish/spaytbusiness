@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <RelativeLayout
+            android:background="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <ImageView
+                android:id="@+id/back"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/back"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp" />
+            <TextView
+                android:gravity="center"
+
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/rgular"
+                android:text="Transaktionsdetails"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </RelativeLayout>
+        <ProgressBar
+         android:visibility="gone"
+            android:id="@+id/progressbar"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp" />
+
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/contentView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ScrollView
+                android:layout_marginBottom="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:orientation="vertical"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+
+                        android:layout_marginTop="10dp"
+                        android:weightSum="5"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+                        <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/rgular"
+                            android:paddingLeft="10dp"
+                            android:textColor="@color/darkText"
+                            android:layout_weight="2"
+
+                            android:gravity="left|center_vertical"
+                            android:text="PRODUKT"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/rgular"
+                            android:paddingLeft="10dp"
+                            android:textColor="@color/darkText"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="MENGE"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/rgular"
+                            android:paddingLeft="10dp"
+                            android:textColor="@color/darkText"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="UST €"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/rgular"
+                            android:paddingLeft="10dp"
+                            android:textColor="@color/darkText"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="BRUTTO €"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent" />
+
+
+                    </LinearLayout>
+                    <View
+                        android:layout_marginTop="5dp"
+                        android:background="@color/darkText"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+
+
+                    <LinearLayout
+                        android:id="@+id/content"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"></LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:weightSum="3"
+                        android:orientation="horizontal"
+                        android:background="@color/lightText"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+
+                        <TextView
+                            android:paddingLeft="10dp"
+                            android:textColor="@color/blue"
+                            android:layout_weight="1"
+                            android:gravity="left|center_vertical"
+                            android:text="GESAMTBETRAG"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:text=""
+                            android:textColor="@color/blue"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:id="@+id/grand_total"
+                            android:text=""
+                            android:textColor="@color/blue"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"/>
+                </LinearLayout>
+            </ScrollView>
+            <LinearLayout
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/download"
+                    android:fontFamily="@font/light"
+                    android:textSize="14dp"
+                    android:textColor="@color/white"
+                    android:text="Herunterladen"
+                    android:layout_marginRight="5dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/blue"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp" />
+                <Button
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:id="@+id/email"
+                    android:fontFamily="@font/light"
+                    android:textSize="14dp"
+                    android:textColor="@color/white"
+                    android:text="Email"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/blue"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp" />
+                <ProgressBar
+                    android:visibility="gone"
+                    android:id="@+id/progressbar2"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

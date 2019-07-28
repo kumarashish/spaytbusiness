@@ -158,8 +158,6 @@ public class ProfileSettings extends Fragment implements WebApiResponseCallback,
             mainLayout.setVisibility(View.GONE);
             apiCall=getData;
             controller.getWebApiCall().getDataCommon(Common.myDetails,controller.getManager().getUserToken(),this);
-
-
         }
         return v;
     }

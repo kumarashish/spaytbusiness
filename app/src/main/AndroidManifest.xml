@@ -28,6 +28,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".TransactionDetails"
+            android:screenOrientation="portrait" />s
         <activity
             android:name=".ForgetPassword"
             android:screenOrientation="portrait" />
@@ -72,6 +74,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".BusinessOffersDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Payout"
+            android:screenOrientation="portrait" />
+        <activity android:name=".PayoutOrders"
             android:screenOrientation="portrait" />
         <activity
             android:screenOrientation="portrait"

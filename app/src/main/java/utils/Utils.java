@@ -161,7 +161,7 @@ public static JSONArray getJSonArray(String value)
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
     public static AlertDialog getProgressDailog(Activity act)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(act);

@@ -79,6 +79,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         transactions.setOnClickListener(this);
         notifications.setOnClickListener(this);
         locations.setOnClickListener(this);
+
         products.setOnClickListener(this);
         offers.setOnClickListener(this);
         businessSettings.setOnClickListener(this);

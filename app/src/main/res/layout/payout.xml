@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:background="@color/blue"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/back"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+        <TextView
+            android:gravity="center"
+
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/rgular"
+            android:text="Payout"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:background="@drawable/bg"
+                android:layout_width="match_parent"
+                android:layout_height="160dp" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="160dp">
+                <TextView
+                    android:gravity="center"
+                    android:id="@+id/name"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="50dp"
+                    android:fontFamily="@font/bold"
+                    android:textSize="18dp"
+                    android:text="Payouts"
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/count"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/rgular"
+                    android:textSize="18dp"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
+        <ImageView
+            android:id="@+id/create"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="-30dp"
+            android:layout_gravity="end"
+            android:padding="20dp"
+            android:background="@drawable/blue_circe"
+            android:tint="@color/white"
+            android:src="@drawable/add"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:visibility="gone"
+                android:progressDrawable="@color/blue"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <ListView
+                android:divider="@null"
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:id="@+id/nodata"
+                android:visibility="gone"
+                android:textSize="18dp"
+                android:gravity="center"
+                android:text="No data"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</RelativeLayout>
+
+
+

@@ -1,6 +1,7 @@
 package adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.spaytbusiness.R;
+import com.spaytbusiness.TransactionDetails;
 
 import org.w3c.dom.Text;
 
@@ -47,7 +49,7 @@ public class TransactionAdapter extends BaseAdapter  {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        OutstandingOrder.OrderDatum model=orderData.get(position);
+        final OutstandingOrder.OrderDatum model=orderData.get(position);
         if (convertView == null) {
             holder = new ViewHolder();
 
@@ -57,6 +59,7 @@ public class TransactionAdapter extends BaseAdapter  {
             holder.paymentstatus=(TextView)convertView.findViewById(R.id.payment_status);
             holder.orderstatus=(TextView)convertView.findViewById(R.id.order_status);
             holder.date=(TextView)convertView.findViewById(R.id.order_date);
+            holder.details=(View)convertView.findViewById(R.id.next);
 
 
         } else {
@@ -74,10 +77,19 @@ public class TransactionAdapter extends BaseAdapter  {
             holder.paymentstatus.setText("Payment : pending");
 
         }
+        holder.details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in=new Intent(activity, TransactionDetails.class);
+                in.putExtra("orderId",model.getId());
+                activity.startActivity(in);
+            }
+        });
 
         return convertView;
     }
     public class ViewHolder{
 TextView name,amount,orderstatus,date,paymentstatus;
+View details;
     }
 }

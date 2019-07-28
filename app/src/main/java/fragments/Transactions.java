@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.spaytbusiness.AddItem;
 import com.spaytbusiness.NewTransaction;
+import com.spaytbusiness.Payout;
 import com.spaytbusiness.R;
 
 import javax.net.ssl.SSLEngineResult;
@@ -31,7 +32,7 @@ import models.OutstandingOrder;
 import utils.Utils;
 
 public class Transactions extends Fragment  implements WebApiResponseCallback{
-    Button new_transaction;
+    Button new_transaction,payout;
     AppController controller;
     ProgressBar progress_bar,progress_bar2;
     int apiCall;
@@ -53,12 +54,19 @@ public class Transactions extends Fragment  implements WebApiResponseCallback{
         View v=inflater.inflate(R.layout.transactions, container, false);
         progress_bar=(ProgressBar)v.findViewById(R.id.progressbar);
         new_transaction=(Button)v.findViewById(R.id.new_transaction);
+        payout=(Button)v.findViewById(R.id.payout);
         transactions=(ListView)v.findViewById(R.id.listView);
         noTransactions=(TextView)v.findViewById(R.id.no_transactionView);
         new_transaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivityForResult(new Intent(getActivity(), AddItem.class),2);
+            }
+        });
+        payout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), Payout.class));
             }
         });
         ButterKnife.bind(getActivity());
