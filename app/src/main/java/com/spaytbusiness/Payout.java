@@ -200,14 +200,22 @@ public class Payout extends Activity implements WebApiResponseCallback, View.OnC
     }
 
     @Override
-    public void onDetailsClick(final List<PayoutModel.PayoutConsumerOrder> list) {
+    public void onDetailsClick(final List<PayoutModel.PayoutConsumerOrder> list,final String payoutId) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 PayoutOrders.list = list;
-                startActivity(new Intent(Payout.this, PayoutOrders.class));
+                PayoutOrders.payoutId=payoutId;
+                startActivityForResult(new Intent(Payout.this, PayoutOrders.class),2);
             }
         });
 
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                getOutStandingPayout();
+            }
+        }
     }
 }

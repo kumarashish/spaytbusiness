@@ -200,7 +200,7 @@
                 android:layout_height="match_parent">
                 <TextView
                 android:layout_margin="10dp"
-                android:text="Artikelbezeicghnung"
+                android:text="Artikelbezeichnungs"
                 android:textSize="16dp"
                 android:textColor="@color/darkText"
                 android:layout_width="match_parent"
@@ -252,7 +252,7 @@
                     android:layout_height="1dp"/>
                 <TextView
                     android:layout_margin="10dp"
-                    android:text="Preise"
+                    android:text="Preis"
                     android:textSize="16dp"
                     android:textColor="@color/darkText"
                     android:layout_width="match_parent"

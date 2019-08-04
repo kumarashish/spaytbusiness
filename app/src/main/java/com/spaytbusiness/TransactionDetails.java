@@ -64,6 +64,8 @@ public class TransactionDetails extends Activity implements WebApiResponseCallba
         back.setOnClickListener(this);
         email.setOnClickListener(this);
         download.setOnClickListener(this);
+        email.setVisibility(View.GONE);
+        download.setVisibility(View.GONE);
         if (Utils.isNetworkAvailable(TransactionDetails.this)) {
             progressBar.setVisibility(View.VISIBLE);
             contentView.setVisibility(View.GONE);

@@ -12,6 +12,7 @@ import com.spaytbusiness.R;
 
 import java.util.List;
 
+import interfaces.OnDeleteOrderClickListner;
 import interfaces.PayoutClickListners;
 import models.PayoutModel;
 
@@ -19,12 +20,13 @@ public class PayoutOrderAdapter  extends BaseAdapter {
     Activity activity;
     List<PayoutModel.PayoutConsumerOrder> orderData;
     LayoutInflater inflater;
-
+    OnDeleteOrderClickListner callback;
 
     public PayoutOrderAdapter(Activity activity, List<PayoutModel.PayoutConsumerOrder> orderData) {
         this.activity = activity;
         this.orderData = orderData;
         inflater = LayoutInflater.from(activity);
+        callback=( OnDeleteOrderClickListner)activity;
 
     }
 
@@ -56,6 +58,7 @@ public class PayoutOrderAdapter  extends BaseAdapter {
             holder.commision = (TextView) convertView.findViewById(R.id.commision);
             holder.paypalfess = (TextView) convertView.findViewById(R.id.paypal_fess);
             holder.date = (TextView) convertView.findViewById(R.id.payout_date);
+            holder.delete_btn = (Button) convertView.findViewById(R.id.delete_btn);
 
 
         } else {
@@ -67,13 +70,26 @@ public class PayoutOrderAdapter  extends BaseAdapter {
         holder.commision.setText("Commission Fee : " + model.getCommissionFee() + " €");
         holder.date.setText("Created_on : " + model.getCreatedOn());
         holder.paypalfess.setText("Paypal Fess : " + model.getPaypalFee());
+        holder.delete_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callback.onDeleteClick(model);
+            }
+        });
 
 
         return convertView;
     }
 
+    @Override
+    public void notifyDataSetChanged() {
+
+        super.notifyDataSetChanged();
+    }
+
     public class ViewHolder {
         TextView orderId, totalAmount, commision, paypalfess, date;
+        Button delete_btn;
 
     }
 }

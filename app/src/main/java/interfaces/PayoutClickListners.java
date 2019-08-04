@@ -7,5 +7,5 @@ import models.PayoutModel.PayoutConsumerOrder;
 
 public interface PayoutClickListners {
     public void onDeleteClick(String orderId);
-    public void onDetailsClick(List<PayoutConsumerOrder> model);
+    public void onDetailsClick(List<PayoutConsumerOrder> model,String payoutId);
 }

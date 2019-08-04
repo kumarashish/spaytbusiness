@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
-            android:layout_weight="4"
+            android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -89,27 +89,20 @@
                 android:layout_height="130dp"/>
         </RelativeLayout>
         <LinearLayout
-            android:visibility="gone"
+
             android:orientation="vertical"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent">
             <Button
+                android:layout_marginTop="50dp"
                 android:id="@+id/delete_btn"
                 android:layout_gravity="center"
                 android:background="@drawable/delete"
-                android:layout_marginTop="20dp"
+
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
-            <Button
-                android:id="@+id/details_btn"
-                android:textAllCaps="false"
-                android:layout_gravity="center"
-                android:text="Details"
-                android:background="@drawable/rectangle"
-                android:layout_marginTop="25dp"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp" />
+
         </LinearLayout>
     </LinearLayout>
     <View

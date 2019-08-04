@@ -81,7 +81,7 @@ public class PayoutAdapter  extends BaseAdapter {
         holder.details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callback.onDetailsClick(model.getPayoutConsumerOrders());
+                callback.onDetailsClick(model.getPayoutConsumerOrders(),model.getId());
             }
         });
         holder.delete_btn.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +93,7 @@ public class PayoutAdapter  extends BaseAdapter {
         holder.details_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-           callback.onDetailsClick(model.getPayoutConsumerOrders());
+           callback.onDetailsClick(model.getPayoutConsumerOrders(),model.getId());
             }
         });
 

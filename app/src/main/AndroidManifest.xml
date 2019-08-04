@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".TransactionDetails"
-            android:screenOrientation="portrait" />s
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ForgetPassword"
             android:screenOrientation="portrait" />

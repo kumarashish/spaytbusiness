@@ -40,8 +40,10 @@ public class Common {
     public static String  getCustomerFromQRCodeUrl=baseUrl+"/order/get_consumer_with_qrcode";
     public static String createPayout=baseUrl+"/payout/create";
     public static String deletePayout=baseUrl+"/payout/delete";
+    public static String updatePayout=baseUrl+"/payout/update";
     public static String getPayout=baseUrl+"/payout/get_business_payouts";
     public static String[] id={"id"};
+    public static String[]updatePayoutKeys={"payout_id", "consumer_order_ids"};
     public static String[] payout_id={"payout_id"};
     public static String[] qrCodeKey={"consumer_qrcode"};
     public static String[] locationIdKey={"location_id"};
