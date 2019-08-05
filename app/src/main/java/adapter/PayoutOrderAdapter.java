@@ -15,6 +15,7 @@ import java.util.List;
 import interfaces.OnDeleteOrderClickListner;
 import interfaces.PayoutClickListners;
 import models.PayoutModel;
+import utils.Utils;
 
 public class PayoutOrderAdapter  extends BaseAdapter {
     Activity activity;
@@ -66,10 +67,10 @@ public class PayoutOrderAdapter  extends BaseAdapter {
         }
         convertView.setTag(holder);
         holder.orderId.setText("Consumer Order Id :" + model.getConsumerOrderId());
-        holder.totalAmount.setText("Total Amount : " + model.getTotalAmount() + " €");
-        holder.commision.setText("Commission Fee : " + model.getCommissionFee() + " €");
+        holder.totalAmount.setText("Total Amount : " + Utils.getFormattedAmount( model.getTotalAmount() )+ " €");
+        holder.commision.setText("Commission Fee : " +Utils.getFormattedAmount( model.getCommissionFee() )+ " €");
         holder.date.setText("Created_on : " + model.getCreatedOn());
-        holder.paypalfess.setText("Paypal Fess : " + model.getPaypalFee());
+        holder.paypalfess.setText("Paypal Fess : " + Utils.getFormattedAmount(model.getPaypalFee()));
         holder.delete_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -126,7 +126,7 @@ Button submit;
             public void afterTextChanged(Editable s) {
 if((price.getText().length()>0)&&(s.length()>0))
 {  double val=Double.parseDouble(price.getText().toString())*Integer.parseInt(quantity.getText().toString());
-    total.setText(Double.toString(val)+" €");
+    total.setText(Utils.getFormattedAmount(Double.toString(val))+" €");
 }
             }
         });
@@ -145,7 +145,7 @@ if((price.getText().length()>0)&&(s.length()>0))
             public void afterTextChanged(Editable s) {
                 if((quantity.getText().length()>0)&&(s.length()>0))
                 {  double val=Double.parseDouble(price.getText().toString())*Integer.parseInt(quantity.getText().toString());
-                    total.setText(Double.toString(val)+" €");
+                    total.setText(Utils.getFormattedAmount(Double.toString(val))+" €");
                 }
             }
         });

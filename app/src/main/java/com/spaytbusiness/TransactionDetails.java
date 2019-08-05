@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -152,34 +153,36 @@ public class TransactionDetails extends Activity implements WebApiResponseCallba
 
     public void setValue()
     {Double grandTotalValue=0.0;
-        for (int i=0;i<model.getOrderDetailsData().size();i++)
-        {
-            final OrderDetailsModel.OrderDetailsDatum modell=model.getOrderDetailsData().get(i);
+    if(model.getOrderDetailsData()!=null) {
+        for (int i = 0; i < model.getOrderDetailsData().size(); i++) {
+            final OrderDetailsModel.OrderDetailsDatum modell = model.getOrderDetailsData().get(i);
             View row = getLayoutInflater().inflate(R.layout.my_cart_row, null);
-            TextView productName=(TextView)row.findViewById(R.id.productName) ;
-            final TextView total_price=(TextView)row.findViewById(R.id.total_price);
-            final EditText quantity=(EditText) row.findViewById(R.id.quantity) ;
-            final EditText price=(EditText) row.findViewById(R.id.price) ;
+            TextView productName = (TextView) row.findViewById(R.id.productName);
+            final TextView total_price = (TextView) row.findViewById(R.id.total_price);
+            final EditText quantity = (EditText) row.findViewById(R.id.quantity);
+            final EditText price = (EditText) row.findViewById(R.id.price);
             productName.setText(modell.getName());
             quantity.setText(modell.getQuantity());
-            price.setText(modell.getNetAmount());
-            Double priceValue=(Double.parseDouble(modell.getNetAmount())*Double.parseDouble(modell.getQuantity()));
-            total_price.setText(priceValue+" €");
+            price.setText(Utils.getFormattedAmount(modell.getNetAmount()));
+            Double priceValue = (Double.parseDouble(modell.getNetAmount()) * Double.parseDouble(modell.getQuantity()));
+            total_price.setText(Utils.getFormattedAmount(Double.toString(priceValue)) + " €");
             price.setEnabled(false);
             quantity.setEnabled(false);
-            if(i==0)
-            {
-                grandTotalValue=priceValue;
-            }else{
-                grandTotalValue+=priceValue;
+            if (i == 0) {
+                grandTotalValue = priceValue;
+            } else {
+                grandTotalValue += priceValue;
             }
             content.addView(row);
 
         }
-        grandTotal.setText(grandTotalValue+" €");
+        grandTotal.setText(Utils.getFormattedAmount(Double.toString(grandTotalValue)) + " €");
         progressBar.setVisibility(View.GONE);
         contentView.setVisibility(View.VISIBLE);
-
+    }else{
+        Utils.showToast(TransactionDetails.this,"Order details not available...");
+        progressBar.setVisibility(View.GONE);
+    }
     }
 
 }

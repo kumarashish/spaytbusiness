@@ -83,9 +83,9 @@ String customerId="";
 
             productName.setText(model.getName());
             quantity.setText(Integer.toString(model.getQuantity()));
-            price.setText(model.getPrice());
+            price.setText(Utils.getFormattedAmount(model.getPrice()));
             Double priceValue=Double.parseDouble(model.getPrice())*(model.getQuantity());
-            total_price.setText(Double.toString(priceValue)+" €");
+            total_price.setText(Utils.getFormattedAmount(Double.toString(priceValue))+" €");
 
             price.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -102,11 +102,11 @@ String customerId="";
                 public void afterTextChanged(Editable s) {
                     if((quantity.getText().length()>0)&&(s.length()>0))
                     {  double val=Double.parseDouble(price.getText().toString())*Integer.parseInt(quantity.getText().toString());
-                        total_price.setText(Double.toString(val)+" €");
+                        total_price.setText(Utils.getFormattedAmount(Double.toString(val))+" €");
                         int index=controller.getIndexOfModel(model);
                         model.setPrice(price.getText().toString());
                         controller.updateModel(model,index);
-                        grandTotal.setText(Double.toString(controller.getTotalPrice())+" €");
+                        grandTotal.setText(Utils.getFormattedAmount(Double.toString(controller.getTotalPrice()))+" €");
                     }
 
                 }
@@ -126,18 +126,18 @@ String customerId="";
                 public void afterTextChanged(Editable s) {
                     if((price.getText().length()>0)&&(s.length()>0))
                     {   double val=Double.parseDouble(price.getText().toString().trim())*Integer.parseInt(quantity.getText().toString().trim());
-                        total_price.setText(Double.toString(val)+" €");
+                        total_price.setText(Utils.getFormattedAmount(Double.toString(val))+" €");
                         int index=controller.getIndexOfModel(model);
                         model.setQuantity(Integer.parseInt(quantity.getText().toString()));
                         controller.updateModel(model,index);
-                        grandTotal.setText(Double.toString(controller.getTotalPrice())+" €");
+                        grandTotal.setText(Utils.getFormattedAmount(Double.toString(controller.getTotalPrice()))+" €");
                     }
                 }
             });
             content.addView(row);
 
         }
-        grandTotal.setText(Double.toString(controller.getTotalPrice())+" €");
+        grandTotal.setText(Utils.getFormattedAmount(Double.toString(controller.getTotalPrice()))+" €");
 
     }
 

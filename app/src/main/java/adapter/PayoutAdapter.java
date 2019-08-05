@@ -17,6 +17,7 @@ import java.util.List;
 import interfaces.PayoutClickListners;
 import models.OutstandingOrder;
 import models.PayoutModel;
+import utils.Utils;
 
 public class PayoutAdapter  extends BaseAdapter {
     Activity activity;
@@ -69,8 +70,8 @@ public class PayoutAdapter  extends BaseAdapter {
         }
         convertView.setTag(holder);
         holder.orderId.setText("Payout Id :" + model.getId());
-        holder.totalAmount.setText("Total Amount : " + model.getTotalAmount() + " €");
-        holder.commision.setText("Commission Fee : " + model.getCommissionFee() + " €");
+        holder.totalAmount.setText("Total Amount : " + Utils.getFormattedAmount( model.getTotalAmount() )+ " €");
+        holder.commision.setText("Commission Fee : " + Utils.getFormattedAmount(model.getCommissionFee()) + " €");
         holder.date.setText("Created_on : " + model.getCreatedOn());
         holder.payoutstatus.setText("Payout status : " + model.getPayoutStatus());
 
