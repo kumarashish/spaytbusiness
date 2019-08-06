@@ -320,6 +320,8 @@ public class WebApiCall {
                 .add("email", email)
                 .add("password", password)
                 .add("device_id", deviceId)
+                .add("device_type", "Android")
+
                 .build();
         Request request = new Request.Builder().url(url).post(formBody).build();
         client.newCall(request).enqueue(new Callback() {

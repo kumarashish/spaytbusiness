@@ -467,7 +467,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp">
 
-            <EditText
+            <common.MyEditText
+            android:maxLength="5"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/grey"
                 android:background="@drawable/rectangle"
@@ -486,7 +487,8 @@
 
                 android:layout_width="10dp"
                 android:layout_height="match_parent"/>
-            <EditText
+            <common.MyEditText
+            android:maxLength="5"
                 android:background="@drawable/rectangle"
                 android:padding="10dp"
                 android:inputType="time"
@@ -526,7 +528,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp">
 
-            <EditText
+            <common.MyEditText
+                android:maxLength="5"
                 android:fontFamily="@font/light"
                 android:textColorHint="@color/grey"
                 android:background="@drawable/rectangle"
@@ -545,7 +548,8 @@
 
                 android:layout_width="10dp"
                 android:layout_height="match_parent"/>
-            <EditText
+            <common.MyEditText
+                android:maxLength="5"
                 android:background="@drawable/rectangle"
                 android:padding="10dp"
 

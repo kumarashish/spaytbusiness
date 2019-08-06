@@ -48,9 +48,9 @@ public class Common {
     public static String[] qrCodeKey={"consumer_qrcode"};
     public static String[] locationIdKey={"location_id"};
     public static String[] updateBusinessKeys = {"business_email","category_id", "company_name", "street_name", "door_no", "city", "zip_code", "phone_number", "paypal_email", "vat_id"};
-    public static String []updateUserKeys={"id","first_name","last_name","salutation","email","is_active","user_type"};
+    public static String []updateUserKeys={"id","first_name","last_name","salutation","email","is_active","user_type","default_location_id"};
     public static String []updateMeKeys={"salutation","first_name","last_name","email","default_location_id"};
-    public static String []addUserKeys={"first_name","last_name","salutation","email","is_active","user_type","password"};
+    public static String []addUserKeys={"first_name","last_name","salutation","email","is_active","user_type","password","default_location_id"};
     public static String[] addBusinessOffersKeys = {"product_id", "business_location_ids", "offer_name",
             "offer_description",
             "from_date",

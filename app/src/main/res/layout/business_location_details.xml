@@ -290,15 +290,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
-                <EditText
-                    android:digits="0123456789:"
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
                     android:textColor="@color/blue"
                     android:layout_marginLeft="10dp"
-android:inputType="time"
+                    android:inputType="time"
+
                     android:textSize="18dp"
                     android:hint="From(HH:MM)"
                     android:id="@+id/m_mFrom"
@@ -310,8 +312,9 @@ android:inputType="time"
 
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
-                <EditText
-                    android:digits="0123456789:"
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
                     android:inputType="time"
@@ -350,7 +353,9 @@ android:inputType="time"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:background="@drawable/rectangle"
@@ -358,7 +363,7 @@ android:inputType="time"
                     android:textColor="@color/blue"
                     android:layout_marginLeft="10dp"
                     android:inputType="time"
-                    android:digits="0123456789:."
+
                     android:textSize="18dp"
                     android:hint="From(HH:MM)"
                     android:id="@+id/m_aFrom"
@@ -370,11 +375,12 @@ android:inputType="time"
 
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
                     android:inputType="time"
-                    android:digits="0123456789:"
                     android:entries="@array/business_opnening_options"
                     android:textSize="18dp"
                     android:hint="To(HH:MM)"
@@ -449,7 +455,9 @@ android:inputType="time"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:background="@drawable/rectangle"
@@ -468,7 +476,9 @@ android:inputType="time"
 
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
 
@@ -508,7 +518,9 @@ android:inputType="time"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:background="@drawable/rectangle"
@@ -527,7 +539,9 @@ android:inputType="time"
 
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
                     android:inputType="time"
@@ -603,7 +617,9 @@ android:inputType="time"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:background="@drawable/rectangle"
@@ -622,7 +638,9 @@ android:inputType="time"
 
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
                     android:inputType="time"
@@ -662,7 +680,9 @@ android:inputType="time"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:background="@drawable/rectangle"
@@ -681,7 +701,9 @@ android:inputType="time"
 
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
                     android:inputType="time"
@@ -758,7 +780,9 @@ android:inputType="time"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:background="@drawable/rectangle"
@@ -777,7 +801,9 @@ android:inputType="time"
 
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
                     android:inputType="time"
@@ -817,7 +843,9 @@ android:inputType="time"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:background="@drawable/rectangle"
@@ -836,7 +864,9 @@ android:inputType="time"
 
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
                     android:inputType="time"
@@ -912,7 +942,9 @@ android:inputType="time"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:background="@drawable/rectangle"
@@ -931,7 +963,9 @@ android:inputType="time"
 
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
                     android:inputType="time"
@@ -971,7 +1005,9 @@ android:inputType="time"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:background="@drawable/rectangle"
@@ -990,7 +1026,9 @@ android:inputType="time"
 
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
                     android:inputType="time"
@@ -1064,7 +1102,9 @@ android:inputType="time"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:background="@drawable/rectangle"
@@ -1083,7 +1123,9 @@ android:inputType="time"
 
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
 
@@ -1123,7 +1165,9 @@ android:inputType="time"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:background="@drawable/rectangle"
@@ -1142,7 +1186,9 @@ android:inputType="time"
 
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
                     android:inputType="time"
@@ -1219,7 +1265,9 @@ android:inputType="time"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:background="@drawable/rectangle"
@@ -1238,7 +1286,9 @@ android:inputType="time"
 
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
 
@@ -1278,7 +1328,9 @@ android:inputType="time"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:fontFamily="@font/light"
                     android:textColorHint="@color/grey"
                     android:background="@drawable/rectangle"
@@ -1297,7 +1349,9 @@ android:inputType="time"
 
                     android:layout_width="10dp"
                     android:layout_height="match_parent"/>
-                <EditText
+                <common.MyEditText
+
+                    android:maxLength="5"
                     android:background="@drawable/rectangle"
                     android:padding="10dp"
 

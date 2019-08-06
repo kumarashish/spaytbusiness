@@ -37,6 +37,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import common.AppController;
 import common.Common;
+import common.MyEditText;
 import fragments.Business;
 import interfaces.OnListItemSelected;
 import interfaces.WebApiResponseCallback;
@@ -79,13 +80,13 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
     @BindView(R.id.mode)
     Spinner mode;
     @BindView(R.id.m_mFrom)
-    EditText m_mFrom;
+    MyEditText m_mFrom;
     @BindView(R.id.m_mTo)
-    EditText m_mTo;
+    MyEditText m_mTo;
     @BindView(R.id.m_aFrom)
-    EditText m_aFrom;
+    MyEditText m_aFrom;
     @BindView(R.id.m_aTo)
-    EditText m_aTo;
+    MyEditText m_aTo;
     @BindView(R.id.add_location)
     ImageView add_location;
     @BindView(R.id.locationList)
@@ -731,6 +732,7 @@ public class BusinessOffersDetails extends Activity implements View.OnClickListe
 
                     });
                 } else {
+                    finish();
                     Utils.showToast(BusinessOffersDetails.this, "You dont have any product,please add atleast one product first.");
                 }
             }

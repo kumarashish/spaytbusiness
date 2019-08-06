@@ -1,26 +1,40 @@
 package com.spaytbusiness;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import adapter.BusinessLocationAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import common.AppController;
 import common.Common;
 import interfaces.WebApiResponseCallback;
+import models.Business_locations;
 import models.UserProfile;
 import utils.Utils;
 import utils.Validation;
@@ -48,14 +62,18 @@ public class BusinessUserDetails  extends Activity implements View.OnClickListen
     Switch isactive;
             @BindView(R.id.role)
     Spinner role;
+    @BindView(R.id.locations)
+    Spinner locations;
             @BindView(R.id.submit)
             Button submit;
     public static UserProfile model=null;
     int apiCall;
-    int addUser=1,updateUser=2;
+    int addUser=1,updateUser=2,getBusinessList=3;
     Validation validation;
-AppController controller;
-
+     AppController controller;
+    ArrayList<Business_locations> businessLocationList=new ArrayList<>();
+    ArrayList<String> businessLocationNames=new ArrayList<>();
+AlertDialog dialog;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,7 +84,13 @@ AppController controller;
         submit.setOnClickListener(this);
         controller=(AppController)getApplicationContext();
         validation=new Validation(this);
-        setValue();
+        dialog=Utils.getProgressDailog(BusinessUserDetails.this);
+        if (controller.getProfile().getRole().equalsIgnoreCase("Admin")) {
+            submit.setVisibility(View.VISIBLE);
+        } else {
+            submit.setVisibility(View.GONE);
+        }
+        getBusinessLocation();
         salutation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -110,6 +134,24 @@ AppController controller;
             }
         });
         role.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TextView child=(TextView) parent.getChildAt(0);
+                child.setTextSize(18);
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    child.setTextColor(getResources().getColor(R.color.blue,getTheme()));
+                } else{
+                    child.setTextColor(getResources().getColor(R.color.blue));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+      locations.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -184,9 +226,9 @@ switch (v.getId())
             roleType = "2";
         }
         if (model == null) {
-            return new String[]{fname.getText().toString(), lname.getText().toString(), salutation.getSelectedItem().toString(), email.getText().toString(), checked, roleType,"12345"};
+            return new String[]{fname.getText().toString(), lname.getText().toString(), salutation.getSelectedItem().toString(), email.getText().toString(), checked, roleType, "12345", businessLocationList.get(locations.getSelectedItemPosition() - 1).getId()};
         } else {
-            return new String[]{model.getUser_id(), fname.getText().toString(), lname.getText().toString(), salutation.getSelectedItem().toString(), email.getText().toString(), checked, roleType};
+            return new String[]{model.getUser_id(), fname.getText().toString(), lname.getText().toString(), salutation.getSelectedItem().toString(), email.getText().toString(), checked, roleType, businessLocationList.get(locations.getSelectedItemPosition() - 1).getId()};
         }
     }
     public boolean isAllFildsValidated()
@@ -194,7 +236,12 @@ switch (v.getId())
         if((fname.getText().length()>0)&&(lname.getText().length()>0)&&(email.getText().length()>0))
         {
             if(validation.isValidEmail(email.getText().toString())) {
-                return true;
+                if(locations.getSelectedItemPosition()!=0) {
+                    return true;
+                }else{
+                    Toast.makeText(BusinessUserDetails.this,"Please Select Business location.",Toast.LENGTH_SHORT).show();
+
+                }
             }
         }else{
             if(fname.getText().length()==0)
@@ -288,6 +335,39 @@ public boolean getCheck(String value)
                             setResult(RESULT_OK, data);
                             finish();
                             break;
+                        case 3:
+                            try {
+
+                                JSONObject jsonObject = new JSONObject(value);
+                                JSONArray businesslocations_details = jsonObject.getJSONArray("businesslocations_details");
+                                if ((businesslocations_details != null) && (businesslocations_details.length() > 0)) {
+                                    businessLocationList.clear();
+                                    businessLocationNames.clear();
+                                    businessLocationNames.add("Select Business Location");
+                                    for (int i = 0; i < businesslocations_details.length(); i++) {
+                                        Business_locations model=    new Business_locations(businesslocations_details.getJSONObject(i));
+                                        businessLocationList.add(model);
+                                        businessLocationNames.add(model.getLocation_name());
+                                    }
+                                    ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(BusinessUserDetails.this,
+                                            android.R.layout.simple_spinner_dropdown_item,
+                                            businessLocationNames);
+                                    locations.setAdapter( spinnerArrayAdapter );
+                                    if(model!=null)
+                                    {
+                                        locations.setSelection(getSelectedIndex(model.getDefaultlocationId()));
+                                    }
+
+
+                                }
+
+                            } catch (Exception ex) {
+                                ex.fillInStackTrace();
+                            }
+                            if (dialog != null) {
+                                dialog.cancel();
+                            }
+                            setValue();
                     }
 
                 }else{
@@ -311,5 +391,22 @@ public boolean getCheck(String value)
                 Utils.showToast(BusinessUserDetails.this,Utils.getMessage(value));
             }
         });
+    }
+    public void getBusinessLocation()
+    {
+        if(Utils.isNetworkAvailable(BusinessUserDetails.this))
+        {dialog.show();
+            apiCall=getBusinessList;
+            controller.getWebApiCall().getDataCommon(Common.businessLocationUrl,controller.getManager().getUserToken(),this);
+        }
+    }
+
+    public int getSelectedIndex(int defaultlocationId) {
+        for (int i = 0; i < businessLocationList.size(); i++) {
+            if (businessLocationList.get(i).getId().equalsIgnoreCase(Integer.toString(defaultlocationId))) {
+                return i + 1;
+            }
+        }
+        return 0;
     }
 }

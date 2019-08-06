@@ -19,6 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import common.AppController;
 import common.Common;
+import common.MyEditText;
 import interfaces.WebApiResponseCallback;
 import models.Business_locations;
 import utils.Utils;
@@ -44,73 +45,73 @@ public class Business_Location_Detais extends Activity implements View.OnClickLi
     @BindView(R.id.mondayMode)
     Spinner mondayMode;
     @BindView(R.id.m_mFrom)
-    EditText m_mFrom;
+    MyEditText m_mFrom;
     @BindView(R.id.m_mTo)
-    EditText m_mTo;
+    MyEditText m_mTo;
     @BindView(R.id.m_aFrom)
-    EditText m_aFrom;
+    MyEditText m_aFrom;
     @BindView(R.id.m_aTo)
-    EditText m_aTo;
+    MyEditText m_aTo;
     @BindView(R.id.tuesdayMode)
     Spinner tuesdayMode;
     @BindView(R.id.t_mFrom)
-    EditText t_mFrom;
+    MyEditText t_mFrom;
     @BindView(R.id.t_mTo)
-    EditText t_mTo;
+    MyEditText t_mTo;
     @BindView(R.id.t_aFrom)
-    EditText t_aFrom;
+    MyEditText t_aFrom;
     @BindView(R.id.t_aTo)
-    EditText t_aTo;
+    MyEditText t_aTo;
     @BindView(R.id.wednesdayMode)
     Spinner wednesdayMode;
     @BindView(R.id.w_mFrom)
-    EditText w_mFrom;
+    MyEditText w_mFrom;
     @BindView(R.id.w_mTo)
-    EditText w_mTo;
+    MyEditText w_mTo;
     @BindView(R.id.w_aFrom)
-    EditText w_aFrom;
+    MyEditText w_aFrom;
     @BindView(R.id.w_aTo)
-    EditText w_aTo;
+    MyEditText w_aTo;
     @BindView(R.id.thursdayMode)
     Spinner thursdayMode;
     @BindView(R.id.th_mFrom)
-    EditText th_mFrom;
+    MyEditText th_mFrom;
     @BindView(R.id.th_mTo)
-    EditText th_mTo;
+    MyEditText th_mTo;
     @BindView(R.id.th_aFrom)
-    EditText th_aFrom;
+    MyEditText th_aFrom;
     @BindView(R.id.th_aTo)
-    EditText th_aTo;
+    MyEditText th_aTo;
     @BindView(R.id.fridayMode)
     Spinner fridayMode;
     @BindView(R.id.f_mFrom)
-    EditText f_mFrom;
+    MyEditText f_mFrom;
     @BindView(R.id.f_mTo)
-    EditText f_mTo;
+    MyEditText f_mTo;
     @BindView(R.id.f_aFrom)
-    EditText f_aFrom;
+    MyEditText f_aFrom;
     @BindView(R.id.f_aTo)
-    EditText f_aTo;
+    MyEditText f_aTo;
     @BindView(R.id.saturdaymode)
     Spinner saturdaymode;
     @BindView(R.id.sat_mFrom)
-    EditText sat_mFrom;
+    MyEditText sat_mFrom;
     @BindView(R.id.sat_mTo)
-    EditText sat_mTo;
+    MyEditText sat_mTo;
     @BindView(R.id.sat_aFrom)
-    EditText sat_aFrom;
+    MyEditText sat_aFrom;
     @BindView(R.id.sat_aTo)
-    EditText sat_aTo;
+    MyEditText sat_aTo;
     @BindView(R.id.sundayMode)
     Spinner sundayMode;
     @BindView(R.id.sun_mFrom)
-    EditText sun_mFrom;
+    MyEditText sun_mFrom;
     @BindView(R.id.sun_mTo)
-    EditText sun_mTo;
+    MyEditText sun_mTo;
     @BindView(R.id.sun_aFrom)
-    EditText sun_aFrom;
+    MyEditText sun_aFrom;
     @BindView(R.id.sun_aTo)
-    EditText sun_aTo;
+    MyEditText sun_aTo;
     @BindView(R.id.submit)
     Button submit;
     @BindView(R.id.monday_morning_to)
@@ -168,6 +169,7 @@ public class Business_Location_Detais extends Activity implements View.OnClickLi
         }
         setValue();
     }
+
 
     public void setValue() {
         if (model == null) {

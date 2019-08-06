@@ -89,6 +89,11 @@ Button submit;
         myCart.setOnClickListener(this);
         submit.setOnClickListener(this);
         controller=(AppController)getApplicationContext();
+       if(controller.getGetMyCart().size()>0)
+       {
+           myCartItemCount.setText(Integer.toString(controller.getQuantity()));
+           myCartItemCount.setVisibility(View.VISIBLE);
+       }
         getProductsList();
 
         product.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -96,9 +101,11 @@ Button submit;
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position!=0) {
                     String pricevalue=businessproductList.get(position - 1).getTotal_price();
-                    if(Double.parseDouble(pricevalue)==0)
-                    {
-                        pricevalue=businessproductList.get(position - 1).getPrice_per_liter();
+                    if (Double.parseDouble(pricevalue) == 0) {
+                        pricevalue = businessproductList.get(position - 1).getPrice_per_liter();
+                    }
+                    if (Double.parseDouble(pricevalue) == 0) {
+                        pricevalue = businessproductList.get(position - 1).getParking_fee_per_hour();
                     }
 
                     quantity.setText("1");
