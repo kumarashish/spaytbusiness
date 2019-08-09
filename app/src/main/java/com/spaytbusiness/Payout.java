@@ -124,25 +124,11 @@ public class Payout extends Activity implements WebApiResponseCallback, View.OnC
                             break;
                         case 2:
                             if (Utils.getStatus(value)) {
-                                model = new Gson().fromJson(value, PayoutModel.class);
-                                model.updatePayoutsDetails(new PayoutModel.PayoutsDetail(Utils.getJSONObject(value,"payout_details")));
-                                if (model.getPayoutsDetails().size() > 0) {
-                                    if (pd != null) {
-                                        pd.cancel();
-                                    }
-                                    nodata.setVisibility(View.GONE);
-                                    count.setText(Integer.toString(model.getPayoutsDetails().size()));
-                                    list.setAdapter(new PayoutAdapter(Payout.this,model.getPayoutsDetails()));
-                                    list.setVisibility(View.VISIBLE);
-                                    Utils.showToast(Payout.this,"Payout Created sucessfully.");
-                                } else {
-                                    if (pd != null) {
-                                        pd.cancel();
-                                    }
-                                    nodata.setVisibility(View.VISIBLE);
-                                    list.setVisibility(View.GONE);
-                                    Utils.showToast(Payout.this, Utils.getMessage(value));
+                                if (pd != null) {
+                                    pd.cancel();
                                 }
+                                getOutStandingPayout();
+                                Utils.showToast(Payout.this,"Payout Created sucessfully.");
                             } else {
                                 if (pd != null) {
                                     pd.cancel();
