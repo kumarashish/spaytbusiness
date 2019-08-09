@@ -8,15 +8,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,15 +29,18 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.net.ssl.SSLEngineResult;
 
+import adapter.CustomerListAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import common.AppController;
 import common.Common;
 import interfaces.WebApiResponseCallback;
 import models.BusinessProductModel;
+import models.ExistingCustomerModel;
 import utils.Utils;
 
 public class MyCart extends Activity implements View.OnClickListener , WebApiResponseCallback {
@@ -50,7 +58,7 @@ public class MyCart extends Activity implements View.OnClickListener , WebApiRes
    Dialog pd;
     String locationId="";
     int apiCall;
-    int createOrder=1,submitOrder=2,getCustomerFromCode=3;
+    int createOrder=1,submitOrder=2,getCustomerFromCode=3,selectExistingCustomer=4;
     String orderId="";
 String customerName="";
 String customerId="";
@@ -149,6 +157,8 @@ String customerId="";
         return formattedDate;
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -158,19 +168,21 @@ String customerId="";
             case R.id.submit:
                 if(controller.getTotalPrice()>0.0)
                 if (Utils.isNetworkAvailable(MyCart.this)) {
+                    showChooseCustomerAlert();
 
-                    if (customerId.length() == 0) {
-                        startActivityForResult(new Intent(MyCart.this,ScanActivity.class),2);     }
-                     else {
-                        submitOrder();
-                    }
                 }
                 break;
 
 
         }
     }
+    public void getExisistingCustomer()
+    {
+        apiCall = selectExistingCustomer;
+        pd.show();
+        controller.getWebApiCall().getDataCommon(Common.getExistingCustomer, controller.getManager().getUserToken(), MyCart.this);
 
+    }
     public void submitOrder()
     {
         if (orderId.length() > 0) {
@@ -208,7 +220,6 @@ String customerId="";
             }
             jsonObject.put("order_items", productsArray);
 
-
         } catch (Exception ex) {
             ex.fillInStackTrace();
         }
@@ -235,7 +246,7 @@ String customerId="";
                             break;
                         case 2:
                             controller.getGetMyCart().clear();
-                           Utils.sucessAlert(MyCart.this,orderId);
+                            Utils.sucessAlert(MyCart.this,orderId);
 
                             break;
                         case 3:
@@ -258,15 +269,39 @@ String customerId="";
                                 startActivityForResult(new Intent(MyCart.this,ScanActivity.class),2);
 
                             }
-                        }else{
+                        } else{
                             Utils.showToast(MyCart.this,Utils.getMessage(value));
                             invalidQRCodeAlert(Utils.getMessage(value));
                             progressBar.setVisibility(View.GONE);
                             submit.setVisibility(View.VISIBLE);
                         }
+                        break;
+                        case 4:
+                            if(Utils.getStatus(value)) {
+                                ExistingCustomerModel model=new Gson().fromJson(value,ExistingCustomerModel.class);
+                                if(model.getExistingConsumers().size()>0)
+                                {
+                                    selectCustomerAlert(model.getExistingConsumers());
+                                }else{
+                                    Utils.showToast(MyCart.this,"No Existing Customer found,Please Use Scan Option.");
+                                }
+                            }else{
+                                if(pd!=null)
+                                {
+                                    pd.cancel();
+                                }
+                                Utils.showToast(MyCart.this,Utils.getMessage(value));
+                            }
+
+                            break;
+
                     }
 
                 }else{
+                    if(pd!=null)
+                    {
+                        pd.cancel();
+                    }
                     Utils.showToast(MyCart.this,Utils.getMessage(value));
                     progressBar.setVisibility(View.GONE);
                     submit.setVisibility(View.VISIBLE);
@@ -303,6 +338,59 @@ String customerId="";
         //Setting the title manually
         alert.setTitle("Alert");
         alert.show();
+    }
+
+    public void selectCustomerAlert(final List<ExistingCustomerModel.ExistingConsumer> list) {
+        final Dialog dialog = new Dialog(MyCart.this);
+        dialog.setCancelable(false); // if you want user to wait for some process to finish,
+        dialog.setContentView(R.layout.choose_customer);
+
+        final ListView custmerlist = (ListView) dialog.findViewById(R.id.custmerlist);
+        custmerlist.setAdapter(new CustomerListAdapter(MyCart.this,list));
+        Button cancel=(Button)dialog.findViewById(R.id.cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+            }
+        });
+        custmerlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                customerId=list.get(i).getConsumerId();
+                submitOrder();
+                dialog.cancel();
+            }
+
+        });
+
+        dialog.show();
+    }
+
+    public void showChooseCustomerAlert()
+    {
+        final Dialog dialog = new Dialog(MyCart.this);
+
+        dialog.setCancelable(false); // if you want user to wait for some process to finish,
+        dialog.setContentView(R.layout.new_transaction);
+
+        Button existing_customer=(Button)dialog.findViewById(R.id.existing_customer);
+        Button scanView=(Button)dialog.findViewById(R.id.scan_customer);
+        existing_customer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getExisistingCustomer();
+                dialog.cancel();
+            }
+        });
+        scanView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(MyCart.this,ScanActivity.class),2);
+                dialog.cancel();
+            }
+        });
+        dialog.show();
     }
 public String getOrderId(String value)
 {

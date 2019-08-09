@@ -36,6 +36,7 @@ public class Common {
     public static  String sendOrderPdfEmail=baseUrl+"/order/send_order_pdf_email";
     public static  String downloadOrderPdfInvoice=baseUrl+"/order/download_order_pdf";
     public static String getCreateOrderUrl=baseUrl+"/order/create_order";
+    public static String getExistingCustomer=baseUrl+"/order/get_my_existing_consumers";
     public static String  getSubmitOrderUrl=baseUrl+"/order/submit_order";
     public static String  getCustomerFromQRCodeUrl=baseUrl+"/order/get_consumer_with_qrcode";
     public static String createPayout=baseUrl+"/payout/create";
