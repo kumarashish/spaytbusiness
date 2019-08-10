@@ -66,7 +66,7 @@ public class TransactionAdapter extends BaseAdapter  {
             holder = (ViewHolder) convertView.getTag();
         }
         convertView.setTag(holder);
-        holder.name.setText(model.getConsumerFullname());
+        holder.name.setText(model.getConsumerFullname()+"\nOrderId: "+model.getId());
         holder.amount.setText("Net Amount : "+model.getNetAmount()+" €");
         holder.date.setText("Order Date : "+model.getUpdatedOn());
         holder.orderstatus.setText("Order status : "+model.getStatus());
